@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class HeroInputReader : MonoBehaviour
 {
     [SerializeField] private Hero _hero;
-    private HeroInputActions _inputActions;
+    private HeroInputActions _inputActions;    
 
     private void Awake()
     {
@@ -25,8 +25,7 @@ public class HeroInputReader : MonoBehaviour
 
     private void OnHeroMovement(InputAction.CallbackContext context)
     {
-        var directionX = context.ReadValue<Vector2>().x;
-        var directionY = context.ReadValue<Vector2>().y;
-        _hero.SetDirection(directionX, directionY);
+        var direction = context.ReadValue<Vector2>();        
+        _hero.SetDirection(direction);
     }
 }
