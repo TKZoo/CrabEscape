@@ -27,9 +27,16 @@ public class Hero : MonoBehaviour
         _heroRb.velocity = new Vector2(_direction.x * _speed, _heroRb.velocity.y);
 
         var isJumping = _direction.y > 0;
-        if (isJumping && IsGrounded())
+        if (isJumping)
         {
-            _heroRb.AddForce(Vector2.up * _jumpImpulse, ForceMode2D.Impulse);
+            if (IsGrounded())
+            {
+                _heroRb.AddForce(Vector2.up * _jumpImpulse, ForceMode2D.Impulse);
+            }            
+        }
+        else if (_heroRb.velocity.y > 0)
+        {
+            _heroRb.velocity = new Vector2(_heroRb.velocity.x, _heroRb.velocity.y * 0.5f);
         }
     }    
 
