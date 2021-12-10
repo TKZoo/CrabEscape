@@ -11,10 +11,18 @@ public class Hero : MonoBehaviour
 
     private Vector2 _direction;    
     private Rigidbody2D _heroRb;
+    private Animator _animator;
+    private SpriteRenderer _sprite;
+
+    private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int verticalVelocity = Animator.StringToHash("vertical_velocity");
 
     private void Awake()
     {
         _heroRb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     public void SetDirection(Vector2 direction)
@@ -26,6 +34,7 @@ public class Hero : MonoBehaviour
     {
         _heroRb.velocity = new Vector2(_direction.x * _speed, _heroRb.velocity.y);
 
+        var isGrounded = IsGrounded();
         var isJumping = _direction.y > 0;
         if (isJumping)
         {
@@ -38,7 +47,25 @@ public class Hero : MonoBehaviour
         {
             _heroRb.velocity = new Vector2(_heroRb.velocity.x, _heroRb.velocity.y * 0.5f);
         }
-    }    
+
+        _animator.SetBool(IsGroundKey, isGrounded);
+        _animator.SetBool(IsRunning, _direction.x != 0);
+        _animator.SetFloat(verticalVelocity, _heroRb.velocity.y);
+
+        UpdateSpriteDirection();       
+    }
+
+    private void UpdateSpriteDirection()
+    {
+        if (_direction.x > 0)
+        {
+            _sprite.flipX = false;
+        }
+        else if (_direction.x < 0)
+        {
+            _sprite.flipX = true;
+        }
+    }
 
     private bool IsGrounded()
     {
