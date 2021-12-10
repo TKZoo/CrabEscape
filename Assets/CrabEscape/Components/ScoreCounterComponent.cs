@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreCounterComponent : MonoBehaviour
 {    
     private int _totalCoins = 0;
 
-    public void CountScore (int cointvalue)
+    public void CountScore (int coinvalue)
     {
-        _totalCoins += cointvalue;
+        _totalCoins += coinvalue;
         Debug.Log($"Всего монет: {_totalCoins}");
     }
 }
