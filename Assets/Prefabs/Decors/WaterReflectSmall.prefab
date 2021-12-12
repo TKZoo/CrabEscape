@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6810538526820275558
 Transform:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6810538526820275561}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.9, y: -2.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -96,12 +96,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 12
-  _loop: 1
-  _sprites:
-  - {fileID: -1898659343009958212, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
-  - {fileID: -8843944345914528079, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
-  - {fileID: -3808486951342339979, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
-  - {fileID: -5088061633143109107, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
-  _onComplete:
-    m_PersistentCalls:
-      m_Calls: []
+  clips:
+  - _clipName: idle
+    _sprites:
+    - {fileID: -1898659343009958212, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
+    - {fileID: -8843944345914528079, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
+    - {fileID: -3808486951342339979, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
+    - {fileID: -5088061633143109107, guid: eeb98cb6ee514c3459e6fa550579bf58, type: 3}
+    _loop: 1
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []

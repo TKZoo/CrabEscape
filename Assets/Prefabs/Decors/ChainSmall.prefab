@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &641684185859681994
 Transform:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641684185859681995}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.44, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -96,16 +96,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 5
-  _loop: 1
-  _sprites:
-  - {fileID: 7515456911145536941, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: 8188337825271032076, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: -6232402627841558155, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: -1922304144749363281, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: 146961160014910225, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: -4666071756097916248, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: -6726507372564969465, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  - {fileID: 6451580281456240679, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
-  _onComplete:
-    m_PersistentCalls:
-      m_Calls: []
+  clips:
+  - _clipName: idle
+    _sprites:
+    - {fileID: 7515456911145536941, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: 8188337825271032076, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: -6232402627841558155, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: -1922304144749363281, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: 146961160014910225, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: -4666071756097916248, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: -6726507372564969465, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    - {fileID: 6451580281456240679, guid: 8f89b38d21109ef4bb5f562b45364931, type: 3}
+    _loop: 1
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []

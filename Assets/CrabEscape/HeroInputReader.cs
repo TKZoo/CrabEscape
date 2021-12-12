@@ -11,6 +11,7 @@ public class HeroInputReader : MonoBehaviour
         _inputActions = new HeroInputActions();
         _inputActions.Hero.HerolMovement.performed += OnHeroMovement;
         _inputActions.Hero.HerolMovement.canceled += OnHeroMovement;
+        _inputActions.Hero.Interact.performed += OnInteract;        
     }
 
     private void OnEnable()
@@ -27,5 +28,10 @@ public class HeroInputReader : MonoBehaviour
     {
         var direction = context.ReadValue<Vector2>();        
         _hero.SetDirection(direction);
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        _hero.Interact();            
     }
 }
