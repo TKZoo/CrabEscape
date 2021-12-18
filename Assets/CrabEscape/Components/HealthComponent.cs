@@ -7,11 +7,11 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private UnityEvent _onTakeDamage;
     [SerializeField] private UnityEvent _onTakeHealing;
     [SerializeField] private UnityEvent _onDie;
-    private int maxHealth;
+    private int _maxHealth;
 
     private void OnEnable()
     {
-        maxHealth = _health;
+        _maxHealth = _health;
     }
 
     public void ApplyDamage(int damageValue)
@@ -28,9 +28,9 @@ public class HealthComponent : MonoBehaviour
     {
         _health += healValue;
         _onTakeHealing?.Invoke();
-        if (_health > maxHealth)
+        if (_health > _maxHealth)
         {
-            _health = maxHealth;
+            _health = _maxHealth;
         }
     }
 

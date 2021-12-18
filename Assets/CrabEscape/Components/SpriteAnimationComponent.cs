@@ -1,13 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SpriteRenderer))]
 
 public class SpriteAnimationComponent : MonoBehaviour
 {
     [SerializeField] private int _frameRate;      
-    [SerializeField] private AnimationClips[] clips;
+    [FormerlySerializedAs("clips")] [SerializeField] private AnimationClips[] _clips;
 
     private SpriteRenderer _renderer;
     private float _secondsPerFrame;
@@ -29,36 +30,37 @@ public class SpriteAnimationComponent : MonoBehaviour
         {
             return;
         }        
-        if (_currentSpriteIndex >= clips[_currentClip].sprites.Length)
+        if (_currentSpriteIndex >= _clips[_currentClip].Sprites.Length)
         {
-            if (clips[_currentClip].loop)
+            if (_clips[_currentClip].Loop)
             {
                 _currentSpriteIndex = 0;
             }
             else
             {
                 _isPlaying = false;
-                clips[_currentClip].onComplete?.Invoke();
-                if (clips[_currentClip].allowNextClip)
+                _clips[_currentClip].OnComplete?.Invoke();
+                if (_clips[_currentClip].AllowNextClip)
                 {
                     _currentSpriteIndex = 0;
-                    _currentClip = (int)Mathf.Repeat(_currentClip + 1, clips.Length);
+                    _currentClip = (int)Mathf.Repeat(_currentClip + 1, _clips.Length);
                 }
                 return;
             }
         }
-        _renderer.sprite = clips[_currentClip].sprites[_currentSpriteIndex];
+        _renderer.sprite = _clips[_currentClip].Sprites[_currentSpriteIndex];
         _nextFrameTime += _secondsPerFrame;
         _currentSpriteIndex++;        
     }
 
     public void SetClip(string clipName)
     {
-        for(int i = 0; i < clips.Length; i++)
+        for(int i = 0; i < _clips.Length; i++)
         {
-            if (clipName == clips[i].clipName)
+            if (clipName == _clips[i].ClipName)
             {
                 _currentClip = i;
+                _currentSpriteIndex = 0;
             }          
         }        
     }
@@ -72,10 +74,10 @@ public class SpriteAnimationComponent : MonoBehaviour
         [SerializeField] private bool _allowNextClip;
         [SerializeField] private UnityEvent _onComplete;
 
-        public string clipName => _clipName;
-        public Sprite[] sprites => _sprites;
-        public bool loop => _loop;
-        public bool allowNextClip => _allowNextClip;
-        public UnityEvent onComplete => _onComplete;
+        public string ClipName => _clipName;
+        public Sprite[] Sprites => _sprites;
+        public bool Loop => _loop;
+        public bool AllowNextClip => _allowNextClip;
+        public UnityEvent OnComplete => _onComplete;
     }    
 }

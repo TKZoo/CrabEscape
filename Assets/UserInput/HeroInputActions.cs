@@ -8,10 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @HeroInputActions : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset { get; }
+    public InputActionAsset Asset { get; }
     public @HeroInputActions()
     {
-        asset = InputActionAsset.FromJson(@"{
+        Asset = InputActionAsset.FromJson(@"{
     ""name"": ""HeroInputActions"",
     ""maps"": [
         {
@@ -108,38 +108,38 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
     ""controlSchemes"": []
 }");
         // Hero
-        m_Hero = asset.FindActionMap("Hero", throwIfNotFound: true);
-        m_Hero_HerolMovement = m_Hero.FindAction("HerolMovement", throwIfNotFound: true);
-        m_Hero_Interact = m_Hero.FindAction("Interact", throwIfNotFound: true);
+        _mHero = Asset.FindActionMap("Hero", throwIfNotFound: true);
+        _mHeroHerolMovement = _mHero.FindAction("HerolMovement", throwIfNotFound: true);
+        _mHeroInteract = _mHero.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        UnityEngine.Object.Destroy(Asset);
     }
 
     public InputBinding? bindingMask
     {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
+        get => Asset.bindingMask;
+        set => Asset.bindingMask = value;
     }
 
     public ReadOnlyArray<InputDevice>? devices
     {
-        get => asset.devices;
-        set => asset.devices = value;
+        get => Asset.devices;
+        set => Asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+    public ReadOnlyArray<InputControlScheme> controlSchemes => Asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
-        return asset.Contains(action);
+        return Asset.Contains(action);
     }
 
     public IEnumerator<InputAction> GetEnumerator()
     {
-        return asset.GetEnumerator();
+        return Asset.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -149,42 +149,42 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
 
     public void Enable()
     {
-        asset.Enable();
+        Asset.Enable();
     }
 
     public void Disable()
     {
-        asset.Disable();
+        Asset.Disable();
     }
 
     // Hero
-    private readonly InputActionMap m_Hero;
-    private IHeroActions m_HeroActionsCallbackInterface;
-    private readonly InputAction m_Hero_HerolMovement;
-    private readonly InputAction m_Hero_Interact;
+    private readonly InputActionMap _mHero;
+    private IHeroActions _mHeroActionsCallbackInterface;
+    private readonly InputAction _mHeroHerolMovement;
+    private readonly InputAction _mHeroInteract;
     public struct HeroActions
     {
-        private @HeroInputActions m_Wrapper;
-        public HeroActions(@HeroInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @HerolMovement => m_Wrapper.m_Hero_HerolMovement;
-        public InputAction @Interact => m_Wrapper.m_Hero_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Hero; }
+        private @HeroInputActions _mWrapper;
+        public HeroActions(@HeroInputActions wrapper) { _mWrapper = wrapper; }
+        public InputAction @HerolMovement => _mWrapper._mHeroHerolMovement;
+        public InputAction @Interact => _mWrapper._mHeroInteract;
+        public InputActionMap Get() { return _mWrapper._mHero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(HeroActions set) { return set.Get(); }
         public void SetCallbacks(IHeroActions instance)
         {
-            if (m_Wrapper.m_HeroActionsCallbackInterface != null)
+            if (_mWrapper._mHeroActionsCallbackInterface != null)
             {
-                @HerolMovement.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnHerolMovement;
-                @HerolMovement.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnHerolMovement;
-                @HerolMovement.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnHerolMovement;
-                @Interact.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
+                @HerolMovement.started -= _mWrapper._mHeroActionsCallbackInterface.OnHerolMovement;
+                @HerolMovement.performed -= _mWrapper._mHeroActionsCallbackInterface.OnHerolMovement;
+                @HerolMovement.canceled -= _mWrapper._mHeroActionsCallbackInterface.OnHerolMovement;
+                @Interact.started -= _mWrapper._mHeroActionsCallbackInterface.OnInteract;
+                @Interact.performed -= _mWrapper._mHeroActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= _mWrapper._mHeroActionsCallbackInterface.OnInteract;
             }
-            m_Wrapper.m_HeroActionsCallbackInterface = instance;
+            _mWrapper._mHeroActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @HerolMovement.started += instance.OnHerolMovement;

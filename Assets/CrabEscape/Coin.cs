@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Coin : MonoBehaviour
 {
     [SerializeField] private int _coinValue;
-    [SerializeField] private ScoreCounterComponent scorecounter;
+    [FormerlySerializedAs("scorecounter")] [SerializeField] private ScoreCounterComponent _scorecounter;
 
     public void OnCoinColected()
     {
-        scorecounter.CountScore(_coinValue);
+        _scorecounter.CountScore(_coinValue);
     }
 }

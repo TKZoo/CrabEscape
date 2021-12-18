@@ -1,34 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Security.Cryptography;
+using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpImpulse;
-    [SerializeField] private float _damageJumpImpulse;
-    [SerializeField] private float _groundCheckRadius;      
+    [SerializeField] private float _damageJumpImpulseY;
+    [SerializeField] private float _groundCheckRadius;
     [SerializeField] private Vector3 _groundCheckPosition;
     [SerializeField] private bool _debug = false;
     [SerializeField] private LayerCheck _groundCheck;
     [SerializeField] private LayerMask _interactLayerCheck;
-    [SerializeField] private Collider2D[] _interactResult = new Collider2D[1]; 
+    [SerializeField] private LayerMask _groundLayerCheck;
+    [SerializeField] private Collider2D[] _interactResult = new Collider2D[1];
+    [SerializeField] private float _fallHeight;
+
+    [SerializeField] private SpawnPrefabComponent _spawnPlayerParticles;
 
     private Vector2 _direction;    
     private Rigidbody2D _heroRb;
-    private Animator _animator;
-    private SpriteRenderer _sprite;
+    private Animator _animator;   
     private bool _isGrounded;
     private bool _allowDoubleJump;
+    private bool _isJumping;
+    private bool _isLanded;
+
+    [SerializeField] private GameObject _runParticles;
+    [SerializeField] private GameObject _jumpParticles;
+    [SerializeField] private GameObject _landingParticles;
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
-    private static readonly int verticalVelocity = Animator.StringToHash("vertical_velocity");
+    private static readonly int VerticalVelocity = Animator.StringToHash("vertical_velocity");
     private static readonly int Hit = Animator.StringToHash("isHit");
 
     private void Awake()
-    {
+    {        
         _heroRb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
     }
 
     public void SetDirection(Vector2 direction)
@@ -37,8 +47,9 @@ public class Hero : MonoBehaviour
     }
 
     private void Update()
-    {
-        _isGrounded = IsGrounded();       
+    {        
+        _isGrounded = IsGrounded();
+        FallHeightCheck();
     }
 
     private void FixedUpdate()
@@ -50,7 +61,7 @@ public class Hero : MonoBehaviour
         
         _animator.SetBool(IsGroundKey, _isGrounded);
         _animator.SetBool(IsRunning, _direction.x != 0);
-        _animator.SetFloat(verticalVelocity, _heroRb.velocity.y);
+        _animator.SetFloat(VerticalVelocity, _heroRb.velocity.y);
 
         UpdateSpriteDirection();       
     }
@@ -59,11 +70,11 @@ public class Hero : MonoBehaviour
     {
         if (_direction.x > 0)
         {
-            _sprite.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);            
         }
         else if (_direction.x < 0)
         {
-            _sprite.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -74,13 +85,21 @@ public class Hero : MonoBehaviour
 
         if (_isGrounded)
         {
+            if (_isLanded == true)
+            {
+                Debug.Log("puff");
+                _spawnPlayerParticles.SpawnPrefab(_landingParticles);
+                _isLanded = false;
+            }
             _allowDoubleJump = true;
+            _isJumping = true;
         }
         if (isJumpPressing)
         {
+            _isJumping = true;
             yVelocity = CalculateJumpVelocity(yVelocity);
         }
-        else if (_heroRb.velocity.y > 0)
+        else if (_heroRb.velocity.y > 0 && _isJumping)
         {
             yVelocity *= 0.5f;
         }
@@ -99,8 +118,9 @@ public class Hero : MonoBehaviour
         {
             yVelocity += _jumpImpulse;
         }
-        else if (_allowDoubleJump)
+        else if (_allowDoubleJump && _isJumping)
         {
+            _spawnPlayerParticles.SpawnPrefab(_jumpParticles);
             yVelocity = _jumpImpulse;
             _allowDoubleJump = false;
         }
@@ -109,13 +129,27 @@ public class Hero : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return _groundCheck.isTouchingLayer;        
+        return _groundCheck._isTouchingLayer;        
     }
 
+    private void FallHeightCheck()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 10, _groundLayerCheck);
+        if (hit.collider != null)
+        {
+            if (hit.distance > _fallHeight)
+            {
+                _isLanded = true;
+            }
+            //Debug.Log(hit.collider.name + " hited by ray");
+            //Debug.Log(hit.distance);
+        }
+    } 
     public void TakeDamage()
     {
+        _isJumping = false;
         _animator.SetTrigger(Hit);
-        _heroRb.velocity = new Vector2(_heroRb.velocity.x, _damageJumpImpulse);
+        _heroRb.velocity = new Vector2(_heroRb.velocity.x, _damageJumpImpulseY);
     }
 
     private void OnDrawGizmos()
@@ -139,5 +173,16 @@ public class Hero : MonoBehaviour
                 interactible.Interact();
             }
         }
+    }    
+
+    public void SpawnFootDust()
+    {
+        //Debug.Log($"name: {_runParticles.name}");
+        _spawnPlayerParticles.SpawnPrefab(_runParticles);
+    }
+    
+    public void SpawnJumpDust()
+    {
+        _spawnPlayerParticles.SpawnPrefab(_jumpParticles);
     }
 }

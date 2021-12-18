@@ -198,7 +198,6 @@ MonoBehaviour:
     - {fileID: -4986890610287934012, guid: f33e77b598982914a81eaf73ee511885, type: 3}
     - {fileID: 6143208460787649835, guid: f33e77b598982914a81eaf73ee511885, type: 3}
     - {fileID: 7609282858266732271, guid: f33e77b598982914a81eaf73ee511885, type: 3}
-    - {fileID: -6288512792030432889, guid: f33e77b598982914a81eaf73ee511885, type: 3}
     _loop: 0
     _allowNextClip: 0
     _onComplete:
