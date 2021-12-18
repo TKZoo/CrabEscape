@@ -24,7 +24,7 @@ public class Hero : MonoBehaviour
     private bool _isGrounded;
     private bool _allowDoubleJump;
     private bool _isJumping;
-    private bool _isLanded;
+    private bool _isFalling;
 
     [SerializeField] private GameObject _runParticles;
     [SerializeField] private GameObject _jumpParticles;
@@ -85,11 +85,10 @@ public class Hero : MonoBehaviour
 
         if (_isGrounded)
         {
-            if (_isLanded == true)
+            if (_isFalling == true)
             {
-                Debug.Log("puff");
                 _spawnPlayerParticles.SpawnPrefab(_landingParticles);
-                _isLanded = false;
+                _isFalling = false;
             }
             _allowDoubleJump = true;
             _isJumping = true;
@@ -139,7 +138,7 @@ public class Hero : MonoBehaviour
         {
             if (hit.distance > _fallHeight)
             {
-                _isLanded = true;
+                _isFalling = true;
             }
             //Debug.Log(hit.collider.name + " hited by ray");
             //Debug.Log(hit.distance);
