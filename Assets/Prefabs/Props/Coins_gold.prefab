@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d08ed6c3db6dd4eb18652cd020f7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tag: Player
+  _tag:
+  - Player
   _action:
     m_PersistentCalls:
       m_Calls:
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinValue: 10
-  scorecounter: {fileID: 0}
+  _scorecounter: {fileID: 0}
 --- !u!114 &4801564348178091880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 8
-  clips:
+  _clips:
   - _clipName: idle
     _sprites:
     - {fileID: 6582046967323461550, guid: f33e77b598982914a81eaf73ee511885, type: 3}

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
@@ -85,7 +83,7 @@ public class Hero : MonoBehaviour
 
         if (_isGrounded)
         {
-            if (_isFalling == true)
+            if (_isFalling)
             {
                 _spawnPlayerParticles.SpawnPrefab(_landingParticles);
                 _isFalling = false;
@@ -134,7 +132,7 @@ public class Hero : MonoBehaviour
     private void FallHeightCheck()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 10, _groundLayerCheck);
-        if (hit.collider != null)
+        if (hit.collider != null && !_isGrounded)
         {
             if (hit.distance > _fallHeight)
             {
