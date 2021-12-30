@@ -11,7 +11,8 @@ public class HeroInputReader : MonoBehaviour
         _inputActions = new HeroInputActions();
         _inputActions.Hero.HerolMovement.performed += OnHeroMovement;
         _inputActions.Hero.HerolMovement.canceled += OnHeroMovement;
-        _inputActions.Hero.Interact.performed += OnInteract;        
+        _inputActions.Hero.Interact.performed += OnInteract;      
+        _inputActions.Hero.Attack.performed += OnAttackAction; 
     }
 
     private void OnEnable()
@@ -33,5 +34,10 @@ public class HeroInputReader : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         _hero.Interact();            
+    }
+    
+    public void OnAttackAction(InputAction.CallbackContext context)
+    {
+        _hero.Attack ();            
     }
 }

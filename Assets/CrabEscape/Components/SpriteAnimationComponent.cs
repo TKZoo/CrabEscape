@@ -59,8 +59,11 @@ public class SpriteAnimationComponent : MonoBehaviour
         {
             if (clipName == _clips[i].ClipName)
             {
+                _secondsPerFrame = 1f / _frameRate;
+                _nextFrameTime = Time.time + _secondsPerFrame;
                 _currentClip = i;
                 _currentSpriteIndex = 0;
+                _isPlaying = true;
             }          
         }        
     }

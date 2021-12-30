@@ -17,11 +17,14 @@ public class HealthComponent : MonoBehaviour
     public void ApplyDamage(int damageValue)
     {
         _health -= damageValue;
-        _onTakeDamage?.Invoke();
-        if(_health <= 0)
+        if (_health > 0)
+        {
+            _onTakeDamage?.Invoke();
+        }
+        else
         {
             _onDie?.Invoke();
-        }        
+        }
     }
 
     public void ApplyHealing(int healValue)

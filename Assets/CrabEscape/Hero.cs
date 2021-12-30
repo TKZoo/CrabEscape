@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEditor.Animations;
+using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
@@ -13,8 +15,13 @@ public class Hero : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerCheck;
     [SerializeField] private Collider2D[] _interactResult = new Collider2D[1];
     [SerializeField] private float _fallHeight;
+    [SerializeField] private int _damage;
 
     [SerializeField] private SpawnPrefabComponent _spawnPlayerParticles;
+    [SerializeField] private SpawnPrefabComponent _spawnWeaponParticles;
+    [SerializeField] private CheckCircleOverlapComponent _attackRange;
+    [SerializeField] private AnimatorController _armed;
+    [SerializeField] private AnimatorController _disarmed;
 
     private Vector2 _direction;    
     private Rigidbody2D _heroRb;
@@ -23,15 +30,18 @@ public class Hero : MonoBehaviour
     private bool _allowDoubleJump;
     private bool _isJumping;
     private bool _isFalling;
+    private bool _isArmed;
 
     [SerializeField] private GameObject _runParticles;
     [SerializeField] private GameObject _jumpParticles;
     [SerializeField] private GameObject _landingParticles;
+    [SerializeField] private GameObject _attackParticles;
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int VerticalVelocity = Animator.StringToHash("vertical_velocity");
     private static readonly int Hit = Animator.StringToHash("isHit");
+    private static readonly int AttackAnim = Animator.StringToHash("attack");
 
     private void Awake()
     {        
@@ -149,15 +159,17 @@ public class Hero : MonoBehaviour
         _heroRb.velocity = new Vector2(_heroRb.velocity.x, _damageJumpImpulseY);
     }
 
+#if UNITY_EDITOR    
     private void OnDrawGizmos()
     {
         if (_debug == true)
         {
-            Gizmos.color = IsGrounded() ? Color.green : Color.red;
-            Gizmos.DrawSphere(transform.position + _groundCheckPosition, _groundCheckRadius);
+            Handles.color = IsGrounded() ? HandlesUtils.TransparentGreen : HandlesUtils.TransparentRed;
+            Handles.DrawSolidDisc(transform.position + _groundCheckPosition, Vector3.forward, _groundCheckRadius);
         }
     }
-
+#endif
+    
     public void Interact()
     {
         var size = Physics2D.OverlapCircleNonAlloc(transform.position, 0.3f, _interactResult, _interactLayerCheck);
@@ -170,7 +182,33 @@ public class Hero : MonoBehaviour
                 interactible.Interact();
             }
         }
-    }    
+    }
+
+    public void ArmHero()
+    {
+        _isArmed = true;
+        _animator.runtimeAnimatorController = _armed;
+    }
+    
+    public void Attack()
+    {
+        if(!_isArmed) return;
+        _animator.SetTrigger(AttackAnim);
+        _spawnWeaponParticles.SpawnPrefab(_attackParticles);
+    }
+
+    public void OnAttack()
+    {
+        var gos =_attackRange.GetObjectsInRadius();
+        foreach (var go in gos)
+        {
+            var hp = go.GetComponent<HealthComponent>();
+            if (hp != null && (go.CompareTag("Enemy") || go.CompareTag("Interactible")))
+            {
+                hp.ApplyDamage(_damage);
+            }
+        }
+    }
 
     public void SpawnFootDust()
     {
