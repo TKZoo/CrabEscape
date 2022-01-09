@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 709739203}
   - component: {fileID: 709739204}
-  m_Layer: 0
-  m_Name: DustEffectSpawnPos
+  m_Layer: 12
+  m_Name: HeroEffectSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,8 @@ GameObject:
   - component: {fileID: 1825459534}
   - component: {fileID: 1825459535}
   - component: {fileID: 1825459536}
-  m_Layer: 0
+  - component: {fileID: 89183753}
+  m_Layer: 12
   m_Name: AttackPosirion
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -90,7 +91,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.34
-  _tag: 
+  _onOverlap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 89183753}
+        m_MethodName: DoDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _mask:
+    serializedVersion: 2
+    m_Bits: 3895
+  _tags:
+  - Enemy
+  - Interactible
 --- !u!114 &1825459536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +125,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1825459534}
   _prefab: {fileID: 0}
+--- !u!114 &89183753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825459533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87251f1610e2fbe4d860296ef5b19c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _healing: 0
+--- !u!1 &2124196056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124196057}
+  - component: {fileID: 2124196059}
+  - component: {fileID: 2124196058}
+  m_Layer: 12
+  m_Name: InteractPosirion
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2124196057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124196056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.016, y: 0.045, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 324642737315750777}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2124196059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124196056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c428a9f0ba22924083baea0d7bd8091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.34
+  _onOverlap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2124196058}
+        m_MethodName: DoInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _mask:
+    serializedVersion: 2
+    m_Bits: 512
+  _tags:
+  - Interactible
+--- !u!114 &2124196058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124196056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c66baaa5c896344a4e1acfbd7d81e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &324642737142285455
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +226,7 @@ GameObject:
   - component: {fileID: 324642737142285454}
   - component: {fileID: 324642737142285452}
   - component: {fileID: 324642737142285453}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b835e5f42507b7944aea24183416ca9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
+  _layer:
     serializedVersion: 2
     m_Bits: 256
   _isTouchingLayer: 0
@@ -196,7 +306,8 @@ GameObject:
   - component: {fileID: 9086317831005432781}
   - component: {fileID: 324642737315750770}
   - component: {fileID: 324642737315750769}
-  m_Layer: 0
+  - component: {fileID: 2036483513687078147}
+  m_Layer: 12
   m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -217,6 +328,7 @@ Transform:
   - {fileID: 324642737142285454}
   - {fileID: 709739203}
   - {fileID: 1825459534}
+  - {fileID: 2124196057}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -331,33 +443,17 @@ MonoBehaviour:
   _speed: 4
   _jumpImpulse: 10
   _damageJumpImpulseY: 6
-  _groundCheckRadius: 0.1
-  _groundCheckPosition: {x: 0, y: -0.3, z: 0}
-  _debug: 0
-  _groundCheck: {fileID: 324642737142285452}
-  _interactLayerCheck:
-    serializedVersion: 2
-    m_Bits: 512
+  _damage: 1
   _groundLayerCheck:
     serializedVersion: 2
     m_Bits: 256
-  _interactResult:
-  - {fileID: 0}
-  _fallHeight: 3
-  _damage: 1
-  _spawnPlayerParticles: {fileID: 709739204}
-  _spawnWeaponParticles: {fileID: 1825459536}
+  _groundCheck: {fileID: 324642737142285452}
   _attackRange: {fileID: 1825459535}
+  _particles: {fileID: 2036483513687078147}
+  _interactionCheck: {fileID: 2124196059}
+  _fallHeight: 3
   _armed: {fileID: 9100000, guid: cdf64d7083299f449b5bea529c4db9d9, type: 2}
   _disarmed: {fileID: 9100000, guid: 179971497dcbd5c4da239bba54b45eb2, type: 2}
-  _runParticles: {fileID: 8664874588410479705, guid: cdc2537acf0d754488dc000a42084c2d,
-    type: 3}
-  _jumpParticles: {fileID: 5616951671081058185, guid: b7acfe9a28b78f94086dc0ec874aca80,
-    type: 3}
-  _landingParticles: {fileID: 4653286085468492107, guid: 1a24e5456a29b814587f2aac70d99f5f,
-    type: 3}
-  _attackParticles: {fileID: 3667371897510133616, guid: d7059ae31e052884392b9a1ab61f83d3,
-    type: 3}
 --- !u!114 &9086317831005432781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +490,20 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_MethodName: Reload
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHealthChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 324642737315750774}
+        m_MethodName: OnHealthChanges
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -447,3 +557,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.50440073, y: 0.8567606}
   m_EdgeRadius: 0
+--- !u!114 &2036483513687078147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324642737315750778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43972725e4c6e14bba34add91ec883d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pfSpawners:
+  - id: Run
+    Component: {fileID: 709739204}
+    pfSpawn: {fileID: 8664874588410479705, guid: cdc2537acf0d754488dc000a42084c2d,
+      type: 3}
+  - id: Jump
+    Component: {fileID: 709739204}
+    pfSpawn: {fileID: 5616951671081058185, guid: b7acfe9a28b78f94086dc0ec874aca80,
+      type: 3}
+  - id: Landing
+    Component: {fileID: 709739204}
+    pfSpawn: {fileID: 4653286085468492107, guid: 1a24e5456a29b814587f2aac70d99f5f,
+      type: 3}
+  - id: Attack
+    Component: {fileID: 1825459536}
+    pfSpawn: {fileID: 3667371897510133616, guid: d7059ae31e052884392b9a1ab61f83d3,
+      type: 3}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6451708156648421556}
   m_Layer: 9
   m_Name: Helm
-  m_TagString: Untagged
+  m_TagString: Interactible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
