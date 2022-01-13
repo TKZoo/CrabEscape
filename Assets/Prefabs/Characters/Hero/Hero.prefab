@@ -72,7 +72,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825459533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.693, y: -0.103, z: 0}
+  m_LocalPosition: {x: 0.572, y: -0.103, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 324642737315750777}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c428a9f0ba22924083baea0d7bd8091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 0.34
+  _radius: 0.42
   _onOverlap:
     m_PersistentCalls:
       m_Calls:
@@ -107,7 +107,7 @@ MonoBehaviour:
         m_CallState: 2
   _mask:
     serializedVersion: 2
-    m_Bits: 3895
+    m_Bits: 12087
   _tags:
   - Enemy
   - Interactible
@@ -440,10 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8234cf076b48ed46af5adb6b3f39082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _invertSpriteScale: 0
   _speed: 4
   _jumpImpulse: 10
   _damageJumpImpulseY: 6
-  _damage: 1
   _groundLayerCheck:
     serializedVersion: 2
     m_Bits: 256

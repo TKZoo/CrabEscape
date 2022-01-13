@@ -1,14 +1,13 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SpriteRenderer))]
 
 public class SpriteAnimationComponent : MonoBehaviour
 {
     [SerializeField] private int _frameRate;      
-    [FormerlySerializedAs("clips")] [SerializeField] private AnimationClips[] _clips;
+    [SerializeField] private AnimationClips[] _clips;
 
     private SpriteRenderer _renderer;
     private float _secondsPerFrame;

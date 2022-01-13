@@ -18,15 +18,15 @@ public class HealthComponent : MonoBehaviour
 
     public void ApplyDamage(int damageValue)
     {
-        _health -= damageValue;
-        _onHealthChange?.Invoke(_health);
         if (_health > 0)
         {
+            _health -= damageValue;
+            _onHealthChange?.Invoke(_health);
             _onTakeDamage?.Invoke();
-        }
-        else
-        {
-            _onDie?.Invoke();
+            if (_health <= 0)
+            {
+                _onDie?.Invoke();
+            }
         }
     }
 
@@ -49,7 +49,7 @@ public class HealthComponent : MonoBehaviour
     [Serializable]
     public class HealthChangeEvent : UnityEvent<int>
     {
-        
+
     }
 
 }

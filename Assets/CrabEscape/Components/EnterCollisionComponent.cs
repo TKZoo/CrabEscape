@@ -19,7 +19,6 @@ public class EnterCollisionComponent : MonoBehaviour
     }
 
     [Serializable]
-
     public class EnterEvent : UnityEvent<GameObject>
     {
 

@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 
-public class Characters : MonoBehaviour
+public class Character : MonoBehaviour
 {
+    [Header("Params")] 
+    [SerializeField] private bool _invertSpriteScale;
     [SerializeField] private float _speed;
     [SerializeField] protected float _jumpImpulse;
     [SerializeField] private float _damageJumpImpulseY;
-    [SerializeField] private int _damage;
 
-    [SerializeField] protected LayerMask _groundLayerCheck;
-    [SerializeField] private LayerCheck _groundCheck;
+    [Header("Checkers")]
+    [SerializeField] public LayerMask _groundLayerCheck;
+    [SerializeField] public LayerCheck _groundCheck;
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
     [SerializeField] protected SpawnPrefabListComponent _particles;
@@ -58,13 +60,14 @@ public class Characters : MonoBehaviour
 
     private void UpdateSpriteDirection()
     {
+        var scaleMultyplier = _invertSpriteScale ? -1 : 1;
         if (Direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(scaleMultyplier, 1, 1);
         }
         else if (Direction.x < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1 * scaleMultyplier, 1, 1);
         }
     }
 

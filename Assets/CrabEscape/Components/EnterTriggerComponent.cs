@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class EnterTriggerComponent : MonoBehaviour
@@ -12,8 +13,14 @@ public class EnterTriggerComponent : MonoBehaviour
         {
             if (collision.gameObject.CompareTag(_tag[i]))
             {
-                _action?.Invoke();
+                _action?.Invoke(collision.gameObject);
             } 
         }
+    }
+    
+    [Serializable]
+    public class UnityEvent : UnityEvent<GameObject>
+    {
+
     }
 }

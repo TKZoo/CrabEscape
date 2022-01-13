@@ -1,9 +1,7 @@
-﻿using System;
-using UnityEditor;
-using UnityEditor.Animations;
+﻿using UnityEditor.Animations;
 using UnityEngine;
 
-public class Hero : Characters
+public class Hero : Character
 {
     [SerializeField] private CheckCircleOverlapComponent _interactionCheck;
     [SerializeField] private float _fallHeight;

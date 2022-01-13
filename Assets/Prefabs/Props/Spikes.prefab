@@ -125,6 +125,7 @@ MonoBehaviour:
   _tag:
   - Player
   - Interactible
+  - Enemy
   _action:
     m_PersistentCalls:
       m_Calls:
