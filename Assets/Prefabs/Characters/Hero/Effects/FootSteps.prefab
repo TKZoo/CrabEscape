@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b87168f1da10f4bb691200a9fd0f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 10
-  clips:
+  _frameRate: 8
+  _clips:
   - _clipName: RunDust
     _sprites:
     - {fileID: 21300000, guid: ac3ce4867e1189946bffdde77f34d940, type: 3}
