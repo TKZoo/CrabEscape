@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709739202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.034, y: -0.367, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.034, y: -0.385, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 324642737315750777}
   m_RootOrder: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   _isTouchingLayer: 0
 --- !u!61 &324642737142285453
 BoxCollider2D:
@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 324642737315750769}
   - component: {fileID: 2036483513687078147}
   - component: {fileID: 1499517538}
+  - component: {fileID: 2114691092}
   m_Layer: 13
   m_Name: Sharky
   m_TagString: Enemy
@@ -586,7 +587,7 @@ MonoBehaviour:
     Component: {fileID: 5012077628662253933}
     pfSpawn: {fileID: 8664874588410479705, guid: d960b97eb092a134c97b861786399e2b,
       type: 3}
-  - id: Miss
+  - id: MissTarget
     Component: {fileID: 5012077628662253933}
     pfSpawn: {fileID: 8664874588410479705, guid: 7109e0e468ac62b48ac9ce1d756be33f,
       type: 3}
@@ -604,8 +605,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vision: {fileID: 3803678646966245868}
   _inAttackRange: {fileID: 1817560668}
-  _timeToReact: 0.5
+  _timeToReact: 0.7
   _attackCoolDown: 0.3
+  _scaleCollider: 1
+--- !u!114 &2114691092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324642737315750778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c477b593dd835d543839eca075519982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points:
+  - {fileID: 0}
+  - {fileID: 0}
+  _treshold: 1
 --- !u!1 &2157991504526517163
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +832,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag:
   - Player
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
   _action:
     m_PersistentCalls:
       m_Calls:

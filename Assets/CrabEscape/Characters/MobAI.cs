@@ -35,7 +35,7 @@ public class MobAI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_current);
+        //Debug.Log(_current);
     }
     private void Start()
     {
@@ -65,10 +65,19 @@ public class MobAI : MonoBehaviour
 
     private IEnumerator AgroOnTarget()
     {
+        
+        LookAtTarget();
         _particles.Spawn("Exclamation");
         yield return new WaitForSeconds(_timeToReact);
 
         StartState(GoToTarget());
+    }
+
+    private void LookAtTarget()
+    {
+        var direction = GetDirectionToTarget();
+        _character.SetDirection(Vector2.zero);
+        _character.UpdateSpriteDirection(direction);
     }
 
     private IEnumerator GoToTarget()
@@ -86,6 +95,13 @@ public class MobAI : MonoBehaviour
 
             yield return null;
         }
+        
+        _character.SetDirection(Vector2.zero);
+        _particles.Spawn("MissTarget");
+        yield return new WaitForSeconds(_timeToReact);
+        
+        StartState(_patrol.DoPatrol());
+        
     }
     private IEnumerator Attack()
     {
@@ -100,17 +116,34 @@ public class MobAI : MonoBehaviour
 
     private void SetDirectionToTarget()
     {
-        var direction = _target.transform.position - transform.position;
+        var direction = GetDirectionToTarget();
         direction.y = 0;
 
-        _character.SetDirection(direction.normalized);
+        _character.SetDirection(direction);
     }
 
+    private Vector2 GetDirectionToTarget()
+    {
+        var direction = _target.transform.position - transform.position;
+        direction.y = 0;
+        return direction.normalized;
+    }
+
+    void SetLayerAllChildren(Transform root, int layer)
+    {
+        var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (var child in children)
+        {
+            child.gameObject.layer = layer;
+        }
+    }
+    
     public void OnDie()
     {
         _isDead = true;
         _animator.SetBool(DeathAnim, true);
         _character.SetDirection(Vector2.zero);
+        SetLayerAllChildren(_character.gameObject.transform, 10);
 
         if (_scaleCollider)
         {
@@ -120,5 +153,4 @@ public class MobAI : MonoBehaviour
         if (_current != null)
             StopCoroutine(_current);
     }
-
 }

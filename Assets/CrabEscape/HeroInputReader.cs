@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class HeroInputReader : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HeroInputReader : MonoBehaviour
         _inputActions.Hero.HerolMovement.canceled += OnHeroMovement;
         _inputActions.Hero.Interact.performed += OnInteract;      
         _inputActions.Hero.Attack.performed += OnAttackAction; 
+        _inputActions.Hero.ThrowAttack.performed += OnThrowAttackAction;
     }
 
     private void OnEnable()
@@ -39,5 +41,19 @@ public class HeroInputReader : MonoBehaviour
     public void OnAttackAction(InputAction.CallbackContext context)
     {
         _hero.Attack ();            
+    }
+
+    public void OnThrowAttackAction(InputAction.CallbackContext context)
+    {
+        float val = context.ReadValue<float>();
+
+        if (val >= InputSystem.settings.defaultHoldTime)
+        {
+            _hero.ThrowComboAttack();
+        }
+        else
+        {
+            _hero.ThrowAttack ();
+        } 
     }
 }

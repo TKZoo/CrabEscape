@@ -1,4 +1,5 @@
-﻿using UnityEditor.Animations;
+﻿using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Hero : Character
@@ -8,13 +9,21 @@ public class Hero : Character
 
     [SerializeField] private AnimatorController _armed;
     [SerializeField] private AnimatorController _disarmed;
+    [SerializeField] private int _swordCount;
+    [SerializeField] private int _throwComboSwordsCount;
+    [SerializeField] private float _throwComboCooldown;
 
+    [SerializeField] private Projectile _projectile;
+
+    private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
+    
     private GameSession _session;
 
     private bool _allowDoubleJump;
 
     private void Start()
     {
+        //_projectile = FindObjectOfType<Projectile>();
         _session = FindObjectOfType<GameSession>();
         var health = GetComponent<HealthComponent>();
         health.SetHealth(_session.PlayerData.Hp);
@@ -29,6 +38,12 @@ public class Hero : Character
         FallHeightCheck();
     }
 
+    public void SwordCounter(int sword)
+    {
+        _swordCount += sword;
+        Debug.Log("player have: " + _swordCount + " sword");
+    }
+    
     protected override float CalculateYVelocity()
     {
         if (IsGrounded)
@@ -93,5 +108,40 @@ public class Hero : Character
     {
         if (!_session.PlayerData.IsArmed) return;
         base.Attack();
+    }
+
+    public override void ThrowAttack()
+    {
+        if (_swordCount > 1)
+        {
+            _projectile.SetRigidBodyToDynamic();
+            base.ThrowAttack();
+            SwordCounter(-1);
+        }
+    }
+
+    private IEnumerator DoThrowComboAttack()
+    {
+        var throwswordcount = _throwComboSwordsCount;
+        while (_throwComboSwordsCount > 0)
+        {
+            if (_swordCount > 1)
+            {
+                Animator.SetTrigger(ThrowAttackAnim);
+                SwordCounter(-1);
+            }
+            yield return new WaitForSeconds(_throwComboCooldown) ;
+            _throwComboSwordsCount--;
+        }
+        _throwComboSwordsCount = throwswordcount;
+    }
+    
+    public void ThrowComboAttack()
+    {
+        if (_swordCount > 1)
+        {
+            _projectile.SetRigidBodyToKinematic();
+            StartCoroutine(DoThrowComboAttack());
+        }
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7797891030484767404}
   - component: {fileID: 3879036550128214603}
   - component: {fileID: 2822859926650255149}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Barrel_destr
   m_TagString: Interactible
   m_Icon: {fileID: 0}

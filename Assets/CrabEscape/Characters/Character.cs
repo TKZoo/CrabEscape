@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
     [SerializeField] protected SpawnPrefabListComponent _particles;
+    [SerializeField] private Cooldown _throwCooldown;
 
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
@@ -27,6 +28,7 @@ public class Character : MonoBehaviour
     private static readonly int VerticalVelocity = Animator.StringToHash("vertical_velocity");
     private static readonly int Hit = Animator.StringToHash("isHit");
     private static readonly int AttackAnim = Animator.StringToHash("attack");
+    private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
 
     protected virtual void Awake()
     {
@@ -36,7 +38,7 @@ public class Character : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
-        Direction = direction;
+        Direction = direction; 
     }
 
     protected virtual void Update()
@@ -55,17 +57,17 @@ public class Character : MonoBehaviour
         Animator.SetBool(IsRunning, Direction.x != 0);
         Animator.SetFloat(VerticalVelocity, Rigidbody.velocity.y);
 
-        UpdateSpriteDirection();
+        UpdateSpriteDirection(Direction);
     }
 
-    private void UpdateSpriteDirection()
+    public void UpdateSpriteDirection(Vector2 direction)
     {
         var scaleMultyplier = _invertSpriteScale ? -1 : 1;
-        if (Direction.x > 0)
+        if (direction.x > 0)
         {
             transform.localScale = new Vector3(scaleMultyplier, 1, 1);
         }
-        else if (Direction.x < 0)
+        else if (direction.x < 0)
         {
             transform.localScale = new Vector3(-1 * scaleMultyplier, 1, 1);
         }
@@ -123,4 +125,20 @@ public class Character : MonoBehaviour
     {
         _attackRange.Check();
     }
+    
+    public void OnThrowAttack()
+    {
+        _particles.Spawn("ThrowAttack");
+    }
+    
+    public virtual void ThrowAttack()
+    {
+        if (_throwCooldown.IsReady)
+        {
+            Animator.SetTrigger(ThrowAttackAnim);
+            _throwCooldown.Reset();
+        }
+    }
+
+    
 }

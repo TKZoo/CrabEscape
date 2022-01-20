@@ -41,6 +41,14 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f712f184-5df6-44db-93cf-21aad4f47f58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1),Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -58,7 +66,7 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Up"",
                     ""id"": ""19956438-ad2f-406c-b203-ac08dbbbef41"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -102,7 +110,7 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c49c92f3-dceb-45db-bb01-796364abbda2"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -113,11 +121,44 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""08c1aa1c-ddab-4404-afb6-5bd0cdc86386"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18ef0b1c-7fde-464f-8385-fcd0b651ecc2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6e0d313-0bcd-405b-b2d0-cd435646aadf"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bce8869-3218-4ee0-9a06-fa0ad24c1129"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -131,6 +172,7 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
         m_Hero_HerolMovement = m_Hero.FindAction("HerolMovement", throwIfNotFound: true);
         m_Hero_Interact = m_Hero.FindAction("Interact", throwIfNotFound: true);
         m_Hero_Attack = m_Hero.FindAction("Attack", throwIfNotFound: true);
+        m_Hero_ThrowAttack = m_Hero.FindAction("ThrowAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +225,7 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Hero_HerolMovement;
     private readonly InputAction m_Hero_Interact;
     private readonly InputAction m_Hero_Attack;
+    private readonly InputAction m_Hero_ThrowAttack;
     public struct HeroActions
     {
         private @HeroInputActions m_Wrapper;
@@ -190,6 +233,7 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
         public InputAction @HerolMovement => m_Wrapper.m_Hero_HerolMovement;
         public InputAction @Interact => m_Wrapper.m_Hero_Interact;
         public InputAction @Attack => m_Wrapper.m_Hero_Attack;
+        public InputAction @ThrowAttack => m_Wrapper.m_Hero_ThrowAttack;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +252,9 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                 @Attack.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack;
+                @ThrowAttack.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnThrowAttack;
+                @ThrowAttack.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnThrowAttack;
+                @ThrowAttack.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnThrowAttack;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +268,9 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @ThrowAttack.started += instance.OnThrowAttack;
+                @ThrowAttack.performed += instance.OnThrowAttack;
+                @ThrowAttack.canceled += instance.OnThrowAttack;
             }
         }
     }
@@ -230,5 +280,6 @@ public class @HeroInputActions : IInputActionCollection, IDisposable
         void OnHerolMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnThrowAttack(InputAction.CallbackContext context);
     }
 }
