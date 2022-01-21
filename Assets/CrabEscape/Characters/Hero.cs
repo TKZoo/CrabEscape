@@ -23,13 +23,19 @@ public class Hero : Character
 
     private void Start()
     {
-        //_projectile = FindObjectOfType<Projectile>();
         _session = FindObjectOfType<GameSession>();
         var health = GetComponent<HealthComponent>();
         health.SetHealth(_session.PlayerData.Hp);
         var score = GetComponent<ScoreCounterComponent>();
         score.SetScore(_session.PlayerData.Coins);
         UpdateHeroWeaponStatus();
+        if (_session.PlayerData.IsArmed)
+        {
+            if (_swordCount <= 0)
+            {
+                _swordCount = 1;
+            }
+        }
     }
 
     protected override void Update()
@@ -112,18 +118,19 @@ public class Hero : Character
 
     public override void ThrowAttack()
     {
-        if (_swordCount > 1)
+        if (_swordCount > 1 && _throwCooldown.IsReady)
         {
             _projectile.SetRigidBodyToDynamic();
             base.ThrowAttack();
             SwordCounter(-1);
+            _throwCooldown.Reset();
         }
     }
 
     private IEnumerator DoThrowComboAttack()
     {
         var throwswordcount = _throwComboSwordsCount;
-        while (_throwComboSwordsCount > 0)
+        while (throwswordcount > 0)
         {
             if (_swordCount > 1)
             {
@@ -131,9 +138,8 @@ public class Hero : Character
                 SwordCounter(-1);
             }
             yield return new WaitForSeconds(_throwComboCooldown) ;
-            _throwComboSwordsCount--;
+            throwswordcount--;
         }
-        _throwComboSwordsCount = throwswordcount;
     }
     
     public void ThrowComboAttack()

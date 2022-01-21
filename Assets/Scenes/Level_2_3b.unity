@@ -5656,6 +5656,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2541326274244314442, guid: c5d93ef05e59bc840bcf52add7c98dd0,
         type: 3}
+    - target: {fileID: 324642737315750774, guid: 46075b11b0b9b934cb5aaa066ff03440,
+        type: 3}
+      propertyPath: _swordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 324642737315750774, guid: 46075b11b0b9b934cb5aaa066ff03440,
+        type: 3}
+      propertyPath: _throwCooldown._value
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 324642737315750777, guid: 46075b11b0b9b934cb5aaa066ff03440,
         type: 3}
       propertyPath: m_RootOrder

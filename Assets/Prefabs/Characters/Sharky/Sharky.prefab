@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invertSpriteScale: 1
-  _speed: 1.4
+  _speed: 1.2
   _jumpImpulse: 10
   _damageJumpImpulseY: 3
   _groundLayerCheck:
@@ -462,6 +462,8 @@ MonoBehaviour:
   _groundCheck: {fileID: 324642737142285452}
   _attackRange: {fileID: 1825459535}
   _particles: {fileID: 2036483513687078147}
+  _throwCooldown:
+    _value: 0
 --- !u!114 &9086317831005432781
 MonoBehaviour:
   m_ObjectHideFlags: 0

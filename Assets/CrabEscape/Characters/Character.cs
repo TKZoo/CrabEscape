@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
     [SerializeField] protected SpawnPrefabListComponent _particles;
-    [SerializeField] private Cooldown _throwCooldown;
+    [SerializeField] protected Cooldown _throwCooldown;
 
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
@@ -60,6 +60,11 @@ public class Character : MonoBehaviour
         UpdateSpriteDirection(Direction);
     }
 
+    public void ChangeSpeedTo(float speed)
+    {
+        _speed = speed;
+    }
+    
     public void UpdateSpriteDirection(Vector2 direction)
     {
         var scaleMultyplier = _invertSpriteScale ? -1 : 1;
@@ -133,11 +138,7 @@ public class Character : MonoBehaviour
     
     public virtual void ThrowAttack()
     {
-        if (_throwCooldown.IsReady)
-        {
-            Animator.SetTrigger(ThrowAttackAnim);
-            _throwCooldown.Reset();
-        }
+        Animator.SetTrigger(ThrowAttackAnim);
     }
 
     
