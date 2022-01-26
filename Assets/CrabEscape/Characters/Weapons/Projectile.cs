@@ -1,28 +1,32 @@
 ﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : BaseProjectile
 {
-    [SerializeField] private float _speed;
     [SerializeField] private float _ySpeedImpulse;
     [SerializeField] private bool _isDynamic;
+    [SerializeField] private float _timeToDestroy;
 
-    private Rigidbody2D _rigidbody;
-    private int _direction;
-
-    private void Start()
+    protected override void Start()
     {
-        _direction = transform.lossyScale.x > 0 ? 1 : -1;
-        _rigidbody = GetComponent<Rigidbody2D>();
+        base.Start();
         if (_isDynamic)
         {
-            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            var force = new Vector2(_direction * _speed, _ySpeedImpulse);
-            _rigidbody.AddForce(force, ForceMode2D.Impulse);
+            Rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            var force = new Vector2(Direction * _speed, _ySpeedImpulse);
+            Rigidbody.AddForce(force, ForceMode2D.Impulse);
         }
         else
         {
-            _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+            Rigidbody.bodyType = RigidbodyType2D.Kinematic;
             _speed /= 50;
+        }
+    }
+
+    private void Update()
+    {
+        if (_timeToDestroy > 0)
+        {
+            Destroy(gameObject, _timeToDestroy);
         }
     }
 
@@ -30,9 +34,9 @@ public class Projectile : MonoBehaviour
     {
         if (!_isDynamic)
         {
-            var position = _rigidbody.position;
-            position.x += _direction * _speed;
-            _rigidbody.MovePosition(position);
+            var position = Rigidbody.position;
+            position.x += Direction * _speed;
+            Rigidbody.MovePosition(position);
         }
     }
 

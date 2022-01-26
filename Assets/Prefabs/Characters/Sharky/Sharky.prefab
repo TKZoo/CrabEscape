@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 4096
   _isTouchingLayer: 0
 --- !u!1 &2124196056
 GameObject:
