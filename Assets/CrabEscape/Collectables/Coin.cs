@@ -4,13 +4,13 @@ using Random = UnityEngine.Random;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private int _coinValue;
-    [SerializeField] private ScoreCounterComponent _scorecounter;
+    private GameSession _session;
     private Rigidbody2D _coinRb;
     private Collider2D _coinCollider;
 
     private void Awake()
     {
-        _scorecounter = FindObjectOfType<ScoreCounterComponent>();
+        _session = FindObjectOfType<GameSession>();
         _coinRb = GetComponent<Rigidbody2D>();
         _coinCollider = GetComponent<Collider2D>();
     }
@@ -34,6 +34,6 @@ public class Coin : MonoBehaviour
 
     public void OnCoinColected()
     {
-        _scorecounter.CountScore(_coinValue);
+        _session.PlayerData.Inventory.Add("Coin", _coinValue);
     }
 }

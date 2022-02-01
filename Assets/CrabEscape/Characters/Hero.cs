@@ -6,36 +6,40 @@ public class Hero : Character
 {
     [SerializeField] private CheckCircleOverlapComponent _interactionCheck;
     [SerializeField] private float _fallHeight;
-
     [SerializeField] private AnimatorController _armed;
     [SerializeField] private AnimatorController _disarmed;
-    [SerializeField] private int _swordCount;
     [SerializeField] private int _throwComboSwordsCount;
     [SerializeField] private float _throwComboCooldown;
 
     [SerializeField] private Projectile _projectile;
 
     private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
-    
-    private GameSession _session;
 
+    private GameSession _session;
     private bool _allowDoubleJump;
+    private int swordCount => _session.PlayerData.Inventory.Count("Sword");
 
     private void Start()
     {
         _session = FindObjectOfType<GameSession>();
         var health = GetComponent<HealthComponent>();
         health.SetHealth(_session.PlayerData.Hp);
-        var score = GetComponent<ScoreCounterComponent>();
-        score.SetScore(_session.PlayerData.Coins);
         UpdateHeroWeaponStatus();
-        if (_session.PlayerData.IsArmed)
+        _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
+    }
+
+    private void OnDestroy()
+    {
+        _session.PlayerData.Inventory.OnChanged -= OnInventoryChanged;
+    }
+    
+    private void OnInventoryChanged(string id, int value)
+    {
+        if (id == "Sword")
         {
-            if (_swordCount <= 0)
-            {
-                _swordCount = 1;
-            }
+            UpdateHeroWeaponStatus();
         }
+        Debug.Log($"Inventory Changed: {id} {value}");
     }
 
     protected override void Update()
@@ -44,12 +48,24 @@ public class Hero : Character
         FallHeightCheck();
     }
 
-    public void SwordCounter(int sword)
+    public void AddInInventory(string id, int value)
     {
-        _swordCount += sword;
-        Debug.Log("player have: " + _swordCount + " sword");
+        _session.PlayerData.Inventory.Add(id, value);
     }
-    
+
+    public void SwordCounter(int delta)
+    {
+        if (delta > 0)
+        {
+            _session.PlayerData.Inventory.Add("Sword", delta);
+        }
+
+        if (delta < 0)
+        {
+            _session.PlayerData.Inventory.Remove("Sword", delta * -1);
+        }
+    }
+
     protected override float CalculateYVelocity()
     {
         if (IsGrounded)
@@ -59,6 +75,7 @@ public class Hero : Character
                 _particles.Spawn("Landing");
                 IsFalling = false;
             }
+
             _allowDoubleJump = true;
         }
 
@@ -73,6 +90,7 @@ public class Hero : Character
             _allowDoubleJump = false;
             return _jumpImpulse;
         }
+
         return base.CalculateJumpVelocity(yVelocity);
     }
 
@@ -99,26 +117,20 @@ public class Hero : Character
         _interactionCheck.Check();
     }
 
-    public void ArmHero()
-    {
-        _session.PlayerData.IsArmed = true;
-        UpdateHeroWeaponStatus();
-    }
-
     private void UpdateHeroWeaponStatus()
     {
-        Animator.runtimeAnimatorController = _session.PlayerData.IsArmed ? _armed : _disarmed;
+        Animator.runtimeAnimatorController = swordCount > 0 ? _armed : _disarmed;
     }
 
     public override void Attack()
     {
-        if (!_session.PlayerData.IsArmed) return;
+        if (swordCount <= 0) return;
         base.Attack();
     }
 
     public override void ThrowAttack()
     {
-        if (_swordCount > 1 && _throwCooldown.IsReady)
+        if (swordCount > 1 && _throwCooldown.IsReady)
         {
             _projectile.SetRigidBodyToDynamic();
             base.ThrowAttack();
@@ -132,19 +144,20 @@ public class Hero : Character
         var throwswordcount = _throwComboSwordsCount;
         while (throwswordcount > 0)
         {
-            if (_swordCount > 1)
+            if (swordCount > 1)
             {
                 Animator.SetTrigger(ThrowAttackAnim);
                 SwordCounter(-1);
             }
-            yield return new WaitForSeconds(_throwComboCooldown) ;
+
+            yield return new WaitForSeconds(_throwComboCooldown);
             throwswordcount--;
         }
     }
-    
+
     public void ThrowComboAttack()
     {
-        if (_swordCount > 1)
+        if (swordCount > 1)
         {
             _projectile.SetRigidBodyToKinematic();
             StartCoroutine(DoThrowComboAttack());

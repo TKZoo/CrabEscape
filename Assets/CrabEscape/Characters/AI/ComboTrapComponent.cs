@@ -20,16 +20,12 @@ public class ComboTrapComponent : MonoBehaviour
         {
             _blockList.Add(child);
             var hp = child.GetComponentInChildren<HealthComponent>();
-            hp._onDie.AddListener(() => OnObjectDestryed(child) );
+            hp._onDie.AddListener(() => OnObjectDestryed(child));
         }
     }
 
     private void Update()
     {
-        if (_blockList.Count == 0)
-        {
-            Destroy(gameObject, 1f);
-        }
         if (_cooldown.IsReady)
         {
             Shoot();
@@ -57,6 +53,10 @@ public class ComboTrapComponent : MonoBehaviour
         if (index < _shootingBlock)
         {
             _shootingBlock--;
+        }
+        if (_blockList.Count == 0)
+        {
+            Destroy(gameObject, 1f);
         }
     }
 }

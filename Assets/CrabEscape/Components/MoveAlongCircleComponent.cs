@@ -17,6 +17,7 @@ public class MoveAlongCircleComponent : MonoBehaviour
 
     private void Update()
     {
+        //transform.Rotate(new Vector3(0,0,1) , _speed);
         CalculatePositions();
         var noObjects = true;
         for (var i = 0; i < _objects.Length; i++)

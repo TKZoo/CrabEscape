@@ -300,7 +300,6 @@ GameObject:
   - component: {fileID: 324642737315750777}
   - component: {fileID: 324642737315750776}
   - component: {fileID: 324642737315750773}
-  - component: {fileID: 324642737315750771}
   - component: {fileID: 324642737315750775}
   - component: {fileID: 324642737315750774}
   - component: {fileID: 9086317831005432781}
@@ -403,18 +402,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &324642737315750771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324642737315750778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64e318c3913d5b42bb949c333aeb293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &324642737315750775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +446,7 @@ MonoBehaviour:
   _swordCount: 1
   _throwComboSwordsCount: 3
   _throwComboCooldown: 0.2
+  _projectile: {fileID: 0}
 --- !u!114 &9086317831005432781
 MonoBehaviour:
   m_ObjectHideFlags: 0

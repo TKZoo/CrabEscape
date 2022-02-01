@@ -91,7 +91,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7999210245524965988}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.129, y: 0.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -183,7 +183,7 @@ MonoBehaviour:
   _projectile: {fileID: 1068566034095055662, guid: 4daacb8816349b94d98912e117872b31,
     type: 3}
   _cooldown:
-    _value: 0
+    _value: 2
   _rangeAttack: {fileID: 7999210244814422192}
 --- !u!114 &7999210245524965998
 MonoBehaviour:

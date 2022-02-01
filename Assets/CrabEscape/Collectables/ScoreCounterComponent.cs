@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreCounterComponent : MonoBehaviour
 {    
@@ -10,12 +9,12 @@ public class ScoreCounterComponent : MonoBehaviour
     {
         _session = FindObjectOfType<GameSession>();
     }
-    public void CountScore (int coinvalue)
+    /*public void CountScore (int coinvalue)
     {
         _totalCoins += coinvalue;
         _session.PlayerData.Coins = _totalCoins;
         Debug.Log($"Всего монет: {_totalCoins}");
-    }
+    }*/
 
     public void SetScore(int coins)
     {

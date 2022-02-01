@@ -53,6 +53,9 @@ TagManager:
   - name: Level
     uniqueID: 2240943791
     locked: 0
+  - name: Props
+    uniqueID: 1916867189
+    locked: 0
   - name: Characters
     uniqueID: 3562303229
     locked: 0
