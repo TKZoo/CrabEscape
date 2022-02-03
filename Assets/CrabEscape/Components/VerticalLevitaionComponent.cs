@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class VerticalLevitaionComponent : MonoBehaviour
 {
     [SerializeField] private float _frequency = 1f;

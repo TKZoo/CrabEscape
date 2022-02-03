@@ -17,12 +17,14 @@ public class Hero : Character
 
     private GameSession _session;
     private bool _allowDoubleJump;
+    private HealthComponent health;
     private int swordCount => _session.PlayerData.Inventory.Count("Sword");
+    private int hpPotionCount => _session.PlayerData.Inventory.Count("HpPotion");
 
     private void Start()
     {
         _session = FindObjectOfType<GameSession>();
-        var health = GetComponent<HealthComponent>();
+        health = GetComponent<HealthComponent>();
         health.SetHealth(_session.PlayerData.Hp);
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
@@ -51,19 +53,6 @@ public class Hero : Character
     public void AddInInventory(string id, int value)
     {
         _session.PlayerData.Inventory.Add(id, value);
-    }
-
-    public void SwordCounter(int delta)
-    {
-        if (delta > 0)
-        {
-            _session.PlayerData.Inventory.Add("Sword", delta);
-        }
-
-        if (delta < 0)
-        {
-            _session.PlayerData.Inventory.Remove("Sword", delta * -1);
-        }
     }
 
     protected override float CalculateYVelocity()
@@ -134,7 +123,7 @@ public class Hero : Character
         {
             _projectile.SetRigidBodyToDynamic();
             base.ThrowAttack();
-            SwordCounter(-1);
+            _session.PlayerData.Inventory.Remove("Sword", 1);
             _throwCooldown.Reset();
         }
     }
@@ -147,7 +136,7 @@ public class Hero : Character
             if (swordCount > 1)
             {
                 Animator.SetTrigger(ThrowAttackAnim);
-                SwordCounter(-1);
+                _session.PlayerData.Inventory.Remove("Sword", 1);
             }
 
             yield return new WaitForSeconds(_throwComboCooldown);
@@ -161,6 +150,19 @@ public class Hero : Character
         {
             _projectile.SetRigidBodyToKinematic();
             StartCoroutine(DoThrowComboAttack());
+        }
+    }
+
+    public void QuickSlotUse()
+    {
+        if (hpPotionCount > 0)
+        {
+            health.ApplyHealing(2);
+            _session.PlayerData.Inventory.Remove("HpPotion", 1);
+        }
+        else
+        {
+            Debug.Log("You don't have Health Potion");
         }
     }
 }

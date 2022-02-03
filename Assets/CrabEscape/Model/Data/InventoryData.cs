@@ -6,21 +6,27 @@ using UnityEngine;
 public class InventoryData
 {
     [SerializeField] private List<InventoryItemData> _inventory = new List<InventoryItemData>();
-
-    public delegate void OnInventoryChange(string id, int value);
+    private int inventorySize = 3;
+    
     //public Action<string, int> OnChanged;
+    public delegate void OnInventoryChange(string id, int value);
 
     public OnInventoryChange OnChanged;
 
     public void Add(string id, int value)
     {
-        if (value <= 0) return;
+        if (value <= 0 || _inventory.Count >= inventorySize) return;
 
         var itemDef = DefsFacade.I.Items.Get(id);
         if (itemDef.IsVoid) return;
 
         var item = GetItem(id);
         if (item == null)
+        {
+            item = new InventoryItemData(id);
+            _inventory.Add(item);
+        }
+        else if (!itemDef.IsStackable)
         {
             item = new InventoryItemData(id);
             _inventory.Add(item);

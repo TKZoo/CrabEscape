@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=1),Press(behavior=2)"
+                },
+                {
+                    "name": "QuickSlotUse",
+                    "type": "Button",
+                    "id": "51a483ec-ff7e-4cdb-9dac-bb2ea7eef9e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -146,6 +154,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ThrowAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79e55122-a731-42cb-b284-11b72133d926",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickSlotUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

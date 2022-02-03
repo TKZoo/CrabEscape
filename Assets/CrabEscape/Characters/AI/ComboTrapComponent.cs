@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ComboTrapComponent : MonoBehaviour
@@ -23,7 +22,7 @@ public class ComboTrapComponent : MonoBehaviour
             hp._onDie.AddListener(() => OnObjectDestryed(child));
         }
     }
-
+    
     private void Update()
     {
         if (_cooldown.IsReady)

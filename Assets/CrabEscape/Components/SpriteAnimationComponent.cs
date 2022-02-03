@@ -81,5 +81,5 @@ public class SpriteAnimationComponent : MonoBehaviour
         public bool Loop => _loop;
         public bool AllowNextClip => _allowNextClip;
         public UnityEvent OnComplete => _onComplete;
-    }    
+    }
 }

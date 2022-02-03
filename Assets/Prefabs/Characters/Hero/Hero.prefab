@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 8960
   _isTouchingLayer: 0
 --- !u!61 &324642737142285453
 BoxCollider2D:
@@ -368,8 +368,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -732664067
-  m_SortingLayer: 4
-  m_SortingOrder: 3
+  m_SortingLayer: 5
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 3738a3c9c42efc8428735fdc20c139df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -438,15 +438,15 @@ MonoBehaviour:
   _attackRange: {fileID: 1825459535}
   _particles: {fileID: 2036483513687078147}
   _throwCooldown:
-    _value: 0.6
+    _value: 0
   _interactionCheck: {fileID: 2124196059}
   _fallHeight: 3
   _armed: {fileID: 9100000, guid: cdf64d7083299f449b5bea529c4db9d9, type: 2}
   _disarmed: {fileID: 9100000, guid: 179971497dcbd5c4da239bba54b45eb2, type: 2}
-  _swordCount: 1
   _throwComboSwordsCount: 3
   _throwComboCooldown: 0.2
-  _projectile: {fileID: 0}
+  _projectile: {fileID: -2541326274244314442, guid: c5d93ef05e59bc840bcf52add7c98dd0,
+    type: 3}
 --- !u!114 &9086317831005432781
 MonoBehaviour:
   m_ObjectHideFlags: 0
