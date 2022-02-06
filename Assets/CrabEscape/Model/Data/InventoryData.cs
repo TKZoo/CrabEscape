@@ -7,7 +7,7 @@ public class InventoryData
 {
     [SerializeField] private List<InventoryItemData> _inventory = new List<InventoryItemData>();
     private int inventorySize = 3;
-    
+
     //public Action<string, int> OnChanged;
     public delegate void OnInventoryChange(string id, int value);
 
@@ -15,12 +15,14 @@ public class InventoryData
 
     public void Add(string id, int value)
     {
-        if (value <= 0 || _inventory.Count >= inventorySize) return;
+        if (value <= 0) return;
 
         var itemDef = DefsFacade.I.Items.Get(id);
         if (itemDef.IsVoid) return;
 
         var item = GetItem(id);
+        if (_inventory.Count >= inventorySize && !itemDef.IsStackable) return;
+
         if (item == null)
         {
             item = new InventoryItemData(id);

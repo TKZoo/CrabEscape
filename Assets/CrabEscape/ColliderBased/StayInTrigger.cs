@@ -5,6 +5,7 @@ public class StayInTrigger : MonoBehaviour
 {
     [SerializeField] private string[] _tag;
     [SerializeField] private UnityEvent _action;
+    [SerializeField] private UnityEvent _actionOnExit;
     private bool _isTriggered = true;
 
     private void OnTriggerStay2D(Collider2D other)
@@ -25,7 +26,7 @@ public class StayInTrigger : MonoBehaviour
     {
         if (_isTriggered != true)
         {
-            _action?.Invoke();
+            _actionOnExit?.Invoke();
             _isTriggered = true;
         }
     }

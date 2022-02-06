@@ -4,6 +4,7 @@ public class ShootingTrapAI : MonoBehaviour
 {
     [SerializeField] private GameObject _projectile;
     [SerializeField] private LayerCheck _vision;
+    [SerializeField] private PlaySoundComponent _sound;
     
     [Header("Ranged")]
     [SerializeField] private Cooldown _rangeCooldown;
@@ -22,6 +23,7 @@ public class ShootingTrapAI : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _sound = GetComponent<PlaySoundComponent>();
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class ShootingTrapAI : MonoBehaviour
                     return;
                 }
             }
-            if(_rangeCooldown.IsReady)
+            else if(_rangeCooldown.IsReady)
             {
                 RangeAttack();
                 _rangeCooldown.Reset();
@@ -53,6 +55,7 @@ public class ShootingTrapAI : MonoBehaviour
     private void MeleeAttack()
     {
         _animator.SetTrigger(Melee);
+        _sound.Play("ranged");
     }
 
     public void OnMeleeAttack()

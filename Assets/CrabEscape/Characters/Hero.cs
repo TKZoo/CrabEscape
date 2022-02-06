@@ -75,7 +75,7 @@ public class Hero : Character
     {
         if (!IsGrounded && _allowDoubleJump && IsJumping)
         {
-            _particles.Spawn("Jump");
+            DoJumpVfx();
             _allowDoubleJump = false;
             return _jumpImpulse;
         }
@@ -158,6 +158,7 @@ public class Hero : Character
         if (hpPotionCount > 0)
         {
             health.ApplyHealing(2);
+            Sound.Play("usepotion");
             _session.PlayerData.Inventory.Remove("HpPotion", 1);
         }
         else

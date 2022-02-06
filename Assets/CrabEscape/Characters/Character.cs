@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
     [SerializeField] protected SpawnPrefabListComponent _particles;
     [SerializeField] protected Cooldown _throwCooldown;
+    [SerializeField] protected PlaySoundComponent Sound;
 
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
@@ -34,11 +35,12 @@ public class Character : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        Sound = GetComponent<PlaySoundComponent>();
     }
 
     public void SetDirection(Vector2 direction)
     {
-        Direction = direction; 
+        Direction = direction;
     }
 
     protected virtual void Update()
@@ -108,11 +110,24 @@ public class Character : MonoBehaviour
         if (IsGrounded)
         {
             yVelocity += _jumpImpulse;
-            _particles.Spawn("Jump");
+            DoJumpVfx();
+
         }
         return yVelocity;
     }
 
+    protected virtual void FootstepVfx()
+    {
+       _particles.Spawn("Run");
+       Sound.Play("footstep");
+    }
+    
+    protected virtual void DoJumpVfx()
+    {
+        _particles.Spawn("Jump");
+        Sound.Play("jump");
+    }
+    
     public virtual void TakeDamage()
     {
         IsJumping = false;
@@ -129,11 +144,13 @@ public class Character : MonoBehaviour
     public void OnAttack()
     {
         _attackRange.Check();
+        Sound.Play("mele");
     }
     
     public void OnThrowAttack()
     {
         _particles.Spawn("ThrowAttack");
+        Sound.Play("range");
     }
     
     public virtual void ThrowAttack()
