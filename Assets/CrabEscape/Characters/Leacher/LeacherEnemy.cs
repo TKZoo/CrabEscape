@@ -8,22 +8,20 @@ public class LeacherEnemy : MonoBehaviour
     [SerializeField] private Cooldown _meleeCooldown;
     [SerializeField] private LeacherTongue _tongue;
     [SerializeField] private float _tongueSpeedIn, _tongueSpeedOut;
-    
-    public bool _isTraped = false;
+
+    private GameObject[] tongueGo;
+
+    [SerializeField] private bool _isTraped;
 
     private void Awake()
     {
-        //_isTraped = false;
         _tongue = transform.GetComponent<LeacherTongue>();
+        _isTraped = false;
     }
 
-    public void SetTraped()
-    {
-        _isTraped = true;
-    }
     private void Update()
     {
-        Debug.Log("_isTraped " + _isTraped);
+        Debug.Log(_isTraped);
         /*if (_inAttackRange.IsTouchingLayer && _isTraped)
         {
             _tongueSpeedOut = 0;
@@ -38,9 +36,27 @@ public class LeacherEnemy : MonoBehaviour
         {
             _tongue.TongueMovement(_tongueSpeedOut);
         }
-        if(!_vision.IsTouchingLayer || _isTraped)
+
+        if (!_vision.IsTouchingLayer || _isTraped)
         {
             _tongue.TongueMovement(_tongueSpeedIn);
+        }
+    }
+
+    public void SetParent(GameObject parent)
+    {
+        tongueGo = GameObject.FindGameObjectsWithTag("EnemyTongue");
+        if (!_isTraped)
+        {
+            for (int i = 0; i < tongueGo.Length; i++)
+            {
+                if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
+                {
+                    parent.transform.SetParent(tongueGo[i].transform);
+                }
+            }
+            _isTraped = true;
+            parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
     }
 

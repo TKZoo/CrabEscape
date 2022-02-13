@@ -7,7 +7,7 @@ public class LeacherTongue : MonoBehaviour
     [SerializeField] private GameObject _tongueSegmentPf;
     [SerializeField] private int _tongueLenght;
     [SerializeField] private GameObject _tongueLowerSegment;
-    private LeacherEnemy _leacherEnemy;
+    [SerializeField] private LeacherEnemy _leacherEnemy;
     
     private List<GameObject> _tongueSegments = new List<GameObject>();
     private GameObject[] tongueGo;
@@ -91,17 +91,4 @@ public class LeacherTongue : MonoBehaviour
         }
     }
 
-    public void SetParent(GameObject parent)
-    {
-        tongueGo = GameObject.FindGameObjectsWithTag("EnemyTongue");
-        for (int i = 0; i < tongueGo.Length; i++)
-        {
-            if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
-            {
-                parent.transform.SetParent(tongueGo[i].transform);
-                _leacherEnemy.SetTraped();
-            }
-        }
-        parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-    } 
 }
