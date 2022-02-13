@@ -30,7 +30,6 @@ public class MobAI : MonoBehaviour
         _animator = GetComponent<Animator>();
         _patrol = GetComponent<Patrol>();
         _collider = GetComponent<BoxCollider2D>();
-
     }
 
     private void Start()
@@ -61,7 +60,6 @@ public class MobAI : MonoBehaviour
 
     private IEnumerator AgroOnTarget()
     {
-        
         LookAtTarget();
         _particles.Spawn("Exclamation");
         _character.ChangeSpeedTo(2.6f);

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 672281116257158045}
   - component: {fileID: 672281116257158044}
   - component: {fileID: 672281116257158047}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: AttackPosirion
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 672281118024693628}
   - component: {fileID: 672281118024693631}
   - component: {fileID: 672281118024693630}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
