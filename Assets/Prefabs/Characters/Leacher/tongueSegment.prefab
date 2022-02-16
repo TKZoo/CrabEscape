@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5864940528792320135}
   - component: {fileID: 5864940528792320134}
   - component: {fileID: 5864940528792320138}
-  - component: {fileID: 4161972211561701279}
+  - component: {fileID: 7092013612385577097}
+  - component: {fileID: 2609930080619466602}
   m_Layer: 0
   m_Name: tongueSegment
   m_TagString: EnemyTongue
@@ -50,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -156,7 +158,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16411279, y: 0.25122333}
   m_EdgeRadius: 0
---- !u!114 &4161972211561701279
+--- !u!114 &7092013612385577097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864940528792320133}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656781e62c46a5e468ed07dcce8b97e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tongueRoot: {fileID: 0}
+  _tongueSegmentPf: {fileID: 5864940528792320133}
+  _tongueLenght: 0
+  _tongueLowerSegment: {fileID: 0}
+  _tongueSegments: []
+--- !u!114 &2609930080619466602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,14 +188,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag:
+  - Enemy
   - Player
   - Interactible
-  - Enemy
   _action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4874932009217915195, guid: 036a2049bc242ce4f8689fe3454c9c3f,
-          type: 3}
+      - m_Target: {fileID: 7092013612385577097}
+        m_TargetAssemblyTypeName: LeacherTongue, Assembly-CSharp
         m_MethodName: SetParent
         m_Mode: 0
         m_Arguments:

@@ -7,23 +7,22 @@ public class LeacherTongue : MonoBehaviour
     [SerializeField] private GameObject _tongueSegmentPf;
     [SerializeField] private int _tongueLenght;
     [SerializeField] private GameObject _tongueLowerSegment;
-    [SerializeField] private LeacherEnemy _leacherEnemy;
+    private LeacherEnemy _leacherEnemy;
     
-    private List<GameObject> _tongueSegments = new List<GameObject>();
-    private GameObject[] tongueGo;
+    public List<GameObject> _tongueSegments = new List<GameObject>();
+    private LeacherTongue[] tongueGo;
     private float _sriteSizeY = 0.22f;
     private int _maxcount;
     private float _speed;
 
     private void Awake()
     {
-        _leacherEnemy = GetComponent<LeacherEnemy>();
+        _leacherEnemy = FindObjectOfType<LeacherEnemy>().GetComponent<LeacherEnemy>();
     }
 
     void Start()
     {
-        _leacherEnemy = GetComponent<LeacherEnemy>();
-        GenerateRope();
+        GenerateTongue();
         //_sriteSizeY = _tongueSegmentPf.GetComponent<SpriteRenderer>().bounds.size.y;
         //Debug.Log(_sriteSizeY);
     }
@@ -33,7 +32,7 @@ public class LeacherTongue : MonoBehaviour
         TongueMovement(_speed);
     }
 
-    private void GenerateRope()
+    public void GenerateTongue()
     {
         GameObject firstSegment = Instantiate(_tongueSegmentPf);
         firstSegment.transform.parent = transform.root;
@@ -90,5 +89,19 @@ public class LeacherTongue : MonoBehaviour
             }
         }
     }
-
+    
+    public void SetParent(GameObject parent)
+    {
+        tongueGo = FindObjectsOfType<LeacherTongue>();
+        for (int i = 0; i < tongueGo.Length; i++)
+        {
+            if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
+            {
+                parent.transform.SetParent(tongueGo[i].transform);
+                Debug.Log(tongueGo[i].GetInstanceID());
+                _leacherEnemy.isTraped = true;
+            }
+            parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        }
+    }
 }
