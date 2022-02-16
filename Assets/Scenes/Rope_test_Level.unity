@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 6886205305494556980, guid: 6d74d6e2c198d844c8c24c15f225542c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.65
+      value: -9.8
       objectReference: {fileID: 0}
     - target: {fileID: 6886205305494556980, guid: 6d74d6e2c198d844c8c24c15f225542c,
         type: 3}
@@ -11095,7 +11095,7 @@ PrefabInstance:
     - target: {fileID: 324642737315750777, guid: 58f81d6afcc057d4790c97550399b5cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.498
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 324642737315750777, guid: 58f81d6afcc057d4790c97550399b5cc,
         type: 3}
@@ -11484,6 +11484,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4874932008103209375, guid: 036a2049bc242ce4f8689fe3454c9c3f,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4874932009217915193, guid: 036a2049bc242ce4f8689fe3454c9c3f,
         type: 3}
       propertyPath: m_Name
@@ -11491,8 +11496,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4874932009217915195, guid: 036a2049bc242ce4f8689fe3454c9c3f,
         type: 3}
-      propertyPath: _tongueSpeedIn
-      value: 0.6
+      propertyPath: _tongueSpeedOut
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4874932009217915198, guid: 036a2049bc242ce4f8689fe3454c9c3f,
         type: 3}
@@ -11549,8 +11554,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 599919325, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
 --- !u!1001 &6153146265528184580
 PrefabInstance:

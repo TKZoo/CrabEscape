@@ -11,9 +11,11 @@ public class LeacherTongue : MonoBehaviour
     
     public List<GameObject> _tongueSegments = new List<GameObject>();
     private LeacherTongue[] tongueGo;
+    private GameObject _victim;
     private float _sriteSizeY = 0.22f;
     private int _maxcount;
     private float _speed;
+    private HealthComponent health;
 
     private void Awake()
     {
@@ -27,7 +29,7 @@ public class LeacherTongue : MonoBehaviour
         //Debug.Log(_sriteSizeY);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         TongueMovement(_speed);
     }
@@ -97,11 +99,24 @@ public class LeacherTongue : MonoBehaviour
         {
             if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
             {
+                _victim = parent;
+                health = _victim.GetComponent<HealthComponent>();
+                if (health)
+                {
+                    health._onDie?.AddListener(OnDie);
+                }
                 parent.transform.SetParent(tongueGo[i].transform);
-                Debug.Log(tongueGo[i].GetInstanceID());
                 _leacherEnemy.isTraped = true;
             }
             parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
+    }
+
+    void OnDie()
+    {
+        _victim.transform.parent = null;
+        _victim.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        _leacherEnemy.isTraped = false;
+        _leacherEnemy.ResetSpeed();
     }
 }

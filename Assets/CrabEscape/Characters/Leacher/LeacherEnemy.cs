@@ -9,27 +9,28 @@ public class LeacherEnemy : MonoBehaviour
     [SerializeField] private LayerCheck _inAttackRange;
     [SerializeField] private Cooldown _meleeCooldown;
     [SerializeField] private LeacherTongue _tongue;
-    [SerializeField] private float _tongueSpeedIn, _tongueSpeedOut;
+    [SerializeField] private float _tongueSpeedIn, _tongueSpeedOut, _tongueSpeedReset;
 
     public bool isTraped;
 
     private void Awake()
     {
         isTraped = false;
+        _tongueSpeedReset = _tongueSpeedIn;
     }
 
-    public void IsTraped()
+    public void ResetSpeed()
     {
-        isTraped = true;
+        _tongueSpeedIn = _tongueSpeedReset;
     }
-    
+
     private void Update()
     {
         Debug.Log(isTraped);
 
         if (_inAttackRange.IsTouchingLayer && isTraped)
         {
-            _tongueSpeedOut = 0;
+            _tongueSpeedIn = 0;
             if (_meleeCooldown.IsReady)
             {
                 MeleeAttack();
@@ -37,7 +38,7 @@ public class LeacherEnemy : MonoBehaviour
                 return;
             }
         }
-        if (_vision.IsTouchingLayer && !isTraped)
+        if (!_vision.IsTouchingLayer && !isTraped)
         {
             _tongue.TongueMovement(_tongueSpeedOut);
         }

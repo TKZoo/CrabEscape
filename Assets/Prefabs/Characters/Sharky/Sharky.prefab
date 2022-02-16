@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709739203}
   - component: {fileID: 709739204}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: HeroEffectSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 89183753}
   - component: {fileID: 1817560669}
   - component: {fileID: 1817560668}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: AttackPosirion
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 89183753}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DoDamage
         m_Mode: 0
         m_Arguments:
@@ -184,7 +185,7 @@ GameObject:
   - component: {fileID: 2124196057}
   - component: {fileID: 2124196059}
   - component: {fileID: 2124196058}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: InteractPosirion
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -222,6 +223,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2124196058}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DoInteraction
         m_Mode: 0
         m_Arguments:
@@ -260,7 +262,7 @@ GameObject:
   - component: {fileID: 324642737142285454}
   - component: {fileID: 324642737142285452}
   - component: {fileID: 324642737142285453}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,6 +387,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -483,6 +486,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6505375292659438113}
+        m_TargetAssemblyTypeName: 
         m_MethodName: TakeDamage
         m_Mode: 1
         m_Arguments:
@@ -494,6 +498,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 7167883176944328595}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 5
         m_Arguments:
@@ -511,6 +516,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1499517538}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnDie
         m_Mode: 1
         m_Arguments:
@@ -522,6 +528,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 7167883176944328595}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 5
         m_Arguments:
@@ -533,6 +540,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1499517538}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -688,7 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778366738347214436}
   - component: {fileID: 5012077628662253933}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: ExclamationSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -734,7 +742,7 @@ GameObject:
   - component: {fileID: 8690254430642957205}
   - component: {fileID: 2955992642177132279}
   - component: {fileID: 3814146204522226824}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: AiDecisionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,6 +901,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1499517538}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnTargetInVision
         m_Mode: 0
         m_Arguments:
