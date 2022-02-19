@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6886205305494556978}
   - component: {fileID: 6886205305494556979}
   - component: {fileID: 530046742171760212}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Interactible
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

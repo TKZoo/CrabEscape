@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LeacherEnemy : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class LeacherEnemy : MonoBehaviour
     [SerializeField] private Cooldown _meleeCooldown;
     [SerializeField] private LeacherTongue _tongue;
     [SerializeField] private float _tongueSpeedIn, _tongueSpeedOut, _tongueSpeedReset;
+    [SerializeField] protected PlaySoundComponent Sound;
 
     public bool isTraped;
 
@@ -17,6 +16,12 @@ public class LeacherEnemy : MonoBehaviour
     {
         isTraped = false;
         _tongueSpeedReset = _tongueSpeedIn;
+        Sound = GetComponent<PlaySoundComponent>();
+    }
+
+    public void PlaySound(string sound)
+    {
+        Sound.Play(sound);
     }
 
     public void ResetSpeed()
@@ -30,15 +35,15 @@ public class LeacherEnemy : MonoBehaviour
 
         if (_inAttackRange.IsTouchingLayer && isTraped)
         {
-            _tongueSpeedIn = 0;
+            _tongueSpeedIn = 0.1f;
             if (_meleeCooldown.IsReady)
             {
                 MeleeAttack();
                 _meleeCooldown.Reset();
-                return;
+                //return;
             }
         }
-        if (!_vision.IsTouchingLayer && !isTraped)
+        if (!isTraped)
         {
             _tongue.TongueMovement(_tongueSpeedOut);
         }

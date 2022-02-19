@@ -8,18 +8,22 @@ public class LeacherTongue : MonoBehaviour
     [SerializeField] private int _tongueLenght;
     [SerializeField] private GameObject _tongueLowerSegment;
     private LeacherEnemy _leacherEnemy;
+    private GameObject _leacherGo;
     
     public List<GameObject> _tongueSegments = new List<GameObject>();
     private LeacherTongue[] tongueGo;
     private GameObject _victim;
-    private float _sriteSizeY = 0.22f;
+    private float _sriteSizeY = 0.2f;
     private int _maxcount;
     private float _speed;
     private HealthComponent health;
+    private Rigidbody2D _victimRb;
 
     private void Awake()
     {
+        _leacherGo = GameObject.Find("Leacher");
         _leacherEnemy = FindObjectOfType<LeacherEnemy>().GetComponent<LeacherEnemy>();
+        _victimRb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -94,29 +98,65 @@ public class LeacherTongue : MonoBehaviour
     
     public void SetParent(GameObject parent)
     {
-        tongueGo = FindObjectsOfType<LeacherTongue>();
-        for (int i = 0; i < tongueGo.Length; i++)
+        if (parent != _leacherGo)
         {
-            if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
+            tongueGo = FindObjectsOfType<LeacherTongue>();
             {
-                _victim = parent;
-                health = _victim.GetComponent<HealthComponent>();
-                if (health)
+                for (int i = 0; i < tongueGo.Length; i++)
                 {
-                    health._onDie?.AddListener(OnDie);
+                    if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
+                    {
+                        _victim = parent;
+                        health = _victim.GetComponent<HealthComponent>();
+                        if (health)
+                        {
+                            health._onDie?.AddListener(OnVictimDie);
+                        }
+                        _victim.transform.SetParent(tongueGo[i].transform);
+                        _leacherEnemy.isTraped = true;
+                    }
+                    parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 }
-                parent.transform.SetParent(tongueGo[i].transform);
-                _leacherEnemy.isTraped = true;
             }
-            parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
+        
+        
     }
 
-    void OnDie()
+    void OnVictimDie()
     {
-        _victim.transform.parent = null;
-        _victim.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         _leacherEnemy.isTraped = false;
+        _victim.gameObject.transform.parent = null;
+        _victim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        _victim.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        _victim.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        _leacherEnemy.PlaySound("kill");
         _leacherEnemy.ResetSpeed();
+    }
+    
+    public void onDie()
+    {
+        _leacherEnemy.isTraped = false;
+        _leacherEnemy.PlaySound("kill");
+
+        
+        
+        _tongueRoot.GetComponent<LeacherTongue>().enabled = false;
+        tongueGo = FindObjectsOfType<LeacherTongue>();
+         var victimsRb = (int)Mathf.Repeat(0, tongueGo.Length);
+        for (int i = 0; i < tongueGo.Length; i++)
+        {
+            
+            if (tongueGo[i].GetComponent<HingeJoint2D>() != null)
+            {
+                tongueGo[i].GetComponent<HingeJoint2D>().enabled = false;
+                tongueGo[i].GetComponent<Collider2D>().isTrigger = true;
+                var test = tongueGo[i].transform.childCount;
+                tongueGo[i].transform.DetachChildren();
+                tongueGo[i].GetComponent<Rigidbody2D>().sharedMaterial = null;
+            }
+        }
+        
+        //Destroy(_tongueRoot.gameObject);
     }
 }

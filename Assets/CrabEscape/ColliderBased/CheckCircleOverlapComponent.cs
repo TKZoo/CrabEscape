@@ -10,6 +10,7 @@ public class CheckCircleOverlapComponent : MonoBehaviour
     [SerializeField] private OnOverlapEvent _onOverlap;
     [SerializeField] private LayerMask _mask;
     [SerializeField] private string[] _tags;
+    [SerializeField] private GameObject _ignoreGo;
 
     private readonly Collider2D[] _interactionResult = new Collider2D[10];
 
@@ -29,7 +30,10 @@ public class CheckCircleOverlapComponent : MonoBehaviour
             var isInTags = _tags.Any(tag => overlapResult.CompareTag(tag));
             if (isInTags)
             {
-                _onOverlap?.Invoke(overlapResult.gameObject);
+                if (overlapResult.gameObject != _ignoreGo)
+                {
+                    _onOverlap?.Invoke(overlapResult.gameObject);
+                }
             }
         }
     }

@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
     private static readonly int Hit = Animator.StringToHash("isHit");
     private static readonly int AttackAnim = Animator.StringToHash("attack");
     private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
+    private static readonly int Died = Animator.StringToHash("isDied");
 
     protected virtual void Awake()
     {
@@ -135,6 +136,12 @@ public class Character : MonoBehaviour
         Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, _damageJumpImpulseY);
     }
 
+    public virtual void Die()
+    {
+        Animator.SetTrigger(Died);
+        gameObject.tag = "Untagged";
+    }
+    
     public virtual void Attack()
     {
         Animator.SetTrigger(AttackAnim);
