@@ -99,14 +99,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &5864940528792320134
 HingeJoint2D:
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5864940528792320133}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9367cea290684294da8d4969d33f3b60, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -174,7 +174,6 @@ MonoBehaviour:
   _tongueSegmentPf: {fileID: 5864940528792320133}
   _tongueLenght: 0
   _tongueLowerSegment: {fileID: 0}
-  Sound: {fileID: 0}
   _tongueSegments: []
 --- !u!114 &2609930080619466602
 MonoBehaviour:

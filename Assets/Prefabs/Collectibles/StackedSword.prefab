@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: -1973306841293788261}
   - component: {fileID: 263724770003105038}
   - component: {fileID: 676235261594916321}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: StackedSword
-  m_TagString: Untagged
+  m_TagString: Collectibles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -168,6 +169,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -1973306841293788261}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Add
         m_Mode: 0
         m_Arguments:
@@ -179,6 +181,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: -7992631496196628928}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -190,6 +193,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 676235261594916321}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -201,6 +205,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4653286085468492086}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -212,6 +217,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 263724770003105038}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:

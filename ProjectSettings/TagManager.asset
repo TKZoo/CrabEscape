@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Interactible
   - Level
+  - EnemyTongue
+  - Collectibles
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - DropCoins
   - Hero
   - Enemy
-  - 
+  - Collectibles
   - 
   - 
   - 

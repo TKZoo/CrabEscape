@@ -17,13 +17,11 @@ public class LeacherTongue : MonoBehaviour
     private int _maxcount;
     private float _speed;
     private HealthComponent health;
-    private Rigidbody2D _victimRb;
 
     private void Awake()
     {
         _leacherGo = GameObject.Find("Leacher");
         _leacherEnemy = FindObjectOfType<LeacherEnemy>().GetComponent<LeacherEnemy>();
-        _victimRb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -98,65 +96,67 @@ public class LeacherTongue : MonoBehaviour
     
     public void SetParent(GameObject parent)
     {
+        if (!parent.GetComponent<HealthComponent>())
+        {
+            parent.gameObject.layer = 10;
+        }
         if (parent != _leacherGo)
         {
             tongueGo = FindObjectsOfType<LeacherTongue>();
             {
                 for (int i = 0; i < tongueGo.Length; i++)
                 {
-                    if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()))
+                    if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()) && !_leacherEnemy.isTraped)
                     {
-                        _victim = parent;
-                        health = _victim.GetComponent<HealthComponent>();
+                        _leacherEnemy.isTraped = true;
+                        if (!parent.gameObject.GetComponent<HingeJoint2D>())
+                        {
+                            parent.gameObject.AddComponent<HingeJoint2D>();
+                        }
+                        parent.GetComponent<HingeJoint2D>().connectedBody = tongueGo[i].GetComponent<Rigidbody2D>();
+                        parent.GetComponent<HingeJoint2D>().connectedAnchor = tongueGo[i].GetComponent<HingeJoint2D>().transform.position;
+                        health = parent.GetComponent<HealthComponent>();
                         if (health)
                         {
-                            health._onDie?.AddListener(OnVictimDie);
+                            health._onDie?.AddListener(delegate { OnVictimDie(parent.GetComponent<HingeJoint2D>()); });
                         }
-                        _victim.transform.SetParent(tongueGo[i].transform);
-                        _leacherEnemy.isTraped = true;
                     }
-                    parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 }
             }
         }
-        
-        
     }
 
-    void OnVictimDie()
+    void OnVictimDie(HingeJoint2D victimHj)
     {
         _leacherEnemy.isTraped = false;
-        _victim.gameObject.transform.parent = null;
-        _victim.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        _victim.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        _victim.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        _leacherEnemy.PlaySound("kill");
         _leacherEnemy.ResetSpeed();
+        if (victimHj.gameObject.GetComponent<HingeJoint2D>() != null)
+        {
+            victimHj.GetComponent<Rigidbody2D>().sharedMaterial = null;
+            Destroy(victimHj);
+        }
     }
     
     public void onDie()
     {
         _leacherEnemy.isTraped = false;
         _leacherEnemy.PlaySound("kill");
-
-        
-        
-        _tongueRoot.GetComponent<LeacherTongue>().enabled = false;
         tongueGo = FindObjectsOfType<LeacherTongue>();
-         var victimsRb = (int)Mathf.Repeat(0, tongueGo.Length);
+        var hJ = FindObjectsOfType<HingeJoint2D>();
+        Debug.Log(hJ.Length);
         for (int i = 0; i < tongueGo.Length; i++)
         {
-            
-            if (tongueGo[i].GetComponent<HingeJoint2D>() != null)
+            tongueGo[i].gameObject.layer = 10;
+            Destroy(tongueGo[i].GetComponent<EnterCollisionComponent>());
+            Destroy(_tongueRoot.gameObject);
+        }
+
+        for (int i = 0; i < hJ.Length; i++)
+        {
+            if (!hJ[i].CompareTag("EnemyTongue"))
             {
-                tongueGo[i].GetComponent<HingeJoint2D>().enabled = false;
-                tongueGo[i].GetComponent<Collider2D>().isTrigger = true;
-                var test = tongueGo[i].transform.childCount;
-                tongueGo[i].transform.DetachChildren();
-                tongueGo[i].GetComponent<Rigidbody2D>().sharedMaterial = null;
+                hJ[i].GetComponent<HingeJoint2D>().enabled = false;
             }
         }
-        
-        //Destroy(_tongueRoot.gameObject);
     }
 }

@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 4801564348178091895}
   - component: {fileID: 1632536127}
   - component: {fileID: 820458280495230295}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Coins_gold
-  m_TagString: Untagged
+  m_TagString: Collectibles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,6 +111,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4801564348178091885}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnCoinColected
         m_Mode: 1
         m_Arguments:
@@ -121,6 +123,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4801564348178091895}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetClip
         m_Mode: 5
         m_Arguments:
@@ -132,6 +135,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4801564348178091881}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -143,6 +147,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 820458280495230295}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -166,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 4801564348178091887}
+  _delay: 0
 --- !u!58 &4801564348178091881
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -231,6 +237,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4801564348178091884}
+          m_TargetAssemblyTypeName: 
           m_MethodName: DestroyObject
           m_Mode: 1
           m_Arguments:

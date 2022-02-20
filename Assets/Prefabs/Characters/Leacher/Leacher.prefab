@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4874932007322213325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.005, y: -0.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4874932009217915198}
@@ -41,19 +41,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4874932007322213325}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &599919326
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   _tongueRoot: {fileID: 4874932007322213327}
   _tongueSegmentPf: {fileID: 5864940528792320133, guid: e094d0461d06d0944b9a4997cdef3aee,
     type: 3}
-  _tongueLenght: 12
+  _tongueLenght: 14
   _tongueLowerSegment: {fileID: 0}
   _tongueSegments: []
 --- !u!1 &4874932007886154393
@@ -223,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4874932008103209371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.006, y: -0.262, z: 0}
+  m_LocalPosition: {x: -0.006, y: -0.091, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4874932009217915198}
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c428a9f0ba22924083baea0d7bd8091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 0.6
+  _radius: 0.4
   _onOverlap:
     m_PersistentCalls:
       m_Calls:
@@ -264,6 +264,7 @@ MonoBehaviour:
   - Player
   - Interactible
   - Enemy
+  _ignoreGo: {fileID: 4874932009217915193}
 --- !u!114 &4874932008103209373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87251f1610e2fbe4d860296ef5b19c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 50
   _healing: 0
 --- !u!58 &4874932008103209375
 CircleCollider2D:
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 12800
   _isTouchingLayer: 0
 --- !u!1 &4874932009217915193
 GameObject:
@@ -322,9 +323,12 @@ GameObject:
   - component: {fileID: 4874932009217915197}
   - component: {fileID: 4874932009217915196}
   - component: {fileID: 4874932009217915195}
-  m_Layer: 0
+  - component: {fileID: 2055698824}
+  - component: {fileID: 2055698822}
+  - component: {fileID: 2055698823}
+  m_Layer: 13
   m_Name: Leacher
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +347,7 @@ Transform:
   - {fileID: 4874932007886154397}
   - {fileID: 4874932008103209345}
   - {fileID: 4874932007322213326}
+  - {fileID: 5615785129525801411}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -447,4 +452,186 @@ MonoBehaviour:
   _tongueSpeedIn: 0.6
   _tongueSpeedOut: -1.2
   _tongueSpeedReset: 0
+  Sound: {fileID: 0}
+  _hitBlinkMat: {fileID: 2100000, guid: 70171016ce81ac94591f3bd1d4b1b5bb, type: 2}
+  _hitBlinkColor: {r: 1, g: 1, b: 1, a: 0}
+  _hitBlinkDuration: 0.05
   isTraped: 0
+--- !u!61 &2055698824
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874932009217915193}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000011920929, y: 0.21999013}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.46875, y: 1}
+    newSize: {x: 1.46875, y: 0.96875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8008282, y: 0.56001973}
+  m_EdgeRadius: 0
+--- !u!114 &2055698822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874932009217915193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95d63a79a8aec5459db7184a22f83d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 0}
+  _sounds:
+  - _id: kill
+    _clip: {fileID: 8300000, guid: 0605ec2084454974bba9ff91dcbfaff2, type: 3}
+--- !u!114 &2055698823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874932009217915193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fc401d144cd884ebaf5ae8f3e3f98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 2
+  _onTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4874932009217915195}
+        m_TargetAssemblyTypeName: LeacherEnemy, Assembly-CSharp
+        m_MethodName: GetHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onTakeHealing:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 599919324}
+        m_TargetAssemblyTypeName: LeacherTongue, Assembly-CSharp
+        m_MethodName: onDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4874932009217915195}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &3351021118578245172
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4874932009217915198}
+    m_Modifications:
+    - target: {fileID: 3172791376329926824, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_Name
+      value: LeacherBloodDrops
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 199ab8ed8c17201449f5a4f063734eaa, type: 3}
+--- !u!4 &5615785129525801411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3351021118578245172}
+  m_PrefabAsset: {fileID: 0}

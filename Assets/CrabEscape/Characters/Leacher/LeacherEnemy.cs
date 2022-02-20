@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class LeacherEnemy : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class LeacherEnemy : MonoBehaviour
     [SerializeField] private LeacherTongue _tongue;
     [SerializeField] private float _tongueSpeedIn, _tongueSpeedOut, _tongueSpeedReset;
     [SerializeField] protected PlaySoundComponent Sound;
+    [SerializeField] private Material _hitBlinkMat;
+    [SerializeField] private Color _hitBlinkColor;
+    [SerializeField] private float _hitBlinkDuration;
+    private SpriteRenderer _spriteRenderer;
 
     public bool isTraped;
 
@@ -17,6 +22,7 @@ public class LeacherEnemy : MonoBehaviour
         isTraped = false;
         _tongueSpeedReset = _tongueSpeedIn;
         Sound = GetComponent<PlaySoundComponent>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void PlaySound(string sound)
@@ -35,7 +41,7 @@ public class LeacherEnemy : MonoBehaviour
 
         if (_inAttackRange.IsTouchingLayer && isTraped)
         {
-            _tongueSpeedIn = 0.1f;
+            _tongueSpeedIn = 0f;
             if (_meleeCooldown.IsReady)
             {
                 MeleeAttack();
@@ -57,5 +63,25 @@ public class LeacherEnemy : MonoBehaviour
     private void MeleeAttack()
     {
         _meleeAtack.Check();
+        Sound.Play("kill");
+    }
+
+    public void GetHit()
+    {
+        Sound.Play("hurt");
+        StartCoroutine(GetHitBlink());
+    }
+
+    private IEnumerator GetHitBlink()
+    {
+        Material defaultMaterial = _spriteRenderer.material;
+        _hitBlinkMat.color = _hitBlinkColor;
+        _spriteRenderer.material = _hitBlinkMat;
+
+        yield return new WaitForSeconds(_hitBlinkDuration);
+
+        _spriteRenderer.material = defaultMaterial;
+        
+        StopCoroutine(GetHitBlink());
     }
 }
