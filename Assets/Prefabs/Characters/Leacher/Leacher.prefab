@@ -93,11 +93,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tongueRoot: {fileID: 4874932007322213327}
-  _tongueSegmentPf: {fileID: 5864940528792320133, guid: e094d0461d06d0944b9a4997cdef3aee,
+  _tongueSegmentPf: {fileID: 8107083865970884240, guid: e094d0461d06d0944b9a4997cdef3aee,
     type: 3}
   _tongueLenght: 14
   _tongueLowerSegment: {fileID: 0}
-  _tongueSegments: []
+  _leacherGo: {fileID: 4874932009217915193}
+  _target: {fileID: 0}
 --- !u!1 &4874932007886154393
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 13056
+    m_Bits: 12800
   _isTouchingLayer: 0
 --- !u!114 &4874932007886154395
 MonoBehaviour:
@@ -259,7 +260,7 @@ MonoBehaviour:
         m_CallState: 2
   _mask:
     serializedVersion: 2
-    m_Bits: 12800
+    m_Bits: 13824
   _tags:
   - Player
   - Interactible
@@ -277,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87251f1610e2fbe4d860296ef5b19c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 50
+  _damage: 1
   _healing: 0
 --- !u!58 &4874932008103209375
 CircleCollider2D:
@@ -309,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layer:
     serializedVersion: 2
-    m_Bits: 12800
+    m_Bits: 13824
   _isTouchingLayer: 0
 --- !u!1 &4874932009217915193
 GameObject:
@@ -326,6 +327,7 @@ GameObject:
   - component: {fileID: 2055698824}
   - component: {fileID: 2055698822}
   - component: {fileID: 2055698823}
+  - component: {fileID: 2055698825}
   m_Layer: 13
   m_Name: Leacher
   m_TagString: Enemy
@@ -416,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _frameRate: 8
   _clips:
-  - _clipName: 
+  - _clipName: idle
     _sprites:
     - {fileID: 21300000, guid: f9f5b65494a69e04f905e9a87535ba53, type: 3}
     - {fileID: 21300000, guid: e965fc25a3d9fbe448c48c494487d03c, type: 3}
@@ -426,6 +428,14 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 30bda3cde5f40a44b89061613a72d853, type: 3}
     - {fileID: 21300000, guid: cbe4d856223044d459a45e33f33eb401, type: 3}
     - {fileID: 21300000, guid: 17fb581bcf47cc54ca266363dd2c5242, type: 3}
+    _loop: 1
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - _clipName: dead
+    _sprites:
+    - {fileID: 21300000, guid: a2472df000beba6458e71da7997fdd44, type: 3}
     _loop: 1
     _allowNextClip: 0
     _onComplete:
@@ -454,8 +464,8 @@ MonoBehaviour:
   _tongueSpeedReset: 0
   Sound: {fileID: 0}
   _hitBlinkMat: {fileID: 2100000, guid: 70171016ce81ac94591f3bd1d4b1b5bb, type: 2}
-  _hitBlinkColor: {r: 1, g: 1, b: 1, a: 0}
-  _hitBlinkDuration: 0.05
+  _hitBlinkColor: {r: 1, g: 1, b: 1, a: 1}
+  _hitBlinkDuration: 0.1
   isTraped: 0
 --- !u!61 &2055698824
 BoxCollider2D:
@@ -499,6 +509,8 @@ MonoBehaviour:
   _sounds:
   - _id: kill
     _clip: {fileID: 8300000, guid: 0605ec2084454974bba9ff91dcbfaff2, type: 3}
+  - _id: hurt
+    _clip: {fileID: 8300000, guid: ce594104b6ee6d74eb41a307d9ee9864, type: 3}
 --- !u!114 &2055698823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,9 +569,60 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4874932009217915196}
+        m_TargetAssemblyTypeName: SpriteAnimationComponent, Assembly-CSharp
+        m_MethodName: SetClip
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: dead
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2055698825}
+        m_TargetAssemblyTypeName: SpawnPrefabComponent, Assembly-CSharp
+        m_MethodName: SpawnPrefab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1868858797640643827, guid: c173bfee76e4ced4ab0f224720bb652d,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 182733342412723868}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _onHealthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2055698825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874932009217915193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa78054ff826d4c4e8250707cdbb5f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 4874932009217915198}
+  _prefab: {fileID: 1868858797640643827, guid: c173bfee76e4ced4ab0f224720bb652d, type: 3}
 --- !u!1001 &3351021118578245172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -571,6 +634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LeacherBloodDrops
+      objectReference: {fileID: 0}
+    - target: {fileID: 3172791376329926824, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,
         type: 3}
@@ -629,6 +697,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 199ab8ed8c17201449f5a4f063734eaa, type: 3}
+--- !u!1 &182733342412723868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3172791376329926824, guid: 199ab8ed8c17201449f5a4f063734eaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3351021118578245172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5615785129525801411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7164788446894903287, guid: 199ab8ed8c17201449f5a4f063734eaa,

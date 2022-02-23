@@ -4,15 +4,16 @@ using UnityEngine;
 public class LeacherTongue : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _tongueRoot;
-    [SerializeField] private GameObject _tongueSegmentPf;
+    [SerializeField] private LeacherTongueSegment _tongueSegmentPf;
     [SerializeField] private int _tongueLenght;
-    [SerializeField] private GameObject _tongueLowerSegment;
+    [SerializeField] private LeacherTongueSegment _tongueLowerSegment;
+    [SerializeField] private GameObject _leacherGo;
     private LeacherEnemy _leacherEnemy;
-    private GameObject _leacherGo;
-    
-    public List<GameObject> _tongueSegments = new List<GameObject>();
-    private LeacherTongue[] tongueGo;
-    private GameObject _victim;
+    private HingeJoint2D firstSegmentHj;
+
+    private List<LeacherTongueSegment> _tongueSegments = new List<LeacherTongueSegment>();
+
+    [SerializeField] private GameObject _target;
     private float _sriteSizeY = 0.2f;
     private int _maxcount;
     private float _speed;
@@ -20,8 +21,7 @@ public class LeacherTongue : MonoBehaviour
 
     private void Awake()
     {
-        _leacherGo = GameObject.Find("Leacher");
-        _leacherEnemy = FindObjectOfType<LeacherEnemy>().GetComponent<LeacherEnemy>();
+        _leacherEnemy = _leacherGo.GetComponent<LeacherEnemy>();
     }
 
     void Start()
@@ -38,44 +38,44 @@ public class LeacherTongue : MonoBehaviour
 
     public void GenerateTongue()
     {
-        GameObject firstSegment = Instantiate(_tongueSegmentPf);
-        firstSegment.transform.parent = transform.root;
-        firstSegment.transform.position = transform.position;
-        firstSegment.GetComponent<HingeJoint2D>().connectedBody = _tongueRoot;
-        firstSegment.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0);
+        var firstSegment = Instantiate(_tongueSegmentPf);
+        firstSegment.transform.parent = gameObject.transform;
+        firstSegment.transform.position = gameObject.transform.position;
+        firstSegment.segmentHj.connectedBody = _tongueRoot;
+        firstSegment.segmentHj.connectedAnchor = new Vector2(0, 0);
         _tongueLowerSegment = firstSegment;
         _tongueSegments.Add(firstSegment);
     }
 
     private void AddTongueSegment()
     {
-        GameObject tongueSegment = Instantiate(_tongueSegmentPf);
-        tongueSegment.transform.parent = transform.root;
-        tongueSegment.transform.position = transform.position;
-        tongueSegment.GetComponent<HingeJoint2D>().connectedBody = _tongueRoot;
-        tongueSegment.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0);
-        _tongueLowerSegment.GetComponent<HingeJoint2D>().connectedBody = tongueSegment.GetComponent<Rigidbody2D>();
+        var tongueSegment = Instantiate(_tongueSegmentPf);
+        tongueSegment.transform.parent = gameObject.transform;
+        tongueSegment.transform.position = gameObject.transform.position;
+        tongueSegment.segmentHj.connectedBody = _tongueRoot;
+        tongueSegment.segmentHj.connectedAnchor = new Vector2(0, 0);
+        _tongueLowerSegment.segmentHj.connectedBody = tongueSegment.segmentRb;
         _tongueLowerSegment = tongueSegment;
         _tongueSegments.Add(tongueSegment);
     }
 
     private void RemoveTongueSegment()
     {
-        GameObject secondTongueSegment = _tongueSegments[_maxcount - 1];
-        secondTongueSegment.GetComponent<HingeJoint2D>().connectedBody = _tongueRoot;
-        secondTongueSegment.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0);
-        GameObject toDestroy = _tongueLowerSegment;
+        var secondTongueSegment = _tongueSegments[_maxcount - 1];
+        secondTongueSegment.segmentHj.connectedBody = _tongueRoot;
+        secondTongueSegment.segmentHj.connectedAnchor = new Vector2(0, 0);
+        var toDestroy = _tongueLowerSegment;
         _tongueLowerSegment = secondTongueSegment;
         _tongueSegments.Remove(toDestroy);
-        Destroy(toDestroy);
+        Destroy(toDestroy.gameObject);
     }
 
     public void TongueMovement(float _speed)
     {
         if (_speed < 0 && _maxcount != _tongueLenght)
         {
-            _tongueLowerSegment.GetComponent<HingeJoint2D>().connectedAnchor += new Vector2(0, _speed * Time.deltaTime);
-            if (_tongueLowerSegment.GetComponent<HingeJoint2D>().connectedAnchor.y * -1 >= _sriteSizeY &&
+            _tongueLowerSegment.segmentHj.connectedAnchor += new Vector2(0, _speed * Time.deltaTime);
+            if (_tongueLowerSegment.segmentHj.connectedAnchor.y * -1 >= _sriteSizeY &&
                 _maxcount < _tongueLenght)
             {
                 AddTongueSegment();
@@ -85,77 +85,79 @@ public class LeacherTongue : MonoBehaviour
 
         if (_speed > 0 && _maxcount != 0)
         {
-            _tongueLowerSegment.GetComponent<HingeJoint2D>().connectedAnchor += new Vector2(0, _speed * Time.deltaTime);
-            if (_tongueLowerSegment.GetComponent<HingeJoint2D>().connectedAnchor.y >= _sriteSizeY && _maxcount > 0)
+            _tongueLowerSegment.segmentHj.connectedAnchor += new Vector2(0, _speed * Time.deltaTime);
+            if (_tongueLowerSegment.segmentHj.connectedAnchor.y >= _sriteSizeY && _maxcount > 0)
             {
                 RemoveTongueSegment();
                 _maxcount--;
             }
         }
     }
-    
-    public void SetParent(GameObject parent)
+
+    public void SetParent(GameObject target, GameObject parent)
     {
-        if (!parent.GetComponent<HealthComponent>())
+        if (target != _leacherGo && _leacherEnemy.isTraped != true)
         {
-            parent.gameObject.layer = 10;
-        }
-        if (parent != _leacherGo)
-        {
-            tongueGo = FindObjectsOfType<LeacherTongue>();
+            _target = target;
+            if (!target.GetComponent<HealthComponent>())
             {
-                for (int i = 0; i < tongueGo.Length; i++)
-                {
-                    if (tongueGo[i].GetComponent<Collider2D>().IsTouching(parent.GetComponent<Collider2D>()) && !_leacherEnemy.isTraped)
-                    {
-                        _leacherEnemy.isTraped = true;
-                        if (!parent.gameObject.GetComponent<HingeJoint2D>())
-                        {
-                            parent.gameObject.AddComponent<HingeJoint2D>();
-                        }
-                        parent.GetComponent<HingeJoint2D>().connectedBody = tongueGo[i].GetComponent<Rigidbody2D>();
-                        parent.GetComponent<HingeJoint2D>().connectedAnchor = tongueGo[i].GetComponent<HingeJoint2D>().transform.position;
-                        health = parent.GetComponent<HealthComponent>();
-                        if (health)
-                        {
-                            health._onDie?.AddListener(delegate { OnVictimDie(parent.GetComponent<HingeJoint2D>()); });
-                        }
-                    }
-                }
+                _leacherEnemy.isIndestructible = true;
+            }
+
+            _leacherEnemy.isTraped = true;
+            if (!target.GetComponent<HingeJoint2D>())
+            {
+                target.AddComponent<HingeJoint2D>();
+            }
+
+            var targetHj = target.GetComponent<HingeJoint2D>();
+            targetHj.connectedBody = parent.GetComponent<Rigidbody2D>();
+            target.GetComponent<Collider2D>().isTrigger = true;
+            target.transform.position = parent.transform.position;
+            health = target.GetComponent<HealthComponent>();
+            if (health)
+            {
+                health._onDie?.AddListener(delegate { OnVictimDie(targetHj); });
             }
         }
     }
 
-    void OnVictimDie(HingeJoint2D victimHj)
+    void OnVictimDie(HingeJoint2D target)
     {
         _leacherEnemy.isTraped = false;
         _leacherEnemy.ResetSpeed();
-        if (victimHj.gameObject.GetComponent<HingeJoint2D>() != null)
+        if (target)
         {
-            victimHj.GetComponent<Rigidbody2D>().sharedMaterial = null;
-            Destroy(victimHj);
+            target.GetComponent<Collider2D>().isTrigger = false;
+            target.GetComponent<Rigidbody2D>().sharedMaterial = null;
+            Destroy(target);
         }
     }
-    
+
     public void onDie()
+    {
+        onDieTarget(_target);
+    }
+    
+    private void onDieTarget(GameObject target)
     {
         _leacherEnemy.isTraped = false;
         _leacherEnemy.PlaySound("kill");
-        tongueGo = FindObjectsOfType<LeacherTongue>();
-        var hJ = FindObjectsOfType<HingeJoint2D>();
-        Debug.Log(hJ.Length);
-        for (int i = 0; i < tongueGo.Length; i++)
+        foreach (var segment in _tongueSegments)
         {
-            tongueGo[i].gameObject.layer = 10;
-            Destroy(tongueGo[i].GetComponent<EnterCollisionComponent>());
+            segment.gameObject.layer = 10;
+            Destroy(segment.segmentColC);
+            _tongueRoot.gameObject.transform.DetachChildren();
             Destroy(_tongueRoot.gameObject);
         }
 
-        for (int i = 0; i < hJ.Length; i++)
+        if (target && target.GetComponent<HingeJoint2D>())
         {
-            if (!hJ[i].CompareTag("EnemyTongue"))
+            target.GetComponent<HingeJoint2D>().enabled = false;
+            target.GetComponent<Collider2D>().isTrigger = false;
+            if (!target.GetComponent<HealthComponent>())
             {
-                hJ[i].GetComponent<HingeJoint2D>().enabled = false;
+                _leacherEnemy.isIndestructible = false;
             }
         }
     }

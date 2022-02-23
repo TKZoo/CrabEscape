@@ -16,6 +16,7 @@ public class LeacherEnemy : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public bool isTraped;
+    public bool isIndestructible;
 
     private void Awake()
     {
@@ -63,7 +64,10 @@ public class LeacherEnemy : MonoBehaviour
     private void MeleeAttack()
     {
         _meleeAtack.Check();
-        Sound.Play("kill");
+        if (!isIndestructible)
+        {
+            Sound.Play("kill");
+        }
     }
 
     public void GetHit()

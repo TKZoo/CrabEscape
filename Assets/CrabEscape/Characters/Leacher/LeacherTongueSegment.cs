@@ -1,22 +1,22 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class LeacherTongueSegment : MonoBehaviour
 {
-    [SerializeField] private LayerCheck _victims;
-    [SerializeField] public UnityEvent _onColision;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public Rigidbody2D segmentRb;
+    public HingeJoint2D segmentHj;
+    public EnterCollisionComponent segmentColC;
+    private void Awake()
     {
-        if (_victims.IsTouchingLayer)
-        {
-            _onColision?.Invoke(collision.gameObject);
-        }
+        segmentRb = GetComponent<Rigidbody2D>();
+        segmentHj = GetComponent<HingeJoint2D>();
+        segmentColC = GetComponent<EnterCollisionComponent>();
+
+        segmentColC._action.AddListener(OnTongueCol);
     }
 
-    [Serializable]
-    public class UnityEvent : UnityEvent<GameObject>
+    public void OnTongueCol(GameObject target)
     {
+        var tongue = transform.parent.GetComponent<LeacherTongue>();
+        tongue.SetParent(target, gameObject);
     }
 }
