@@ -105,12 +105,11 @@ public class LeacherTongue : MonoBehaviour
             }
 
             _leacherEnemy.isTraped = true;
-            if (!target.GetComponent<HingeJoint2D>())
+            if (!target.TryGetComponent(out HingeJoint2D targetHj)) ;
             {
-                target.AddComponent<HingeJoint2D>();
+                targetHj = target.AddComponent<HingeJoint2D>();
             }
 
-            var targetHj = target.GetComponent<HingeJoint2D>();
             targetHj.connectedBody = parent.GetComponent<Rigidbody2D>();
             target.GetComponent<Collider2D>().isTrigger = true;
             target.transform.position = parent.transform.position;

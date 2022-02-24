@@ -7,10 +7,6 @@ public class LeacherTongueSegment : MonoBehaviour
     public EnterCollisionComponent segmentColC;
     private void Awake()
     {
-        segmentRb = GetComponent<Rigidbody2D>();
-        segmentHj = GetComponent<HingeJoint2D>();
-        segmentColC = GetComponent<EnterCollisionComponent>();
-
         segmentColC._action.AddListener(OnTongueCol);
     }
 
