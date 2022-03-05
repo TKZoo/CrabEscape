@@ -38,7 +38,7 @@ public class LeacherEnemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isTraped);
+        //Debug.Log(isTraped);
 
         if (_inAttackRange.IsTouchingLayer && isTraped)
         {

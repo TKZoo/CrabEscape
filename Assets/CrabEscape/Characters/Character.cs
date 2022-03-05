@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Character : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class Character : MonoBehaviour
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
     protected Animator Animator;
+    protected HealthComponent Health;
     protected bool IsGrounded;
     protected bool IsJumping;
     protected bool IsFalling;
+    
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
@@ -36,14 +39,29 @@ public class Character : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        Health = GetComponent<HealthComponent>();
         Sound = GetComponent<PlaySoundComponent>();
     }
 
+    private void Start()
+    {
+        Health.SetHealth(Health.GetHp());
+    }
+
+    public virtual void OnHealthChanges(int currentHealth)
+    {
+        Health.Hp.Value = currentHealth;
+    }
+    
     public void SetDirection(Vector2 direction)
     {
         Direction = direction;
     }
 
+    public Vector2 GetDirection()
+    {
+        return Direction;
+    }
     protected virtual void Update()
     {
         IsGrounded = _groundCheck.IsTouchingLayer;

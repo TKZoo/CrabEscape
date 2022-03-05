@@ -17,15 +17,13 @@ public class Hero : Character
 
     private GameSession _session;
     private bool _allowDoubleJump;
-    private HealthComponent health;
     private int swordCount => _session.PlayerData.Inventory.Count("Sword");
     private int hpPotionCount => _session.PlayerData.Inventory.Count("HpPotion");
 
     private void Start()
     {
         _session = FindObjectOfType<GameSession>();
-        health = GetComponent<HealthComponent>();
-        health.SetHealth(_session.PlayerData.Hp);
+        Health.SetHealth(_session.PlayerData.Hp.Value);
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
     }
@@ -96,9 +94,9 @@ public class Hero : Character
         }
     }
 
-    public void OnHealthChanges(int currentHealth)
+    public override void OnHealthChanges(int currentHealth)
     {
-        _session.PlayerData.Hp = currentHealth;
+        _session.PlayerData.Hp.Value = currentHealth;
     }
 
     public void Interact()
@@ -157,7 +155,7 @@ public class Hero : Character
     {
         if (hpPotionCount > 0)
         {
-            health.ApplyHealing(2);
+            Health.ApplyHealing(2);
             Sound.Play("usepotion");
             _session.PlayerData.Inventory.Remove("HpPotion", 1);
         }

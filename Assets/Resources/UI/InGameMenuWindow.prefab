@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 6322711221178730066}
   - component: {fileID: 6322711221178730067}
   - component: {fileID: 6322711221178730064}
+  - component: {fileID: 2637298067782487754}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -417,8 +418,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6322711221178730064}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _normal: {fileID: 6322711220636264362}
   _pressed: {fileID: 6322711220986537038}
+--- !u!114 &2637298067782487754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322711221178730078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6ea83eda07c874495632fe9661888d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: db9aeebdc1c1d294aa85b00570a46eee, type: 3}
 --- !u!1 &6536760252743650639
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +820,7 @@ GameObject:
   - component: {fileID: 6536760253529036493}
   - component: {fileID: 6536760253529036492}
   - component: {fileID: 6536760253529036491}
+  - component: {fileID: 7911017138309412434}
   m_Layer: 5
   m_Name: Retsrt_Button
   m_TagString: Untagged
@@ -919,6 +946,19 @@ MonoBehaviour:
         m_CallState: 2
   _normal: {fileID: 6536760252775696350}
   _pressed: {fileID: 6536760253619293054}
+--- !u!114 &7911017138309412434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536760253529036489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6ea83eda07c874495632fe9661888d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: db9aeebdc1c1d294aa85b00570a46eee, type: 3}
 --- !u!1 &6536760253619293054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1583,7 @@ GameObject:
   - component: {fileID: 6536760254385838865}
   - component: {fileID: 6536760254385838864}
   - component: {fileID: 7324107759582988773}
+  - component: {fileID: 5989298654357235827}
   m_Layer: 5
   m_Name: Exit_Button
   m_TagString: Untagged
@@ -1681,6 +1722,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelToLoad: Main_menu
+--- !u!114 &5989298654357235827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536760254385838878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6ea83eda07c874495632fe9661888d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: db9aeebdc1c1d294aa85b00570a46eee, type: 3}
 --- !u!1 &6536760254482685849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,6 +1842,7 @@ GameObject:
   - component: {fileID: 6536760254558701731}
   - component: {fileID: 6536760254558701730}
   - component: {fileID: 6536760254558701729}
+  - component: {fileID: 3206777556121932278}
   m_Layer: 5
   m_Name: Options_Button
   m_TagString: Untagged
@@ -1913,6 +1968,19 @@ MonoBehaviour:
         m_CallState: 2
   _normal: {fileID: 6536760253777575874}
   _pressed: {fileID: 6536760253952645159}
+--- !u!114 &3206777556121932278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6536760254558701743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6ea83eda07c874495632fe9661888d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: db9aeebdc1c1d294aa85b00570a46eee, type: 3}
 --- !u!1 &6536760254592444862
 GameObject:
   m_ObjectHideFlags: 0
