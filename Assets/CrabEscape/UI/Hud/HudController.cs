@@ -21,20 +21,16 @@ public class HudController : MonoBehaviour
             mobHp = gameObject.GetComponentInParent<HealthComponent>();
             mobHp.Hp.OnChanged += OnMobHealthChange;
             OnMobHealthChange(mobHp.Hp.Value, mobHp.Hp.Value);
-            Debug.Log(mobHp);
         }
     }
 
     private void OnMobHealthChange(int newvalue, int oldvalue)
     {
-        var maxHealth = mobHp.GetHp();
-        Debug.Log(maxHealth + " mob hp");
+        var maxHealth = mobHp.GetMaxHp();
         var value = (float) newvalue / maxHealth;
-        Debug.Log(value + " mob val");
         _healthBar.SetProgress(value);
     }
 
-  
     private void OnHealthChange(int newvalue, int oldvalue)
     {
         var maxHealth = DefsFacade.I.Player.MaxHealth;

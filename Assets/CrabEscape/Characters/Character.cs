@@ -45,7 +45,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        Health.SetHealth(Health.GetHp());
+        Health.SetHealth(Health.Hp.Value);
     }
 
     public virtual void OnHealthChanges(int currentHealth)

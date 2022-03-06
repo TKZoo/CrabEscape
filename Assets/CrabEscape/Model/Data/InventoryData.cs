@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -21,14 +22,14 @@ public class InventoryData
         if (itemDef.IsVoid) return;
 
         var item = GetItem(id);
-        if (_inventory.Count >= inventorySize && !itemDef.IsStackable) return;
+        if (_inventory.Count >= inventorySize && !itemDef.HasTag(ItemTag.Stackable)) return;
 
         if (item == null)
         {
             item = new InventoryItemData(id);
             _inventory.Add(item);
         }
-        else if (!itemDef.IsStackable)
+        else if (!itemDef.HasTag(ItemTag.Stackable))
         {
             item = new InventoryItemData(id);
             _inventory.Add(item);
@@ -78,6 +79,22 @@ public class InventoryData
         }
 
         return null;
+    }
+
+    public InventoryItemData[] GetAll(params ItemTag[] tags)
+    {
+        var returnVal = new List<InventoryItemData>();
+        foreach (var item in _inventory)
+        {
+            var itemDef = DefsFacade.I.Items.Get(item.Id);
+            var isAllRequirementsMet = tags.All(x => itemDef.HasTag(x));
+            if (isAllRequirementsMet)
+            {
+                returnVal.Add(item);
+            }
+        }
+
+        return returnVal.ToArray();
     }
 }
 

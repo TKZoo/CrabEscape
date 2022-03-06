@@ -9,15 +9,14 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private UnityEvent _onTakeHealing;
     [SerializeField] public UnityEvent _onDie;
     [SerializeField] private HealthChangeEvent _onHealthChange;
-    //public delegate void OnInventoryChange();
 
-    //public OnInventoryChange OnChanged;
-    public IntProperty Hp = new IntProperty();
+   public IntProperty Hp = new IntProperty();
     
     private int _maxHealth;
 
-    private void OnEnable()
+    private void Awake()
     {
+        SetHealth(_health);
         _maxHealth = _health;
     }
 
@@ -48,10 +47,10 @@ public class HealthComponent : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        Hp.Value = _health = health;
+        Hp.Value = health;
     }
 
-    public int GetHp()
+    public int GetMaxHp()
     {
         return _maxHealth;
     }
@@ -61,5 +60,4 @@ public class HealthComponent : MonoBehaviour
     {
 
     }
-
 }

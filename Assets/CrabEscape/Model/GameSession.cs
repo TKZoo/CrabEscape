@@ -6,6 +6,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
 
     public PlayerData PlayerData => _playerData;
+    public QuickInventoryModel QuickInventory { get; private set; }
 
     private void Awake()
     {
@@ -17,8 +18,14 @@ public class GameSession : MonoBehaviour
         }
         else
         {
+            InitModels();
             DontDestroyOnLoad(this);
         }
+    }
+
+    private void InitModels()
+    {
+        QuickInventory = new QuickInventoryModel(PlayerData);
     }
 
     private void LoadHud()

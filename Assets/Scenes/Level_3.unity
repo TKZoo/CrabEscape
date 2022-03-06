@@ -11637,6 +11637,12 @@ MonoBehaviour:
       _inventory:
       - Id: Sword
         Value: 1
+      - Id: DoorKey
+        Value: 1
+      - Id: Coin
+        Value: 10
+      - Id: HpPotion
+        Value: 10
     Hp:
       _value: 10
 --- !u!4 &1308496877

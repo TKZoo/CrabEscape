@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _items:
   - _id: Coin
-    _isStackable: 1
+    _icon: {fileID: -2322180950842035098, guid: f33e77b598982914a81eaf73ee511885,
+      type: 3}
+    _tags: 00000000
   - _id: Sword
-    _isStackable: 1
+    _icon: {fileID: 21300000, guid: d2bdb935053419043816281b1bac0d0e, type: 3}
+    _tags: 000000000200000001000000
   - _id: DoorKey
-    _isStackable: 0
+    _icon: {fileID: 21300000, guid: 19719d3d1759a0a489ce97f286e554f3, type: 3}
+    _tags: 
   - _id: HpPotion
-    _isStackable: 0
+    _icon: {fileID: -6202940564662568092, guid: cf1cb6cb254092743b744285af503f23,
+      type: 3}
+    _tags: 01000000
