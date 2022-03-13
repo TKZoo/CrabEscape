@@ -71,6 +71,15 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""49382150-f649-4d9e-8238-d728eaf459b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,11 +196,22 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""79e55122-a731-42cb-b284-11b72133d926"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""QuickSlotUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15944a97-b322-4a7d-b997-5024e7f53aa4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -207,6 +227,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         m_Hero_Attack = m_Hero.FindAction("Attack", throwIfNotFound: true);
         m_Hero_ThrowAttack = m_Hero.FindAction("ThrowAttack", throwIfNotFound: true);
         m_Hero_QuickSlotUse = m_Hero.FindAction("QuickSlotUse", throwIfNotFound: true);
+        m_Hero_NextItem = m_Hero.FindAction("NextItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +292,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Hero_Attack;
     private readonly InputAction m_Hero_ThrowAttack;
     private readonly InputAction m_Hero_QuickSlotUse;
+    private readonly InputAction m_Hero_NextItem;
     public struct HeroActions
     {
         private @HeroInputActions m_Wrapper;
@@ -280,6 +302,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Hero_Attack;
         public InputAction @ThrowAttack => m_Wrapper.m_Hero_ThrowAttack;
         public InputAction @QuickSlotUse => m_Wrapper.m_Hero_QuickSlotUse;
+        public InputAction @NextItem => m_Wrapper.m_Hero_NextItem;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,6 +327,9 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @QuickSlotUse.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnQuickSlotUse;
                 @QuickSlotUse.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnQuickSlotUse;
                 @QuickSlotUse.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnQuickSlotUse;
+                @NextItem.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
+                @NextItem.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
+                @NextItem.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
@@ -323,6 +349,9 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @QuickSlotUse.started += instance.OnQuickSlotUse;
                 @QuickSlotUse.performed += instance.OnQuickSlotUse;
                 @QuickSlotUse.canceled += instance.OnQuickSlotUse;
+                @NextItem.started += instance.OnNextItem;
+                @NextItem.performed += instance.OnNextItem;
+                @NextItem.canceled += instance.OnNextItem;
             }
         }
     }
@@ -334,5 +363,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnThrowAttack(InputAction.CallbackContext context);
         void OnQuickSlotUse(InputAction.CallbackContext context);
+        void OnNextItem(InputAction.CallbackContext context);
     }
 }

@@ -7533,6 +7533,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1594551398}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &558227721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1825459536, guid: 46075b11b0b9b934cb5aaa066ff03440,
+    type: 3}
+  m_PrefabInstance: {fileID: 324642736554915631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa78054ff826d4c4e8250707cdbb5f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &559718063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6521742604930517710, guid: b495d82c3ddfba2459786a1f25ee8026,
@@ -7722,6 +7734,18 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 400306174}
+--- !u!114 &852180114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2036483513687078147, guid: 58f81d6afcc057d4790c97550399b5cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209804492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43972725e4c6e14bba34add91ec883d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &861428888
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -11584,6 +11608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sharky
       objectReference: {fileID: 0}
+    - target: {fileID: 6505375292659438113, guid: 58f81d6afcc057d4790c97550399b5cc,
+        type: 3}
+      propertyPath: _spawnPf
+      value: 
+      objectReference: {fileID: 852180114}
     - target: {fileID: 7167883176944328595, guid: 58f81d6afcc057d4790c97550399b5cc,
         type: 3}
       propertyPath: _source
@@ -11635,14 +11664,12 @@ MonoBehaviour:
   _playerData:
     _inventory:
       _inventory:
-      - Id: Sword
-        Value: 1
-      - Id: DoorKey
-        Value: 1
-      - Id: Coin
-        Value: 10
       - Id: HpPotion
-        Value: 10
+        Value: 3
+      - Id: PearlProjectile
+        Value: 5
+      - Id: Sword
+        Value: 5
     Hp:
       _value: 10
 --- !u!4 &1308496877
@@ -11733,6 +11760,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b495d82c3ddfba2459786a1f25ee8026, type: 3}
+--- !u!1 &1534137767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 182733342412723868, guid: 036a2049bc242ce4f8689fe3454c9c3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4874932008169838064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1552674768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7797891030484767403, guid: 15b1cc858e12655478538e07d8e044b2,
@@ -11966,6 +11999,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1209804492}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1951811711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2036483513687078147, guid: 46075b11b0b9b934cb5aaa066ff03440,
+    type: 3}
+  m_PrefabInstance: {fileID: 324642736554915631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43972725e4c6e14bba34add91ec883d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2017466138
 GameObject:
   m_ObjectHideFlags: 0
@@ -12015,11 +12060,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barrel_destr
-      objectReference: {fileID: 0}
-    - target: {fileID: 7797891030484767400, guid: 15b1cc858e12655478538e07d8e044b2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7797891030484767403, guid: 15b1cc858e12655478538e07d8e044b2,
         type: 3}
@@ -12076,16 +12116,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7797891030484767404, guid: 15b1cc858e12655478538e07d8e044b2,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7797891030484767404, guid: 15b1cc858e12655478538e07d8e044b2,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b1cc858e12655478538e07d8e044b2, type: 3}
 --- !u!1001 &324642736554915631
@@ -12137,7 +12167,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: cdf64d7083299f449b5bea529c4db9d9, type: 2}
+      objectReference: {fileID: 9100000, guid: 179971497dcbd5c4da239bba54b45eb2, type: 2}
     - target: {fileID: 324642737315750773, guid: 46075b11b0b9b934cb5aaa066ff03440,
         type: 3}
       propertyPath: m_Material
@@ -12148,6 +12178,16 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 324642737315750774, guid: 46075b11b0b9b934cb5aaa066ff03440,
+        type: 3}
+      propertyPath: _spawnPf
+      value: 
+      objectReference: {fileID: 1951811711}
+    - target: {fileID: 324642737315750774, guid: 46075b11b0b9b934cb5aaa066ff03440,
+        type: 3}
+      propertyPath: _throwSpawner
+      value: 
+      objectReference: {fileID: 558227721}
     - target: {fileID: 324642737315750777, guid: 46075b11b0b9b934cb5aaa066ff03440,
         type: 3}
       propertyPath: m_RootOrder
@@ -12381,6 +12421,54 @@ PrefabInstance:
       propertyPath: _source
       value: 
       objectReference: {fileID: 1041011435}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1534137767}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 1534137767}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetAndSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055698823, guid: 036a2049bc242ce4f8689fe3454c9c3f, type: 3}
+      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4874932009217915193, guid: 036a2049bc242ce4f8689fe3454c9c3f,
         type: 3}
       propertyPath: m_Name

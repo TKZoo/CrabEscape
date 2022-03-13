@@ -11,7 +11,7 @@ public class SpawnPrefabListComponent : MonoBehaviour
         {
             if (data.id == id)
             {
-                data.Component.SpawnPrefab(data.pfSpawn);
+                data.Component.SetAndSpawn(data.pfSpawn);
                 break;
             }
         }

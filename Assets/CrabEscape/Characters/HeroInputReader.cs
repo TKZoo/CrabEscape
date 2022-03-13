@@ -15,6 +15,7 @@ public class HeroInputReader : MonoBehaviour
         _inputActions.Hero.Attack.performed += OnAttackAction; 
         _inputActions.Hero.ThrowAttack.performed += OnThrowAttackAction;
         _inputActions.Hero.QuickSlotUse.performed += OnQuickSlotUse;
+        _inputActions.Hero.NextItem.performed += OnNextItem;
     }
 
     private void OnEnable()
@@ -40,12 +41,17 @@ public class HeroInputReader : MonoBehaviour
     
     public void OnAttackAction(InputAction.CallbackContext context)
     {
-        _hero.Attack ();            
+        _hero.Attack();            
     }
     
     public void OnQuickSlotUse(InputAction.CallbackContext context)
     {
-        _hero.QuickSlotUse ();            
+        _hero.QuickSlotUse();            
+    }
+    
+    private void OnNextItem(InputAction.CallbackContext obj)
+    {
+        _hero.NextItem();
     }
 
     public void OnThrowAttackAction(InputAction.CallbackContext context)

@@ -7,7 +7,6 @@ using UnityEngine;
 public class InventoryData
 {
     [SerializeField] private List<InventoryItemData> _inventory = new List<InventoryItemData>();
-    private int inventorySize = 3;
 
     //public Action<string, int> OnChanged;
     public delegate void OnInventoryChange(string id, int value);
@@ -22,7 +21,7 @@ public class InventoryData
         if (itemDef.IsVoid) return;
 
         var item = GetItem(id);
-        if (_inventory.Count >= inventorySize && !itemDef.HasTag(ItemTag.Stackable)) return;
+        if (_inventory.Count >= DefsFacade.I.Player.InventorySize && !itemDef.HasTag(ItemTag.Stackable)) return;
 
         if (item == null)
         {
@@ -87,7 +86,7 @@ public class InventoryData
         foreach (var item in _inventory)
         {
             var itemDef = DefsFacade.I.Items.Get(item.Id);
-            var isAllRequirementsMet = tags.All(x => itemDef.HasTag(x));
+            var isAllRequirementsMet = tags.Any(x => itemDef.HasTag(x));
             if (isAllRequirementsMet)
             {
                 returnVal.Add(item);

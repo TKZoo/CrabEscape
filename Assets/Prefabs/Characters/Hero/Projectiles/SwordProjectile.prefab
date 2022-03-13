@@ -55,6 +55,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -732664067
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 692739de778000d489a8829e0b9e1865, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,8 +104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
+  _invertXDir: 0
   _ySpeedImpulse: 5
   _isDynamic: 1
+  _timeToDestroy: 0
 --- !u!114 &4653286085468492105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6778954650723857077}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DoDamage
         m_Mode: 0
         m_Arguments:
@@ -200,6 +204,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 80037294723966609}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -237,6 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 4653286085468492107}
+  _delay: 0
 --- !u!114 &-279175250223838863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,18 +263,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9183041542778164378}
+        m_TargetAssemblyTypeName: SpawnPrefabComponent, Assembly-CSharp
         m_MethodName: SpawnPrefab
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 4653286085468492107, guid: fd3af7d7ce256bf4d94ab0156bfcb374,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 80037294723966609}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:

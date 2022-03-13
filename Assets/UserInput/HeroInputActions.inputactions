@@ -11,7 +11,8 @@
                     "id": "084e7b05-0f97-40e2-9395-314b5522d9b0",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Interact",
@@ -19,7 +20,8 @@
                     "id": "8bceb215-308a-4dc3-879f-e864d2d81440",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Attack",
@@ -27,7 +29,8 @@
                     "id": "7809aaae-684e-4734-b879-d4e3349dc23c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ThrowAttack",
@@ -35,7 +38,8 @@
                     "id": "f712f184-5df6-44db-93cf-21aad4f47f58",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1),Press(behavior=2)"
+                    "interactions": "Hold(duration=1),Press(behavior=2)",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "QuickSlotUse",
@@ -43,7 +47,17 @@
                     "id": "51a483ec-ff7e-4cdb-9dac-bb2ea7eef9e2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextItem",
+                    "type": "Button",
+                    "id": "49382150-f649-4d9e-8238-d728eaf459b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -160,11 +174,22 @@
                 {
                     "name": "",
                     "id": "79e55122-a731-42cb-b284-11b72133d926",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "QuickSlotUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15944a97-b322-4a7d-b997-5024e7f53aa4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

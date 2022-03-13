@@ -65,6 +65,7 @@ public class ShootingTrapAI : MonoBehaviour
 
     public void OnRangedAttack()
     {
-        _rangeAttack.SpawnPrefab(_projectile);
+        _rangeAttack.SetPrefab(_projectile);
+        _rangeAttack.SpawnPrefab();
     }
 }

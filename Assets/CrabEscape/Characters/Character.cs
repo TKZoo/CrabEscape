@@ -14,9 +14,10 @@ public class Character : MonoBehaviour
     [SerializeField] public LayerCheck _groundCheck;
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
-    [SerializeField] protected SpawnPrefabListComponent _particles;
+    [SerializeField] protected SpawnPrefabListComponent _spawnPf;
     [SerializeField] protected Cooldown _throwCooldown;
     [SerializeField] protected PlaySoundComponent Sound;
+    [SerializeField] private SpawnPrefabComponent _throwSpawner;
 
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
@@ -137,13 +138,13 @@ public class Character : MonoBehaviour
 
     protected virtual void FootstepVfx()
     {
-       _particles.Spawn("Run");
+       _spawnPf.Spawn("Run");
        Sound.Play("footstep");
     }
     
     protected virtual void DoJumpVfx()
     {
-        _particles.Spawn("Jump");
+        _spawnPf.Spawn("Jump");
         Sound.Play("jump");
     }
     
@@ -163,7 +164,7 @@ public class Character : MonoBehaviour
     public virtual void Attack()
     {
         Animator.SetTrigger(AttackAnim);
-        _particles.Spawn("Attack");
+        _spawnPf.Spawn("Attack");
     }
 
     public void OnAttack()
@@ -174,12 +175,14 @@ public class Character : MonoBehaviour
     
     public void OnThrowAttack()
     {
-        _particles.Spawn("ThrowAttack");
+        _throwSpawner.SpawnPrefab();
+        //_spawnPf.Spawn("ThrowAttack");
         Sound.Play("range");
     }
     
-    public virtual void ThrowAttack()
+    public virtual void ThrowAttack(GameObject pf)
     {
+        _throwSpawner.SetPrefab(pf);
         Animator.SetTrigger(ThrowAttackAnim);
     }
 
