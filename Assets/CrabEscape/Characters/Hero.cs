@@ -17,8 +17,9 @@ public class Hero : Character
 
     private GameSession _session;
     private bool _allowDoubleJump;
+    private float _potionEffectDuration;
+    private bool _isSpeedPotionCrRunning = false;
     private int swordCount => _session.PlayerData.Inventory.Count("Sword");
-    private int hpPotionCount => _session.PlayerData.Inventory.Count("HpPotion");
 
     private string SelectedId => _session.QuickInventory.SelectedItem.Id;
 
@@ -30,11 +31,12 @@ public class Hero : Character
             {
                 return swordCount > 1;
             }
+
             var def = DefsFacade.I.Items.Get(SelectedId);
             return def.HasTag(ItemTag.Throwable);
         }
     }
-    
+
     private bool CanUse
     {
         get
@@ -43,11 +45,10 @@ public class Hero : Character
             return def.HasTag(ItemTag.Usable);
         }
     }
-    
+
     private void Start()
     {
         _session = FindObjectOfType<GameSession>();
-        Health.SetHealth(_session.PlayerData.Hp.Value);
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
     }
@@ -56,13 +57,14 @@ public class Hero : Character
     {
         _session.PlayerData.Inventory.OnChanged -= OnInventoryChanged;
     }
-    
+
     private void OnInventoryChanged(string id, int value)
     {
         if (id == "Sword")
         {
             UpdateHeroWeaponStatus();
         }
+
         Debug.Log($"Inventory Changed: {id} {value}");
     }
 
@@ -155,11 +157,17 @@ public class Hero : Character
         var throwswordcount = _throwComboSwordsCount;
         while (throwswordcount > 0)
         {
-            if (throwableValue > 0)
+            if (throwableValue > 0 && throwableId == "Sword" && swordCount > 1)
             {
                 Debug.Log("throwableValue : " + throwableValue);
                 base.ThrowAttack(throwableDef.ProjectilePf);
-                //Animator.SetTrigger(ThrowAttackAnim);
+                _session.PlayerData.Inventory.Remove(throwableId, 1);
+                throwableValue--;
+            }
+            else if (throwableValue > 0 && throwableId != "Sword")
+            {
+                Debug.Log("throwableValue : " + throwableValue);
+                base.ThrowAttack(throwableDef.ProjectilePf);
                 _session.PlayerData.Inventory.Remove(throwableId, 1);
                 throwableValue--;
             }
@@ -182,13 +190,37 @@ public class Hero : Character
     {
         var usableId = SelectedId;
         var usableDef = DefsFacade.I.UsableItems.Get(usableId);
-        
-        if (hpPotionCount > 0 && CanUse)
+
+        if (CanUse)
         {
-            Health.ApplyHealing(2);
+            switch (usableDef.UsableItemType)
+            {
+                case UsableItemType.HealthPotion:
+                    _session.PlayerData.Hp.Value += (int) usableDef.Value;
+                    break;
+                case UsableItemType.SpeedPotion:
+                    _potionEffectDuration = usableDef.EffectTime;
+                    if (!_isSpeedPotionCrRunning)
+                    {
+                        StartCoroutine(SpeedPotionEffect(usableDef.Value));
+                    }
+
+                    break;
+            }
+
             Sound.Play("usepotion");
             _session.PlayerData.Inventory.Remove(usableId, 1);
         }
+    }
+
+    private IEnumerator SpeedPotionEffect(float value)
+    {
+        _isSpeedPotionCrRunning = true;
+        ChangeSpeedTo(value);
+        yield return new WaitForSeconds(_potionEffectDuration);
+        ChangeSpeedTo(-value);
+        _potionEffectDuration = 0f;
+        _isSpeedPotionCrRunning = false;
     }
 
     public void NextItem()

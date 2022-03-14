@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Character : MonoBehaviour
 {
@@ -84,7 +83,7 @@ public class Character : MonoBehaviour
 
     public void ChangeSpeedTo(float speed)
     {
-        _speed = speed;
+        _speed += speed;
     }
     
     public void UpdateSpriteDirection(Vector2 direction)

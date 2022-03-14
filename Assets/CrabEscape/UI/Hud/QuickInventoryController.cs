@@ -7,18 +7,14 @@ public class QuickInventoryController : MonoBehaviour
     [SerializeField] private InventoryItemWidget _prefab;
 
     private GameSession _session;
-    private InventoryAddComponent _inventoryAdd;
 
     private readonly CompositeDisposable _trash = new CompositeDisposable();
     private List<InventoryItemWidget> _createdItems = new List<InventoryItemWidget>();
 
     private void Start()
     {
-        _inventoryAdd = FindObjectOfType<InventoryAddComponent>();
         _session = FindObjectOfType<GameSession>();
         _trash.Retain(_session.QuickInventory.Subscribe(Rebuild));
-        _trash.Retain(_inventoryAdd.Subscribe(Rebuild));
-        //_inventoryAdd.OnChanged += Rebuild;
 
         Rebuild();
     }

@@ -13,4 +13,19 @@ MonoBehaviour:
   m_Name: UsableItems
   m_EditorClassIdentifier: 
   _items:
-  - _id: HpPotion
+  - _id: HpPotionSmall
+    _usableItemType: 0
+    _value: 2
+    _effectTime: 0
+  - _id: HpPotionMedium
+    _usableItemType: 0
+    _value: 5
+    _effectTime: 0
+  - _id: HpPotionBig
+    _usableItemType: 0
+    _value: 10
+    _effectTime: 0
+  - _id: SpeedPotionMedium
+    _usableItemType: 1
+    _value: 2
+    _effectTime: 5

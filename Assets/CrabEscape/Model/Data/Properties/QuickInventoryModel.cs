@@ -18,7 +18,6 @@ public class QuickInventoryModel
         Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
         
         _playerData.Inventory.OnChanged += OnInventoryChange;
-        Debug.Log(Inventory.Length);
     }
 
     public IDisposable Subscribe(Action call)
