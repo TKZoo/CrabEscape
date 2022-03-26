@@ -6,6 +6,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
 
     public PlayerData PlayerData => _playerData;
+    private readonly CompositeDisposable _trash = new CompositeDisposable();
     public QuickInventoryModel QuickInventory { get; private set; }
 
     private void Awake()
@@ -26,6 +27,7 @@ public class GameSession : MonoBehaviour
     private void InitModels()
     {
         QuickInventory = new QuickInventoryModel(PlayerData);
+        _trash.Retain(QuickInventory);
     }
 
     private void LoadHud()
@@ -44,5 +46,10 @@ public class GameSession : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void OnDestroy()
+    {
+        _trash.Dispose();
     }
 }

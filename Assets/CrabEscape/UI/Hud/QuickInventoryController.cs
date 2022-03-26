@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,5 +43,10 @@ public class QuickInventoryController : MonoBehaviour
         {
             _createdItems[i].gameObject.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _trash.Dispose();
     }
 }

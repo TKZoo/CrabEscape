@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class QuickInventoryModel
+public class QuickInventoryModel : IDisposable
 {
     private readonly PlayerData _playerData;
 
@@ -28,17 +28,18 @@ public class QuickInventoryModel
 
     private void OnInventoryChange(string id, int value)
     {
-        var indexFound = Array.FindIndex(Inventory, x => x.Id == id);
-        if (indexFound != -1)
-        {
-            Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
-            SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
-            OnChanged?.Invoke();
-        }
+        Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
+        SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
+        OnChanged?.Invoke();
     }
 
     public void SetNextItem()
     {
         SelectedIndex.Value = (int) Mathf.Repeat(SelectedIndex.Value + 1, Inventory.Length);
+    }
+
+    public void Dispose()
+    {
+        _playerData.Inventory.OnChanged -= OnInventoryChange;
     }
 }
