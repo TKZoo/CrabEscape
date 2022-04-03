@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e0a1e780b1069488b3a68afd336141, type: 3}
+  m_Name: lat
+  m_EditorClassIdentifier: 
+  _url: https://docs.google.com/spreadsheets/d/e/2PACX-1vTN8LMXTnj-o56mKJluzNzEkQoV54E-JvLSRoMTpbTQuHVTkXgE5_MBPQRxEpf2sy02TEru5Vr8kyI1/pub?gid=753308504&single=true&output=tsv
+  _localizationItems:
+  - Key: menu_title
+    Value: "Menu\r"
+  - Key: button_start
+    Value: "S\u0101kt\r"
+  - Key: button_options
+    Value: "Iestat\u012Bjumi\r"
+  - Key: button_exit
+    Value: "Beigt\r"
+  - Key: select_language
+    Value: "Izv\u0113l\u0113t\u0101 valoda {0}\r"
+  - Key: button_language
+    Value: "Main\u012Bt Valodu\r"
+  - Key: language_text
+    Value: Valoda

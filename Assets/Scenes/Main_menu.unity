@@ -803,6 +803,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 939550871312564829, guid: 6371c00f29a5d3d408b3c4da8a9823e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 939550871312564830, guid: 6371c00f29a5d3d408b3c4da8a9823e7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -816,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 939550871312564830, guid: 6371c00f29a5d3d408b3c4da8a9823e7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 939550871312564830, guid: 6371c00f29a5d3d408b3c4da8a9823e7,
         type: 3}
