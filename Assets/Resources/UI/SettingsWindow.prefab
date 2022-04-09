@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Language
+  m_text: 'Change Language
 
 '
   m_isRightToLeft: 0
@@ -1635,7 +1635,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 53.800003, y: 13.610001}
+  m_SizeDelta: {x: 64.43, y: 13.610001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1814712401141088671
 CanvasRenderer:
@@ -2075,7 +2075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Language
+  m_text: 'Change Language
 
 '
   m_isRightToLeft: 0
