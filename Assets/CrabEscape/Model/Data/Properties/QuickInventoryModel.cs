@@ -28,9 +28,13 @@ public class QuickInventoryModel : IDisposable
 
     private void OnInventoryChange(string id, int value)
     {
-        Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
-        SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
-        OnChanged?.Invoke();
+        var indexFound = Array.FindIndex(Inventory, x => x.Id == id);
+        if (indexFound != -1)
+        {
+            Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
+            SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
+            OnChanged?.Invoke();
+        }
     }
 
     public void SetNextItem()

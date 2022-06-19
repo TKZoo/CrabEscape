@@ -231,6 +231,7 @@ MonoBehaviour:
   _typingSfx: {fileID: 8300000, guid: cd1bb1e2d2d80604f86686a04f965bce, type: 3}
   _openSfx: {fileID: 8300000, guid: 8b62b86df1a9d714a9535e266553d69e, type: 3}
   _closeSfx: {fileID: 8300000, guid: 0fb3a17124d5f9d4895eb8b9e0a1bc90, type: 3}
+  _isDialogActive: 0
 --- !u!1 &652071074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1404,7 @@ GameObject:
   - component: {fileID: 1903243508}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1487,7 +1488,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

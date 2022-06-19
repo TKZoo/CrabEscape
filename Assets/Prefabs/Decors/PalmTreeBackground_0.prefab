@@ -47,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 6
-  clips:
-  - _clipName: idle
+  _clips:
+  - _clipName: 
     _sprites:
     - {fileID: 8683632313750085214, guid: 6f493dd3006ec6e47b56f6acdef3664a, type: 3}
     - {fileID: 262518517033693272, guid: 6f493dd3006ec6e47b56f6acdef3664a, type: 3}

@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected SpawnPrefabListComponent _spawnPf;
     [SerializeField] protected Cooldown _throwCooldown;
     [SerializeField] protected PlaySoundComponent Sound;
-    [SerializeField] private SpawnPrefabComponent _throwSpawner;
+    [SerializeField] protected SpawnPrefabComponent _throwSpawner;
 
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;

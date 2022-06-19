@@ -152,7 +152,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""08c1aa1c-ddab-4404-afb6-5bd0cdc86386"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -174,7 +174,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e6e0d313-0bcd-405b-b2d0-cd435646aadf"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -196,7 +196,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""79e55122-a731-42cb-b284-11b72133d926"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

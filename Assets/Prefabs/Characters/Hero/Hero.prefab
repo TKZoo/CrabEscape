@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 2036483513687078147}
   - component: {fileID: 2049969154}
   - component: {fileID: 425913311}
+  - component: {fileID: -8044679359624621660}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -443,10 +444,11 @@ MonoBehaviour:
     m_Bits: 768
   _groundCheck: {fileID: 324642737142285452}
   _attackRange: {fileID: 1825459535}
-  _particles: {fileID: 2036483513687078147}
+  _spawnPf: {fileID: 2036483513687078147}
   _throwCooldown:
     _value: 0.9
-  Sound: {fileID: 0}
+  Sound: {fileID: 2049969154}
+  _throwSpawner: {fileID: 1825459536}
   _interactionCheck: {fileID: 2124196059}
   _fallHeight: 3
   _armed: {fileID: 9100000, guid: cdf64d7083299f449b5bea529c4db9d9, type: 2}
@@ -501,8 +503,8 @@ MonoBehaviour:
   _onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: -8044679359624621660}
+        m_TargetAssemblyTypeName: ReloadLevelComponent, Assembly-CSharp
         m_MethodName: Reload
         m_Mode: 1
         m_Arguments:
@@ -528,6 +530,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Hp:
+    _value: 0
 --- !u!95 &324642737315750770
 Animator:
   serializedVersion: 3
@@ -642,3 +646,15 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324642737315750778}
   m_Enabled: 1
+--- !u!114 &-8044679359624621660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324642737315750778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119145842f28bb24daf77c4defff8d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,6 +6,11 @@ public class PlaySoundComponent : MonoBehaviour
     [SerializeField] private AudioSource _source;
     [SerializeField] private AudioData[] _sounds;
 
+    private void Awake()
+    {
+        _source = AudioUtils.FindSfxSource();
+    }
+
     public void Play(string id)
     {
         foreach (var audioData in _sounds)

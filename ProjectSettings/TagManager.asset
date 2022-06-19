@@ -10,6 +10,7 @@ TagManager:
   - EnemyTongue
   - Collectibles
   - SfxAudioSource
+  - Canvas
   layers:
   - Default
   - TransparentFX

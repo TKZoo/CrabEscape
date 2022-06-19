@@ -1,26 +1,67 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private string _defaultCheckPoint;
 
     public PlayerData PlayerData => _playerData;
     private readonly CompositeDisposable _trash = new CompositeDisposable();
     public QuickInventoryModel QuickInventory { get; private set; }
 
+    private readonly List<string> _checkpoints = new List<string>();
+
     private void Awake()
     {
-        LoadHud();
-        
-        if (IsSessionExist())
+        var existsSession = GetExistsSession();
+        if (existsSession != null)
         {
+            existsSession.StartSession(_defaultCheckPoint);
             Destroy(gameObject);
         }
         else
         {
             InitModels();
             DontDestroyOnLoad(this);
+            StartSession(_defaultCheckPoint);
+        }
+    }
+
+    private void StartSession(string defaultCheckPoint)
+    {
+        SetChecked(defaultCheckPoint);
+        LoadHud();
+        SpawnHero();
+    }
+
+    private void SpawnHero()
+    {
+        var checkpoints =  FindObjectsOfType<CheckPointComponent>();
+        var lastCheckPoint = _checkpoints.Last();
+        foreach (var checkPoint in checkpoints)
+        {
+            if (checkPoint.Id == lastCheckPoint)
+            {
+                checkPoint.SpawnHero();
+                break;
+            }
+        }
+    }
+    
+    public bool IsChecked(string id)
+    {
+        return _checkpoints.Contains(id);
+    }
+
+    public void SetChecked(string id)
+    {
+        if (!_checkpoints.Contains(id))
+        {
+            _checkpoints.Add(id);
+            Debug.Log(_checkpoints.Last());
         }
     }
 
@@ -35,17 +76,18 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
     }
 
-    private bool IsSessionExist()
+    private GameSession GetExistsSession()
     {
         var sessions = FindObjectsOfType<GameSession>();
         foreach (var gameSession in sessions)
         {
             if (gameSession != this)
             {
-                return true;
+                return gameSession;
             }
         }
-        return false;
+
+        return null;
     }
 
     private void OnDestroy()

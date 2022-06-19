@@ -5,7 +5,7 @@ public class InGameMenu : MainMenuWindow
     public void OnShowInGameMenu()
     {
         var window = Resources.Load<GameObject>("UI/InGameMenuWindow");
-        var canvas = FindObjectOfType<Canvas>();
+        var canvas = GameObject.FindGameObjectWithTag("Canvas");
         Instantiate(window, canvas.transform);
         Destroy(gameObject);
     }

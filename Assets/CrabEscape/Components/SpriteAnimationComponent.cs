@@ -37,7 +37,7 @@ public class SpriteAnimationComponent : MonoBehaviour
             }
             else
             {
-                _isPlaying = false;
+                //_isPlaying = false;
                 _clips[_currentClip].OnComplete?.Invoke();
                 if (_clips[_currentClip].AllowNextClip)
                 {
