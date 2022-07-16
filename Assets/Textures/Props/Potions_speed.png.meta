@@ -99,6 +99,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -700,6 +701,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Potions_speed_13: -742562150004053959
+      Potions_speed_4: 5261414087591494884
+      Potions_speed_5: 8588447157430081783
+      Potions_speed_19: -2415774102869156820
+      Potions_speed_1: -5873473019188948581
+      Potions_speed_3: -807615156997760171
+      Potions_speed_8: -3533131716421550733
+      Potions_speed_9: -1174952772149310841
+      Potions_speed_14: -5576817002820041260
+      Potions_speed_18: -3170068161661750446
+      Potions_speed_0: -386900788528887507
+      Potions_speed_10: 7554449415556276065
+      Potions_speed_23: -568106784514667954
+      Potions_speed_16: 8615219581436423973
+      Potions_speed_20: 3808941063593803447
+      Potions_speed_21: -3217663434594205426
+      Potions_speed_22: 1363570212856787534
+      Potions_speed_6: 226504273400090734
+      Potions_speed_24: 1108666951810968764
+      Potions_speed_12: -1106615185017415174
+      Potions_speed_7: 2881500702318566315
+      Potions_speed_2: 1761823270275497893
+      Potions_speed_15: 965868146384048296
+      Potions_speed_11: 5686066256705918548
+      Potions_speed_17: 4521079320048656854
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

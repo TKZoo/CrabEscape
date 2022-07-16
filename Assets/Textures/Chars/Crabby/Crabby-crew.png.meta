@@ -51,6 +51,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -316,6 +317,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Crabby-crew_0: 1237259564474456676
+      Crabby-crew_8: 3505128172380155607
+      Crabby-crew_4: 6233811717460821285
+      Crabby-crew_5: 8388748351631217864
+      Crabby-crew_1: 6781877334341790625
+      Crabby-crew_2: -7988024427863313899
+      Crabby-crew_6: -565611628317543566
+      Crabby-crew_7: 6729741187243169404
+      Crabby-crew_3: -8339802707405750284
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

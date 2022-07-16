@@ -305,6 +305,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -314,8 +316,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -336,9 +338,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -2364,6 +2369,101 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      indoor_76: -4922639002770483139
+      indoor_64: 5043175742351087347
+      indoor_88: 2627702649544701440
+      indoor_25: -5084833636219364753
+      indoor_40: 2594649788531324403
+      indoor_58: 6585701727498438757
+      indoor_85: -3805751383599110050
+      indoor_26: 6259483929877044520
+      indoor_93: 5354259336513083314
+      indoor_89: 5751728206926569623
+      indoor_43: -238381958801282089
+      indoor_66: -5850166024549380566
+      indoor_52: -6959963516012356137
+      indoor_92: 8709258281805957891
+      indoor_21: 8751143914726439614
+      indoor_55: 1963646570684493972
+      indoor_7: 1295234896928447855
+      indoor_35: 5709826801312459373
+      indoor_74: -7278560207515168339
+      indoor_86: -7406881643822211795
+      indoor_51: -8612543656553693579
+      indoor_72: -932843930980265364
+      indoor_82: -8160682963976161980
+      indoor_60: -2740090150638831045
+      indoor_9: -8945887338537756449
+      indoor_42: -7434435943689790463
+      indoor_14: -5430759348850144933
+      indoor_2: 5291829340013501150
+      indoor_63: 8810287822056228354
+      indoor_49: -8546522450380351855
+      indoor_11: -8765851768298953373
+      indoor_4: -2717779429621646964
+      indoor_16: -8899719962528285542
+      indoor_13: 4796776436160181384
+      indoor_0: 2037705609780158108
+      indoor_81: 6320717475578356907
+      indoor_33: 654331458269538614
+      indoor_36: -3175603381214537603
+      indoor_77: 1252463489842338241
+      indoor_61: 4472037135317444270
+      indoor_31: 1145922944314539693
+      indoor_10: -5151458352144272408
+      indoor_44: -6548910108061787615
+      indoor_75: -5657362450009597701
+      indoor_22: 1562782377210923023
+      indoor_23: -1681676715898016272
+      indoor_68: 6772231772272605688
+      indoor_27: -8374940817900895911
+      indoor_28: 4413427062387195671
+      indoor_53: -1800410653148384915
+      indoor_91: -2417208726676922545
+      indoor_80: 2341996331806493225
+      indoor_54: 4368650948226563512
+      indoor_47: -2050741517044694168
+      indoor_39: -7962455202544676584
+      indoor_62: 606741403804245620
+      indoor_30: 3387875622174978288
+      indoor_67: 3626391873710316442
+      indoor_65: -2060871159317438176
+      indoor_69: -1801513132739668326
+      indoor_24: -2320106369363416089
+      indoor_38: 6932991753082344886
+      indoor_78: 5814929032443678134
+      indoor_73: -8711071433319254145
+      indoor_20: -946136473501327748
+      indoor_5: 5836684132198637021
+      indoor_56: -5328862557329474155
+      indoor_71: -3442224425189600978
+      indoor_12: -7619084037363062509
+      indoor_59: 53362161956547844
+      indoor_50: 7596920452878247136
+      indoor_18: 4177191406315687900
+      indoor_15: -5139823303626037118
+      indoor_37: -7548855707783141247
+      indoor_1: 3140530033283691388
+      indoor_83: 830932557799343809
+      indoor_84: 2062315230808389935
+      indoor_17: 7101800934421854682
+      indoor_32: 2507111465787011296
+      indoor_46: 341537123485003929
+      indoor_87: 9216925103190343549
+      indoor_57: 6768128148477501077
+      indoor_48: -86063827008491788
+      indoor_6: -9221000154663767849
+      indoor_8: 5747350708903968324
+      indoor_70: -861134693597747504
+      indoor_34: 4083031531868569663
+      indoor_45: 3382529651386421155
+      indoor_90: -9017302121164489259
+      indoor_29: 1316990926786723534
+      indoor_3: 2636349479704555225
+      indoor_19: -7632378591658232634
+      indoor_79: 3947390365369117681
+      indoor_41: 6833308700845117305
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

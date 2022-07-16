@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected PlaySoundComponent Sound;
     [SerializeField] protected SpawnPrefabComponent _throwSpawner;
 
+    private protected GameSession _session;
     protected Rigidbody2D Rigidbody;
     protected Vector2 Direction;
     protected Animator Animator;
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
+        _session = FindObjectOfType<GameSession>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         Health = GetComponent<HealthComponent>();

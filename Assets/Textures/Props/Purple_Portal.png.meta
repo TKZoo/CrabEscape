@@ -89,6 +89,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -98,8 +100,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -120,9 +122,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -636,6 +641,29 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Purple_Portal_16: -8214833676491028033
+      Purple_Portal_11: -350088299774483833
+      Purple_Portal_9: -98410918202320850
+      Purple_Portal_8: -6811843689389022964
+      Purple_Portal_2: 6598869828543077294
+      Purple_Portal_1: 4270943063897028017
+      Purple_Portal_18: 6467512242419563801
+      Purple_Portal_14: -1187072141491894321
+      Purple_Portal_10: -1849721157110297540
+      Purple_Portal_7: -4080105300931009543
+      Purple_Portal_13: -2156772495564824204
+      Purple_Portal_15: 2941649816586535651
+      Purple_Portal_6: 1663970529538579223
+      Purple_Portal_20: 1868025484596372180
+      Purple_Portal_19: 2274361702943621672
+      Purple_Portal_17: -7622779286792032179
+      Purple_Portal_5: -6032861159060212454
+      Purple_Portal_21: 174009587832936703
+      Purple_Portal_0: -4605583769066147293
+      Purple_Portal_3: 7400241605856209901
+      Purple_Portal_4: -4679487668938914753
+      Purple_Portal_12: -4263626735961218305
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

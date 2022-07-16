@@ -99,6 +99,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -700,6 +701,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Potions_hp_23: -3533370917776105164
+      Potions_hp_6: -2422975533524181131
+      Potions_hp_18: -1157211081082007066
+      Potions_hp_2: 5335704725100066574
+      Potions_hp_10: 5304078531484558683
+      Potions_hp_22: -552465321534329804
+      Potions_hp_19: -3531837619941318673
+      Potions_hp_4: 3887316850192366821
+      Potions_hp_13: 3291906363046695007
+      Potions_hp_14: 3399796981702735517
+      Potions_hp_9: 1949780863282187142
+      Potions_hp_12: 4557296642759135101
+      Potions_hp_17: -2037303169461876531
+      Potions_hp_0: -5424018080786991329
+      Potions_hp_8: -2004261864805408109
+      Potions_hp_15: -680926917735160016
+      Potions_hp_24: 302852234531502407
+      Potions_hp_20: 1005452094095497021
+      Potions_hp_11: 3257323672636324981
+      Potions_hp_16: -847293010008122772
+      Potions_hp_5: -4550005190465587100
+      Potions_hp_3: -7117188726804933054
+      Potions_hp_1: -7489782808709783694
+      Potions_hp_7: -5056091655110497624
+      Potions_hp_21: 3017296447035033951
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
