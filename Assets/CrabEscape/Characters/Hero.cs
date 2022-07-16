@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hero : Character
 {
+    private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
     [SerializeField] private CheckCircleOverlapComponent _interactionCheck;
     [SerializeField] private float _fallHeight;
     [SerializeField] private AnimatorController _armed;
@@ -13,24 +14,30 @@ public class Hero : Character
 
     [SerializeField] private Projectile _projectile;
 
-    private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
-
-    private GameSession _session;
     private bool _allowDoubleJump;
+    private bool _isSpeedPotionCrRunning;
     private float _potionEffectDuration;
-    private bool _isSpeedPotionCrRunning = false;
     private int swordCount => _session.PlayerData.Inventory.Count("Sword");
 
     private string SelectedId => _session.QuickInventory.SelectedItem.Id;
+
+    private bool HaveItemToSelect
+    {
+        get
+        {
+            if (_session.QuickInventory.SelectedItem == null) return false;
+
+            return true;
+        }
+    }
 
     private bool CanThrow
     {
         get
         {
-            if (SelectedId == "Sword")
-            {
-                return swordCount > 1;
-            }
+            if (!HaveItemToSelect) return false;
+
+            if (SelectedId == "Sword") return swordCount > 1;
 
             var def = DefsFacade.I.Items.Get(SelectedId);
             return def.HasTag(ItemTag.Throwable);
@@ -41,16 +48,26 @@ public class Hero : Character
     {
         get
         {
-            var def = DefsFacade.I.Items.Get(SelectedId);
-            return def.HasTag(ItemTag.Usable);
+            if (HaveItemToSelect)
+            {
+                var def = DefsFacade.I.Items.Get(SelectedId);
+                return def.HasTag(ItemTag.Usable);
+            }
+
+            return false;
         }
     }
 
     private void Start()
     {
-        _session = FindObjectOfType<GameSession>();
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        FallHeightCheck();
     }
 
     private void OnDestroy()
@@ -60,18 +77,9 @@ public class Hero : Character
 
     private void OnInventoryChanged(string id, int value)
     {
-        if (id == "Sword")
-        {
-            UpdateHeroWeaponStatus();
-        }
+        if (id == "Sword") UpdateHeroWeaponStatus();
 
         Debug.Log($"Inventory Changed: {id} {value}");
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        FallHeightCheck();
     }
 
     protected override float CalculateYVelocity()
@@ -104,7 +112,7 @@ public class Hero : Character
 
     private void FallHeightCheck()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,
+        var hit = Physics2D.Raycast(transform.position,
             Vector2.down, 10, _groundLayerCheck);
         if (hit.collider != null && !IsGrounded)
         {
@@ -188,22 +196,19 @@ public class Hero : Character
 
     public void QuickSlotUse()
     {
-        var usableId = SelectedId;
-        var usableDef = DefsFacade.I.UsableItems.Get(usableId);
-
-        if (CanUse)
+        if (CanUse && HaveItemToSelect)
         {
+            var usableId = SelectedId;
+            var usableDef = DefsFacade.I.UsableItems.Get(usableId);
+
             switch (usableDef.UsableItemType)
             {
                 case UsableItemType.HealthPotion:
-                    _session.PlayerData.Hp.Value += (int) usableDef.Value;
+                    _session.PlayerData.Hp.Value += (int)usableDef.Value;
                     break;
                 case UsableItemType.SpeedPotion:
                     _potionEffectDuration = usableDef.EffectTime;
-                    if (!_isSpeedPotionCrRunning)
-                    {
-                        StartCoroutine(SpeedPotionEffect(usableDef.Value));
-                    }
+                    if (!_isSpeedPotionCrRunning) StartCoroutine(SpeedPotionEffect(usableDef.Value));
 
                     break;
             }
