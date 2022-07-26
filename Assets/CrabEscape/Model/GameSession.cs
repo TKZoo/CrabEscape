@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -88,6 +89,21 @@ public class GameSession : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void SaveGame()
+    {
+        
+    }
+
+    public void LoadGame()
+    {
+        
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
     }
 
     private void OnDestroy()
