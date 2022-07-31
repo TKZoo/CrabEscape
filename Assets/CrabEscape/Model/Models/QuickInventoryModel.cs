@@ -21,6 +21,8 @@ public class QuickInventoryModel : IDisposable
         }
     }
 
+    public ItemDef SelectedDef => DefsFacade.I.Items.Get(SelectedItem?.Id);
+    
     public QuickInventoryModel(PlayerData playerData)
     {
         _playerData = playerData;

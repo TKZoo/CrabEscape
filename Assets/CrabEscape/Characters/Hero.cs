@@ -60,6 +60,7 @@ public class Hero : Character
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath);
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
     }
@@ -194,28 +195,44 @@ public class Hero : Character
         }
     }
 
+    private bool IsSelectedItem(ItemTag tag)
+    {
+        return _session.QuickInventory.SelectedDef.HasTag(tag);
+    }
+    
     public void QuickSlotUse()
     {
+        if (IsSelectedItem(ItemTag.Throwable))
+        {
+            //Do Throw
+            //Also need detect combothrow attack
+        }
+        
         if (CanUse && HaveItemToSelect)
         {
-            var usableId = SelectedId;
-            var usableDef = DefsFacade.I.UsableItems.Get(usableId);
-
-            switch (usableDef.UsableItemType)
-            {
-                case UsableItemType.HealthPotion:
-                    _session.PlayerData.Hp.Value += (int)usableDef.Value;
-                    break;
-                case UsableItemType.SpeedPotion:
-                    _potionEffectDuration = usableDef.EffectTime;
-                    if (!_isSpeedPotionCrRunning) StartCoroutine(SpeedPotionEffect(usableDef.Value));
-
-                    break;
-            }
-
-            Sound.Play("usepotion");
-            _session.PlayerData.Inventory.Remove(usableId, 1);
+            UseItem();
         }
+    }
+
+    private void UseItem()
+    {
+        var usableId = SelectedId;
+        var usableDef = DefsFacade.I.UsableItems.Get(usableId);
+
+        switch (usableDef.UsableItemType)
+        {
+            case UsableItemType.HealthPotion:
+                _session.PlayerData.Hp.Value += (int)usableDef.Value;
+                break;
+            case UsableItemType.SpeedPotion:
+                _potionEffectDuration = usableDef.EffectTime;
+                if (!_isSpeedPotionCrRunning) StartCoroutine(SpeedPotionEffect(usableDef.Value));
+
+                break;
+        }
+
+        Sound.Play("usepotion");
+        _session.PlayerData.Inventory.Remove(usableId, 1);
     }
 
     private IEnumerator SpeedPotionEffect(float value)

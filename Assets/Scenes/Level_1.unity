@@ -2323,7 +2323,10 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
+    ModeOverride: 0
     LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8048,6 +8051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1073303548}
   - component: {fileID: 1073303549}
+  - component: {fileID: 1073303550}
   m_Layer: 0
   m_Name: GameSession
   m_TagString: Untagged
@@ -8084,10 +8088,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData:
     _inventory:
-      _inventory: []
+      _inventory:
+      - Id: Sword
+        Value: 6
+      - Id: PearlProjectile
+        Value: 6
     Hp:
       _value: 0
   _defaultCheckPoint: Level1_cp1
+--- !u!114 &1073303550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073303547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b5e1b559634f768b0dbec5a085c07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1076204933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4801564348178091886, guid: 7c85e1afb5779eb49942775555ac47f4,
@@ -18373,11 +18393,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935438521}
     m_Modifications:
-    - target: {fileID: 2822859926650255149, guid: 15b1cc858e12655478538e07d8e044b2,
-        type: 3}
-      propertyPath: _totalPrefabs
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7797891030484767400, guid: 15b1cc858e12655478538e07d8e044b2,
         type: 3}
       propertyPath: m_Name
@@ -18920,12 +18935,12 @@ PrefabInstance:
     - target: {fileID: 6521742604930517710, guid: b495d82c3ddfba2459786a1f25ee8026,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.57
+      value: -2.506
       objectReference: {fileID: 0}
     - target: {fileID: 6521742604930517710, guid: b495d82c3ddfba2459786a1f25ee8026,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.36
+      value: 3.368
       objectReference: {fileID: 0}
     - target: {fileID: 6521742604930517710, guid: b495d82c3ddfba2459786a1f25ee8026,
         type: 3}

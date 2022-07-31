@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthComponent : MonoBehaviour
+public class HealthComponent : MonoBehaviour, ISaveable
 {
     [SerializeField] private int _health;
     [SerializeField] private UnityEvent _onTakeDamage;
@@ -59,5 +59,25 @@ public class HealthComponent : MonoBehaviour
     public class HealthChangeEvent : UnityEvent<int>
     {
 
+    }
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            health = _health
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        Hp.Value = saveData.health;
+        Debug.Log(Hp.Value);
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public int health;
     }
 }

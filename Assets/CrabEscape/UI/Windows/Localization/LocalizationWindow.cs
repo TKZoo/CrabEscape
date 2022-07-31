@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using PixelCrew.UI.Widgets;
 using UnityEngine;
 
 public class LocalizationWindow : AnimatedWindow

@@ -1,15 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [Header("Params")] 
-    [SerializeField] private bool _invertSpriteScale;
+    [Header("Params")] [SerializeField] private bool _invertSpriteScale;
     [SerializeField] private float _speed;
     [SerializeField] protected float _jumpImpulse;
     [SerializeField] private float _damageJumpImpulseY;
 
-    [Header("Checkers")]
-    [SerializeField] public LayerMask _groundLayerCheck;
+    [Header("Checkers")] [SerializeField] public LayerMask _groundLayerCheck;
     [SerializeField] public LayerCheck _groundCheck;
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
@@ -26,7 +25,7 @@ public class Character : MonoBehaviour
     protected bool IsGrounded;
     protected bool IsJumping;
     protected bool IsFalling;
-    
+
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
@@ -54,7 +53,7 @@ public class Character : MonoBehaviour
     {
         Health.Hp.Value = currentHealth;
     }
-    
+
     public void SetDirection(Vector2 direction)
     {
         Direction = direction;
@@ -64,6 +63,7 @@ public class Character : MonoBehaviour
     {
         return Direction;
     }
+
     protected virtual void Update()
     {
         IsGrounded = _groundCheck.IsTouchingLayer;
@@ -87,7 +87,7 @@ public class Character : MonoBehaviour
     {
         _speed += speed;
     }
-    
+
     public void UpdateSpriteDirection(Vector2 direction)
     {
         var scaleMultyplier = _invertSpriteScale ? -1 : 1;
@@ -110,6 +110,7 @@ public class Character : MonoBehaviour
         {
             IsJumping = true;
         }
+
         if (isJumpPressing)
         {
             IsJumping = true;
@@ -132,23 +133,23 @@ public class Character : MonoBehaviour
         {
             yVelocity += _jumpImpulse;
             DoJumpVfx();
-
         }
+
         return yVelocity;
     }
 
     protected virtual void FootstepVfx()
     {
-       _spawnPf.Spawn("Run");
-       Sound.Play("footstep");
+        _spawnPf.Spawn("Run");
+        Sound.Play("footstep");
     }
-    
+
     protected virtual void DoJumpVfx()
     {
         _spawnPf.Spawn("Jump");
         Sound.Play("jump");
     }
-    
+
     public virtual void TakeDamage()
     {
         IsJumping = false;
@@ -161,7 +162,7 @@ public class Character : MonoBehaviour
         Animator.SetTrigger(Died);
         gameObject.tag = "Untagged";
     }
-    
+
     public virtual void Attack()
     {
         Animator.SetTrigger(AttackAnim);
@@ -173,19 +174,17 @@ public class Character : MonoBehaviour
         _attackRange.Check();
         Sound.Play("mele");
     }
-    
+
     public void OnThrowAttack()
     {
         _throwSpawner.SpawnPrefab();
         //_spawnPf.Spawn("ThrowAttack");
         Sound.Play("range");
     }
-    
+
     public virtual void ThrowAttack(GameObject pf)
     {
         _throwSpawner.SetPrefab(pf);
         Animator.SetTrigger(ThrowAttackAnim);
     }
-
-    
 }
