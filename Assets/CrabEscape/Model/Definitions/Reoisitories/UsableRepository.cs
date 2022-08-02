@@ -7,7 +7,7 @@ public class UsableRepository : DefRepository<UsableItemDef>
 }
 
 [Serializable]
-public struct UsableItemDef : IHaveID
+public struct UsableItemDef : IHaveId
 {
     [InventoryId] [SerializeField] private string _id;
     [SerializeField] private UsableItemType _usableItemType;

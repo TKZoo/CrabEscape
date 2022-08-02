@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Defs/Perks", fileName = "Perks")]
 public class PerkRepository : DefRepository<PerkDef>
 {
 }
 
 [Serializable]
-public struct PerkDef : IHaveID
+public struct  PerkDef : IHaveId
 {
     [SerializeField] private string _id;
     [SerializeField] private string _info;

@@ -8089,10 +8089,12 @@ MonoBehaviour:
   _playerData:
     _inventory:
       _inventory:
-      - Id: Sword
-        Value: 6
-      - Id: PearlProjectile
-        Value: 6
+      - Id: GreenDiamond
+        Value: 20
+    Perks:
+      _used:
+        _value: 
+      _unlocked: []
     Hp:
       _value: 0
   _defaultCheckPoint: Level1_cp1

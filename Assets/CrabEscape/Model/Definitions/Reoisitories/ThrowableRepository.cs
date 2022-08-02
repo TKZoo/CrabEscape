@@ -7,7 +7,7 @@ public class ThrowableRepository : DefRepository<ThrowableItemDef>
 }
 
 [Serializable]
-public struct ThrowableItemDef : IHaveID
+public struct ThrowableItemDef : IHaveId
 {
     [InventoryId] [SerializeField] private string _id;
     [SerializeField] private GameObject _projectilePf;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a155ca1653671945ab30e665bcf816f, type: 3}
   m_Name: Items
   m_EditorClassIdentifier: 
-  _items:
+  _collection:
   - _id: Coin
     _icon: {fileID: -2322180950842035098, guid: f33e77b598982914a81eaf73ee511885,
       type: 3}
@@ -40,3 +40,6 @@ MonoBehaviour:
   - _id: SpeedPotionMedium
     _icon: {fileID: 2881500702318566315, guid: 205f45edf0d11424793fdd6a30c5c51a, type: 3}
     _tags: 0000000001000000
+  - _id: GreenDiamond
+    _icon: {fileID: 21300000, guid: 09e3cc14cada44e9ea18cb6d673c85e7, type: 3}
+    _tags: 00000000

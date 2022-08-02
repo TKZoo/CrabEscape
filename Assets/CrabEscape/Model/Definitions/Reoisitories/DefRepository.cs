@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DefRepository<TDefType> : ScriptableObject where TDefType : IHaveID
+public class DefRepository<TDefType> : ScriptableObject where TDefType : IHaveId
 {
     [SerializeField] protected TDefType[] _collection;
 
@@ -19,4 +20,6 @@ public class DefRepository<TDefType> : ScriptableObject where TDefType : IHaveID
         }
         return default;
     }
+
+    public TDefType[] All => new List<TDefType>(_collection).ToArray();
 }

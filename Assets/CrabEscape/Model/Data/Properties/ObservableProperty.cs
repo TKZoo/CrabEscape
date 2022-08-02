@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ObservableProperty<TPropertyType>
 {
-    [SerializeField] private TPropertyType _value;
+    [SerializeField] protected TPropertyType _value;
 
     public delegate void OnPropertyChanged(TPropertyType newValue, TPropertyType oldValue);
     
@@ -27,7 +27,7 @@ public class ObservableProperty<TPropertyType>
         get => _value;
         set
         {
-            var isSame = _value.Equals(value);
+            var isSame = _value?.Equals(value) ?? false;
             if(isSame) return;
             var oldValue = _value;
 

@@ -12,6 +12,7 @@ public class DefsFacade : ScriptableObject
     public ItemsRepository Items => _items;
     public ThrowableRepository ThrowableItems => _throwableItems;
     public UsableRepository UsableItems => _usableItems;
+    public PerkRepository Perks => _perks;
     
     public PlayerDef Player => _player;
 

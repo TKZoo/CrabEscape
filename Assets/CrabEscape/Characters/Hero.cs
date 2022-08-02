@@ -101,7 +101,7 @@ public class Hero : Character
 
     protected override float CalculateJumpVelocity(float yVelocity)
     {
-        if (!IsGrounded && _allowDoubleJump && IsJumping)
+        if (!IsGrounded && _allowDoubleJump && IsJumping && _session.PerksModel.IsDoubleJumpEnabled)
         {
             DoJumpVfx();
             _allowDoubleJump = false;
@@ -188,7 +188,7 @@ public class Hero : Character
 
     public void ThrowComboAttack()
     {
-        if (CanThrow)
+        if (CanThrow && _session.PerksModel.IsSuperThrowEnabled)
         {
             _projectile.SetRigidBodyToKinematic();
             StartCoroutine(DoThrowComboAttack());

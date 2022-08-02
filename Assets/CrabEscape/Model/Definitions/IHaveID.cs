@@ -1,4 +1,4 @@
-public interface IHaveID
+public interface IHaveId
 {
     string Id { get; }
 }

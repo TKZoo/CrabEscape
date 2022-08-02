@@ -11,7 +11,7 @@ public class ItemsRepository : DefRepository<ItemDef>
 }
 
 [Serializable]
-public struct ItemDef : IHaveID
+public struct ItemDef : IHaveId
 {
     [SerializeField] private string _id;
     [SerializeField] private Sprite _icon;

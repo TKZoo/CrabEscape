@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class PerksData
 {
     [SerializeField] private StringProperty _used = new StringProperty();
