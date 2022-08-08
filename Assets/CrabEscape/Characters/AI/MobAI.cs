@@ -62,7 +62,7 @@ public class MobAI : MonoBehaviour
     {
         LookAtTarget();
         _particles.Spawn("Exclamation");
-        _character.ChangeSpeedTo(2.6f);
+        _character.additionalSpeedValue = 2.6f;
         yield return new WaitForSeconds(_timeToReact);
 
         StartState(GoToTarget());
@@ -93,7 +93,7 @@ public class MobAI : MonoBehaviour
         
         _character.SetDirection(Vector2.zero);
         _particles.Spawn("MissTarget");
-        _character.ChangeSpeedTo(1.2f);
+        _character.additionalSpeedValue = 1.2f;
         yield return new WaitForSeconds(_timeToReact);
         
         StartState(_patrol.DoPatrol());

@@ -8,7 +8,7 @@ public class MainMenuWindow : AnimatedWindow
 
     public void OnShowSettings()
     {
-        var window = Resources.Load<GameObject>("UI/SettingsWindow");
+        var window = Resources.Load<GameObject>("UI/ManagePerkWindow"); //"UI/SettingsWindow"
         var canvas = FindObjectOfType<Canvas>();
         Instantiate(window, canvas.transform);
         Close();

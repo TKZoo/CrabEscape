@@ -12,6 +12,7 @@ public class GameSession : MonoBehaviour
     private readonly CompositeDisposable _trash = new CompositeDisposable();
     public QuickInventoryModel QuickInventory { get; private set; }
     public PerksModel PerksModel { get; private set; }
+    public PlayerStatsModel StatsModel { get; private set; }
 
     private readonly List<string> _checkpoints = new List<string>();
 
@@ -40,7 +41,7 @@ public class GameSession : MonoBehaviour
 
     private void SpawnHero()
     {
-        var checkpoints =  FindObjectsOfType<CheckPointComponent>();
+        var checkpoints = FindObjectsOfType<CheckPointComponent>();
         var lastCheckPoint = _checkpoints.Last();
         foreach (var checkPoint in checkpoints)
         {
@@ -51,7 +52,7 @@ public class GameSession : MonoBehaviour
             }
         }
     }
-    
+
     public bool IsChecked(string id)
     {
         return _checkpoints.Contains(id);
@@ -70,9 +71,10 @@ public class GameSession : MonoBehaviour
     {
         QuickInventory = new QuickInventoryModel(_playerData);
         _trash.Retain(QuickInventory);
-
         PerksModel = new PerksModel(_playerData);
         _trash.Retain(PerksModel);
+        StatsModel = new PlayerStatsModel(_playerData);
+        _trash.Retain(StatsModel);
     }
 
     private void LoadHud()
@@ -96,12 +98,10 @@ public class GameSession : MonoBehaviour
 
     public void SaveGame()
     {
-        
     }
 
     public void LoadGame()
     {
-        
     }
 
     private void OnApplicationQuit()

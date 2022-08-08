@@ -12,20 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85da8fce5af4ec5419bd702915270a4d, type: 3}
   m_Name: Usable
   m_EditorClassIdentifier: 
-  _items:
-  - _id: HpPotionSmall
-    _usableItemType: 0
-    _value: 2
-    _effectTime: 0
-  - _id: HpPotionMedium
-    _usableItemType: 0
-    _value: 5
-    _effectTime: 0
-  - _id: HpPotionBig
-    _usableItemType: 0
-    _value: 10
-    _effectTime: 0
+  _collection:
   - _id: SpeedPotionMedium
     _usableItemType: 1
-    _value: 2
+    _value: 1
     _effectTime: 5

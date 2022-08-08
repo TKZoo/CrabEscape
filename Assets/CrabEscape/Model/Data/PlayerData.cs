@@ -8,6 +8,7 @@ public class PlayerData
 
     public InventoryData Inventory => _inventory;
     public PerksData Perks = new PerksData();
+    public PlayerLevelData PlayerLevels = new PlayerLevelData();
     public IntProperty Hp = new IntProperty();
 }
 

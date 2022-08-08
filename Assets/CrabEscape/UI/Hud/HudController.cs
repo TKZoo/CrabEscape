@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class HudController : MonoBehaviour
@@ -36,6 +37,11 @@ public class HudController : MonoBehaviour
         var maxHealth = DefsFacade.I.Player.MaxHealth;
         var value = (float) newvalue / maxHealth;
         _healthBar.SetProgress(value);
+    }
+    
+    public void OnLevelUpWindow()
+    {
+        WindowUtils.CreateWindow("UI/PlayerLevelUpWindow");
     }
 
     private void OnDestroy()

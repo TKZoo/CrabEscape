@@ -15,7 +15,8 @@ public class Hero : Character
     [SerializeField] private Projectile _projectile;
 
     private bool _allowDoubleJump;
-    private bool _isSpeedPotionCrRunning;
+    private bool _additionalSpeed = false;
+    private float _additionalSpeedValue = 0;
     private float _potionEffectDuration;
     private int swordCount => _session.PlayerData.Inventory.Count("Sword");
 
@@ -111,6 +112,11 @@ public class Hero : Character
         return base.CalculateJumpVelocity(yVelocity);
     }
 
+    protected override float CalculateSpeed()
+    {
+        return _session.StatsModel.GetValue(statId.Speed) + _additionalSpeedValue;
+    }
+
     private void FallHeightCheck()
     {
         var hit = Physics2D.Raycast(transform.position,
@@ -126,7 +132,23 @@ public class Hero : Character
 
     public override void OnHealthChanges(int currentHealth)
     {
-        _session.PlayerData.Hp.Value = currentHealth;
+        if (_session.PerksModel.IsShieldEnabled)
+        {
+            var tmpHP = Health.Hp.Value;
+            Health.Hp.Value = tmpHP;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public override void TakeDamage()
+    {
+        if (_session.PerksModel.IsShieldEnabled)
+        {
+            base.TakeDamage();
+        }
     }
 
     public void Interact()
@@ -226,7 +248,7 @@ public class Hero : Character
                 break;
             case UsableItemType.SpeedPotion:
                 _potionEffectDuration = usableDef.EffectTime;
-                if (!_isSpeedPotionCrRunning) StartCoroutine(SpeedPotionEffect(usableDef.Value));
+                if (!_additionalSpeed) StartCoroutine(SpeedPotionEffect(usableDef.Value));
 
                 break;
         }
@@ -235,14 +257,14 @@ public class Hero : Character
         _session.PlayerData.Inventory.Remove(usableId, 1);
     }
 
-    private IEnumerator SpeedPotionEffect(float value)
+    private IEnumerator SpeedPotionEffect(float value)  //need to be fixed !!!
     {
-        _isSpeedPotionCrRunning = true;
-        ChangeSpeedTo(value);
+        _additionalSpeed = true;
+        _additionalSpeedValue = value; 
         yield return new WaitForSeconds(_potionEffectDuration);
-        ChangeSpeedTo(-value);
+        _additionalSpeedValue = 0;
         _potionEffectDuration = 0f;
-        _isSpeedPotionCrRunning = false;
+        _additionalSpeed = false;
     }
 
     public void NextItem()

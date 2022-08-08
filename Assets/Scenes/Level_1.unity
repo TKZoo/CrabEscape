@@ -8091,10 +8091,16 @@ MonoBehaviour:
       _inventory:
       - Id: GreenDiamond
         Value: 20
+      - Id: Coin
+        Value: 10000
+      - Id: SpeedPotionMedium
+        Value: 3
     Perks:
       _used:
         _value: 
       _unlocked: []
+    PlayerLevels:
+      _progress: []
     Hp:
       _value: 0
   _defaultCheckPoint: Level1_cp1

@@ -1,15 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [Header("Params")] [SerializeField] private bool _invertSpriteScale;
+    [Header("Params")] 
+    [SerializeField] private bool _invertSpriteScale;
     [SerializeField] private float _speed;
     [SerializeField] protected float _jumpImpulse;
     [SerializeField] private float _damageJumpImpulseY;
+    public float additionalSpeedValue = 0;
 
-    [Header("Checkers")] [SerializeField] public LayerMask _groundLayerCheck;
-    [SerializeField] public LayerCheck _groundCheck;
+    [Header("Checkers")] 
+    public LayerMask _groundLayerCheck;
+    public LayerCheck _groundCheck;
 
     [SerializeField] private CheckCircleOverlapComponent _attackRange;
     [SerializeField] protected SpawnPrefabListComponent _spawnPf;
@@ -25,6 +27,7 @@ public class Character : MonoBehaviour
     protected bool IsGrounded;
     protected bool IsJumping;
     protected bool IsFalling;
+    protected float _aditionalsSpeedValue;
 
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
@@ -71,7 +74,7 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var xVelocity = Direction.x * _speed;
+        var xVelocity = CalculateXVelocity();
         var yVelocity = CalculateYVelocity();
 
         Rigidbody.velocity = new Vector2(xVelocity, yVelocity);
@@ -81,11 +84,6 @@ public class Character : MonoBehaviour
         Animator.SetFloat(VerticalVelocity, Rigidbody.velocity.y);
 
         UpdateSpriteDirection(Direction);
-    }
-
-    public void ChangeSpeedTo(float speed)
-    {
-        _speed += speed;
     }
 
     public void UpdateSpriteDirection(Vector2 direction)
@@ -99,6 +97,16 @@ public class Character : MonoBehaviour
         {
             transform.localScale = new Vector3(-1 * scaleMultyplier, 1, 1);
         }
+    }
+
+    protected virtual float CalculateXVelocity()
+    {
+        return Direction.x * CalculateSpeed();
+    }
+    
+    protected virtual float CalculateSpeed()
+    {
+        return _speed + additionalSpeedValue;
     }
 
     protected virtual float CalculateYVelocity()

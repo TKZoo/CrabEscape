@@ -23,6 +23,7 @@ public class PerksModel : IDisposable
     }
     public bool IsSuperThrowEnabled => _playerData.Perks.Used.Value == "super_throw"; //_playerData.Perks.Unlocked = if plane do all perk available in same time
     public bool IsDoubleJumpEnabled => _playerData.Perks.Used.Value == "double_jump";
+    public bool IsShieldEnabled => _playerData.Perks.Used.Value == "energy_shield";
     public string Used => _playerData.Perks.Used.Value;
     
     public void Unlock(string id)

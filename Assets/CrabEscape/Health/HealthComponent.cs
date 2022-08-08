@@ -34,6 +34,11 @@ public class HealthComponent : MonoBehaviour, ISaveable
         }
     }
 
+    public void NoDamage()
+    {
+        
+    }
+
     public void ApplyHealing(int healValue)
     {
         _health += healValue;
