@@ -7,11 +7,17 @@ public class HealthComponent : MonoBehaviour, ISaveable
     [SerializeField] private int _health;
     [SerializeField] private UnityEvent _onTakeDamage;
     [SerializeField] private UnityEvent _onTakeHealing;
-    [SerializeField] public UnityEvent _onDie;
     [SerializeField] private HealthChangeEvent _onHealthChange;
+    [SerializeField] public UnityEvent _onDie;
+    [SerializeField] private bool _immune;
 
-   public IntProperty Hp = new IntProperty();
-    
+    public IntProperty Hp = new IntProperty();
+    public bool Immune
+    {
+        get => _immune;
+        set => _immune = value;
+    }
+
     private int _maxHealth;
 
     private void Awake()
@@ -22,6 +28,7 @@ public class HealthComponent : MonoBehaviour, ISaveable
 
     public void ApplyDamage(int damageValue)
     {
+        if (Immune == true) return;
         if (_health > 0)
         {
             _health -= damageValue;
@@ -32,11 +39,6 @@ public class HealthComponent : MonoBehaviour, ISaveable
                 _onDie?.Invoke();
             }
         }
-    }
-
-    public void NoDamage()
-    {
-        
     }
 
     public void ApplyHealing(int healValue)
@@ -63,7 +65,6 @@ public class HealthComponent : MonoBehaviour, ISaveable
     [Serializable]
     public class HealthChangeEvent : UnityEvent<int>
     {
-
     }
     public object SaveState()
     {

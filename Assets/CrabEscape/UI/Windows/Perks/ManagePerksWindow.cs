@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,7 +47,7 @@ public class ManagePerksWindow : AnimatedWindow
     private void OnUse()
     {
         var selected = _session.PerksModel.InterfaceSelection.Value;
-        _session.PerksModel.UsePerk(selected);
+        _session.PerksModel.SelectPerk(selected);
 
     }
 
@@ -54,5 +55,10 @@ public class ManagePerksWindow : AnimatedWindow
     {
         var selected = _session.PerksModel.InterfaceSelection.Value;
          _session.PerksModel.Unlock(selected);
+    }
+
+    private void OnDisable()
+    {
+        _trash.Dispose();
     }
 }

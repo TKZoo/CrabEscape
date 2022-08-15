@@ -21,14 +21,13 @@ public class Character : MonoBehaviour
 
     private protected GameSession _session;
     protected Rigidbody2D Rigidbody;
+    private Collider2D _collision2D;
     protected Vector2 Direction;
     protected Animator Animator;
     protected HealthComponent Health;
     protected bool IsGrounded;
     protected bool IsJumping;
     protected bool IsFalling;
-    protected float _aditionalsSpeedValue;
-
 
     private static readonly int IsGroundKey = Animator.StringToHash("isGrounded");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
@@ -40,6 +39,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
+        _collision2D = GetComponent<Collider2D>();
         _session = FindObjectOfType<GameSession>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
@@ -116,7 +116,7 @@ public class Character : MonoBehaviour
 
         if (IsGrounded)
         {
-            IsJumping = true;
+            IsJumping = false;
         }
 
         if (isJumpPressing)
@@ -161,6 +161,7 @@ public class Character : MonoBehaviour
     public virtual void TakeDamage()
     {
         IsJumping = false;
+        
         Animator.SetTrigger(Hit);
         Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, _damageJumpImpulseY);
     }

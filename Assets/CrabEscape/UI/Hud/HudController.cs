@@ -1,4 +1,3 @@
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class HudController : MonoBehaviour
@@ -42,6 +41,11 @@ public class HudController : MonoBehaviour
     public void OnLevelUpWindow()
     {
         WindowUtils.CreateWindow("UI/PlayerLevelUpWindow");
+    }
+    
+    public void OnPerksWindow()
+    {
+        WindowUtils.CreateWindow("UI/ManagePerkWindow");
     }
 
     private void OnDestroy()

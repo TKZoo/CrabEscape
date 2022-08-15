@@ -16,6 +16,7 @@ public class HeroInputReader : MonoBehaviour
         _inputActions.Hero.ThrowAttack.performed += OnThrowAttackAction;
         _inputActions.Hero.QuickSlotUse.performed += OnQuickSlotUse;
         _inputActions.Hero.NextItem.performed += OnNextItem;
+        _inputActions.Hero.PerkUse.performed += OnPerkUse;
     }
 
     private void OnEnable()
@@ -53,10 +54,19 @@ public class HeroInputReader : MonoBehaviour
     {
         _hero.NextItem();
     }
+    
+    private void OnPerkUse(InputAction.CallbackContext obj)
+    {
+        _hero.UsePerk();
+    }
 
     public void OnThrowAttackAction(InputAction.CallbackContext context)
     {
-        float val = context.ReadValue<float>();
+        _hero.ThrowAttack ();
+        
+        // use for detect hold button for combo attack
+        
+        /*float val = context.ReadValue<float>();
 
         if (val >= InputSystem.settings.defaultHoldTime)
         {
@@ -65,6 +75,6 @@ public class HeroInputReader : MonoBehaviour
         else
         {
             _hero.ThrowAttack ();
-        } 
+        } */
     }
 }

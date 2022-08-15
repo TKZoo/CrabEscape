@@ -80,6 +80,15 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PerkUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ee09a71-ec5b-4a5d-b3e7-6114db2616ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""NextItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a946907-2107-41a0-aad9-66a54dd28938"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PerkUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         m_Hero_ThrowAttack = m_Hero.FindAction("ThrowAttack", throwIfNotFound: true);
         m_Hero_QuickSlotUse = m_Hero.FindAction("QuickSlotUse", throwIfNotFound: true);
         m_Hero_NextItem = m_Hero.FindAction("NextItem", throwIfNotFound: true);
+        m_Hero_PerkUse = m_Hero.FindAction("PerkUse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Hero_ThrowAttack;
     private readonly InputAction m_Hero_QuickSlotUse;
     private readonly InputAction m_Hero_NextItem;
+    private readonly InputAction m_Hero_PerkUse;
     public struct HeroActions
     {
         private @HeroInputActions m_Wrapper;
@@ -303,6 +325,7 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         public InputAction @ThrowAttack => m_Wrapper.m_Hero_ThrowAttack;
         public InputAction @QuickSlotUse => m_Wrapper.m_Hero_QuickSlotUse;
         public InputAction @NextItem => m_Wrapper.m_Hero_NextItem;
+        public InputAction @PerkUse => m_Wrapper.m_Hero_PerkUse;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +353,9 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @NextItem.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
                 @NextItem.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
                 @NextItem.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnNextItem;
+                @PerkUse.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnPerkUse;
+                @PerkUse.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnPerkUse;
+                @PerkUse.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnPerkUse;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
@@ -352,6 +378,9 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @NextItem.started += instance.OnNextItem;
                 @NextItem.performed += instance.OnNextItem;
                 @NextItem.canceled += instance.OnNextItem;
+                @PerkUse.started += instance.OnPerkUse;
+                @PerkUse.performed += instance.OnPerkUse;
+                @PerkUse.canceled += instance.OnPerkUse;
             }
         }
     }
@@ -364,5 +393,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         void OnThrowAttack(InputAction.CallbackContext context);
         void OnQuickSlotUse(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);
+        void OnPerkUse(InputAction.CallbackContext context);
     }
 }

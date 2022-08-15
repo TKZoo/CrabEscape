@@ -29,7 +29,7 @@ MonoBehaviour:
       _count: 5
   - _id: energy_shield
     _info: Make you invincible on short time
-    _icon: {fileID: 21300000, guid: 0c1708a7220934e56aa71c3715cd330f, type: 3}
+    _icon: {fileID: 21300000, guid: 54e055a7358cc40e3b259adb060a706b, type: 3}
     _cooldown: 5
     _price:
       _itemId: GreenDiamond

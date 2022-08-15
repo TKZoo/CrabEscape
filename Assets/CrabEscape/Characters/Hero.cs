@@ -11,9 +11,10 @@ public class Hero : Character
     [SerializeField] private AnimatorController _disarmed;
     [SerializeField] private int _throwComboSwordsCount;
     [SerializeField] private float _throwComboCooldown;
+    [SerializeField] private ShieldSkillComponent _shieldSkill;
 
     [SerializeField] private Projectile _projectile;
-
+    
     private bool _allowDoubleJump;
     private bool _additionalSpeed = false;
     private float _additionalSpeedValue = 0;
@@ -31,14 +32,14 @@ public class Hero : Character
             return true;
         }
     }
-
+    
     private bool CanThrow
     {
         get
         {
             if (!HaveItemToSelect) return false;
 
-            if (SelectedId == "Sword") return swordCount > 1;
+            if (SelectedId == "Sword") return swordCount > 1; // check condition looks wired
 
             var def = DefsFacade.I.Items.Get(SelectedId);
             return def.HasTag(ItemTag.Throwable);
@@ -68,8 +69,8 @@ public class Hero : Character
 
     protected override void Update()
     {
-        base.Update();
         FallHeightCheck();
+        base.Update();
     }
 
     private void OnDestroy()
@@ -81,7 +82,7 @@ public class Hero : Character
     {
         if (id == "Sword") UpdateHeroWeaponStatus();
 
-        Debug.Log($"Inventory Changed: {id} {value}");
+        //Debug.Log($"Inventory Changed: {id} {value}");
     }
 
     protected override float CalculateYVelocity()
@@ -130,25 +131,15 @@ public class Hero : Character
         }
     }
 
-    public override void OnHealthChanges(int currentHealth)
-    {
-        if (_session.PerksModel.IsShieldEnabled)
-        {
-            var tmpHP = Health.Hp.Value;
-            Health.Hp.Value = tmpHP;
-        }
-        else
-        {
-            return;
-        }
-    }
-
     public override void TakeDamage()
     {
-        if (_session.PerksModel.IsShieldEnabled)
-        {
-            base.TakeDamage();
-        }
+        _allowDoubleJump = false;
+        base.TakeDamage();
+    }
+
+    public override void OnHealthChanges(int currentHealth)
+    {
+        Health.Hp.Value = currentHealth;
     }
 
     public void Interact()
@@ -210,11 +201,8 @@ public class Hero : Character
 
     public void ThrowComboAttack()
     {
-        if (CanThrow && _session.PerksModel.IsSuperThrowEnabled)
-        {
-            _projectile.SetRigidBodyToKinematic();
-            StartCoroutine(DoThrowComboAttack());
-        }
+        _projectile.SetRigidBodyToKinematic();
+        StartCoroutine(DoThrowComboAttack());
     }
 
     private bool IsSelectedItem(ItemTag tag)
@@ -226,8 +214,7 @@ public class Hero : Character
     {
         if (IsSelectedItem(ItemTag.Throwable))
         {
-            //Do Throw
-            //Also need detect combothrow attack
+            ThrowAttack();
         }
         
         if (CanUse && HaveItemToSelect)
@@ -257,7 +244,21 @@ public class Hero : Character
         _session.PlayerData.Inventory.Remove(usableId, 1);
     }
 
-    private IEnumerator SpeedPotionEffect(float value)  //need to be fixed !!!
+    public void UsePerk()
+    {
+        if (_session.PerksModel.IsShieldEnabled)
+        {
+           _shieldSkill.UseShield();
+           _session.PerksModel.Cooldown.Reset();
+        }
+        if (_session.PerksModel.IsSuperThrowEnabled && CanThrow)
+        {
+            ThrowComboAttack();
+            _session.PerksModel.Cooldown.Reset();
+        }
+    }
+
+    private IEnumerator SpeedPotionEffect(float value)
     {
         _additionalSpeed = true;
         _additionalSpeedValue = value; 

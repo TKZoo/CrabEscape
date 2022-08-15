@@ -7,6 +7,8 @@ public class PerksModel : IDisposable
     private readonly CompositeDisposable _trash = new CompositeDisposable();
     public event Action OnChanged;
 
+    public readonly Cooldown Cooldown = new Cooldown();
+
     public PerksModel(PlayerData playerdata)
     {
         _playerData = playerdata;
@@ -21,9 +23,9 @@ public class PerksModel : IDisposable
         OnChanged += call;
         return new ActionDisposable(() => OnChanged -= call);
     }
-    public bool IsSuperThrowEnabled => _playerData.Perks.Used.Value == "super_throw"; //_playerData.Perks.Unlocked = if plane do all perk available in same time
-    public bool IsDoubleJumpEnabled => _playerData.Perks.Used.Value == "double_jump";
-    public bool IsShieldEnabled => _playerData.Perks.Used.Value == "energy_shield";
+    public bool IsSuperThrowEnabled => _playerData.Perks.Used.Value == "super_throw" && Cooldown.IsReady; //_playerData.Perks.Unlocked = if plane do all perk available in same time
+    public bool IsDoubleJumpEnabled => _playerData.Perks.Used.Value == "double_jump" && Cooldown.IsReady;
+    public bool IsShieldEnabled => _playerData.Perks.Used.Value == "energy_shield" && Cooldown.IsReady;
     public string Used => _playerData.Perks.Used.Value;
     
     public void Unlock(string id)
@@ -39,8 +41,10 @@ public class PerksModel : IDisposable
         }
     }
 
-    public void UsePerk(string selected)
+    public void SelectPerk(string selected)
     {
+        var perkDef = DefsFacade.I.Perks.Get(selected);
+        Cooldown.Value = perkDef.Cooldown;
         _playerData.Perks.Used.Value = selected;
     }
 

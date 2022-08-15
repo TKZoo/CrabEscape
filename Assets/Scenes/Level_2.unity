@@ -12948,6 +12948,14 @@ MonoBehaviour:
       _inventory:
       - Id: Sword
         Value: 1
+      - Id: GreenDiamond
+        Value: 10
+    Perks:
+      _used:
+        _value: 
+      _unlocked: []
+    PlayerLevels:
+      _progress: []
     Hp:
       _value: 0
   _defaultCheckPoint: Level2_cp1
