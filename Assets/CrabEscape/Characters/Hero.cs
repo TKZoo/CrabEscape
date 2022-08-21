@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hero : Character
 {
-    private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
+    //private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
     [SerializeField] private CheckCircleOverlapComponent _interactionCheck;
     [SerializeField] private float _fallHeight;
     [SerializeField] private AnimatorController _armed;
@@ -160,15 +160,12 @@ public class Hero : Character
 
     public void ThrowAttack()
     {
-        if (_throwCooldown.IsReady && CanThrow)
-        {
-            var throwableId = SelectedId;
-            var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
-            _projectile.SetRigidBodyToDynamic();
-            base.ThrowAttack(throwableDef.ProjectilePf);
-            _session.PlayerData.Inventory.Remove(throwableId, 1);
-            _throwCooldown.Reset();
-        }
+        var throwableId = SelectedId;
+        var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
+        _projectile.SetRigidBodyToDynamic();
+        base.ThrowAttack(throwableDef.ProjectilePf);
+        _session.PlayerData.Inventory.Remove(throwableId, 1);
+        _throwCooldown.Reset();
     }
 
     private IEnumerator DoThrowComboAttack()
@@ -205,21 +202,18 @@ public class Hero : Character
         StartCoroutine(DoThrowComboAttack());
     }
 
-    private bool IsSelectedItem(ItemTag tag)
-    {
-        return _session.QuickInventory.SelectedDef.HasTag(tag);
-    }
-    
     public void QuickSlotUse()
     {
-        if (IsSelectedItem(ItemTag.Throwable))
+        if (CanThrow && _throwCooldown.IsReady)
         {
             ThrowAttack();
+            return;
         }
         
         if (CanUse && HaveItemToSelect)
         {
             UseItem();
+            return;
         }
     }
 
@@ -271,5 +265,6 @@ public class Hero : Character
     public void NextItem()
     {
         _session.QuickInventory.SetNextItem();
+        Debug.Log(SelectedId);
     }
 }

@@ -3,25 +3,41 @@ using UnityEngine;
 public class HudController : MonoBehaviour
 {
     [SerializeField] private ProgressBarWidget _healthBar;
+    [SerializeField] private UsedPerkWidget _usedPerk;
     [SerializeField] private bool _isPlayer;
 
     private GameSession _session;
     private HealthComponent mobHp;
+    private CompositeDisposable _trash = new CompositeDisposable();
 
     private void Start()
     {
+        _session = FindObjectOfType<GameSession>();
+        _trash.Retain(_session.PerksModel.Subscribe(OnPerkChanged));
         if (_isPlayer)
         {
             _session = FindObjectOfType<GameSession>();
-            _session.PlayerData.Hp.OnChanged += OnHealthChange;
-            OnHealthChange(_session.PlayerData.Hp.Value, _session.PlayerData.Hp.Value);
+            _trash.Retain(_session.PlayerData.Hp.SubscribeAndInvoke(OnHealthChange));
         }
         if((!_isPlayer))
         {
             mobHp = gameObject.GetComponentInParent<HealthComponent>();
-            mobHp.Hp.OnChanged += OnMobHealthChange;
-            OnMobHealthChange(mobHp.Hp.Value, mobHp.Hp.Value);
+            _trash.Retain(mobHp.Hp.SubscribeAndInvoke(OnMobHealthChange));
         }
+
+        OnPerkChanged();
+    }
+
+    private void OnPerkChanged()
+    {
+        var usedPerkId = _session.PerksModel.Used;
+        var hasPerk = !string.IsNullOrEmpty(usedPerkId);
+        if (hasPerk)
+        {
+            var perkDef = DefsFacade.I.Perks.Get(usedPerkId);
+            _usedPerk.Set(perkDef);
+        }
+        _usedPerk.gameObject.SetActive(hasPerk);
     }
 
     private void OnMobHealthChange(int newvalue, int oldvalue)
@@ -50,13 +66,6 @@ public class HudController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_isPlayer)
-        {
-            _session.PlayerData.Hp.OnChanged -= OnHealthChange;
-        }
-        else
-        {
-            mobHp.Hp.OnChanged -= OnMobHealthChange;
-        }
+        _trash.Dispose();
     }
 }

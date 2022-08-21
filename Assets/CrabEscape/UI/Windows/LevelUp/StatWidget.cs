@@ -27,11 +27,13 @@ public class StatWidget : MonoBehaviour, IItemRenderer<StatDef>
         
         _statIcon.sprite = _data.Icon;
         _statName.text = _data.Name; // LocalizationManager.I.Localize(_data.Name);
+        var currentLevelValue = statModel.GetValue(_data.Id);
         _currentStatValue.text = _session.StatsModel.GetValue(_data.Id).ToString(CultureInfo.InvariantCulture);
 
         var currentLevel = statModel.GetCurrentLevel(_data.Id);
         var nextLevel = statModel.GetCurrentLevel(_data.Id) + 1;
-        var increaseValue = statModel.GetValue(_data.Id, nextLevel);
+        var nextLevelValue  = statModel.GetValue(_data.Id, nextLevel);
+        var increaseValue = nextLevelValue - currentLevelValue;
         _increaseStatValue.gameObject.SetActive(increaseValue > 0);
         _increaseStatValue.text = increaseValue.ToString(CultureInfo.InvariantCulture);
 

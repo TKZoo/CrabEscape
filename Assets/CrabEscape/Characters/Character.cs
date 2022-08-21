@@ -186,14 +186,24 @@ public class Character : MonoBehaviour
 
     public void OnThrowAttack()
     {
-        _throwSpawner.SpawnPrefab();
+        //_throwSpawner.SpawnPrefab();
         //_spawnPf.Spawn("ThrowAttack");
         Sound.Play("range");
     }
 
-    public virtual void ThrowAttack(GameObject pf)
+    public void ThrowAttack(GameObject pf)
     {
         _throwSpawner.SetPrefab(pf);
+        var insrance = _throwSpawner.SpawnPrefab();
+        ApplyRangeDamage(insrance);
+        Sound.Play("range");
         Animator.SetTrigger(ThrowAttackAnim);
+    }
+
+    private void ApplyRangeDamage(GameObject projectile)
+    {
+        var hpModify = projectile.GetComponent<HealthModifierComponent>();
+        var damageValue = _session.StatsModel.GetValue(statId.RangeDamage);
+        hpModify.SetAdditionalValue((int) damageValue);
     }
 }

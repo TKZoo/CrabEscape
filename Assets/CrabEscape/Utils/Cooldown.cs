@@ -8,6 +8,7 @@ public class Cooldown
 
     private float _timeUp;
 
+    public float RemainingTime => Mathf.Max(_timeUp - Time.time, 0);
     public bool IsReady => _timeUp <= Time.time;
     public float Value
     {

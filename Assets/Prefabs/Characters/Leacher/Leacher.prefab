@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.005, y: -0.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4874932009217915198}
   m_RootOrder: 2
@@ -128,6 +129,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.053, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4874932009217915198}
   m_RootOrder: 0
@@ -226,6 +228,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.006, y: -0.091, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4874932009217915198}
   m_RootOrder: 1
@@ -345,6 +348,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4874932007886154397}
   - {fileID: 4874932008103209345}
@@ -364,6 +368,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -372,7 +377,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -467,6 +472,7 @@ MonoBehaviour:
   _hitBlinkColor: {r: 1, g: 1, b: 1, a: 1}
   _hitBlinkDuration: 0.1
   isTraped: 0
+  isIndestructible: 0
 --- !u!61 &2055698824
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -542,6 +548,9 @@ MonoBehaviour:
   _onTakeHealing:
     m_PersistentCalls:
       m_Calls: []
+  _onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
   _onDie:
     m_PersistentCalls:
       m_Calls:
@@ -606,9 +615,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _onHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
+  _immune: 0
+  Hp:
+    _value: 0
 --- !u!114 &2055698825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +639,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4874932009217915198}
     m_Modifications:
+    - target: {fileID: 1747848379973103583, guid: 199ab8ed8c17201449f5a4f063734eaa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 3172791376329926824, guid: 199ab8ed8c17201449f5a4f063734eaa,
         type: 3}
       propertyPath: m_Name

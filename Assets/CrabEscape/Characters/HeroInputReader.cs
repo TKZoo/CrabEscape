@@ -62,7 +62,7 @@ public class HeroInputReader : MonoBehaviour
 
     public void OnThrowAttackAction(InputAction.CallbackContext context)
     {
-        _hero.ThrowAttack ();
+        _hero.ThrowAttack();
         
         // use for detect hold button for combo attack
         

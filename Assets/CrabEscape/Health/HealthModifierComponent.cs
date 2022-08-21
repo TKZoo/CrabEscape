@@ -5,12 +5,20 @@ public class HealthModifierComponent : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private int _healing;
 
+    private int additionalValue;
+    
+    public int SetAdditionalValue(int value)
+    {
+        additionalValue = value;
+        return additionalValue;
+    }
+    
     public void DoDamage(GameObject target)
     {
         var healthComponent = target.GetComponent<HealthComponent>();
         if (healthComponent != null)
         {
-            healthComponent.ApplyDamage(_damage);
+            healthComponent.ApplyDamage(_damage + additionalValue);
         }
     }
 
@@ -19,7 +27,7 @@ public class HealthModifierComponent : MonoBehaviour
         var healthComponent = target.GetComponent<HealthComponent>();
         if (healthComponent != null)
         {
-            healthComponent.ApplyHealing(_healing);
+            healthComponent.ApplyHealing(_healing + additionalValue);
         }
     }
 }

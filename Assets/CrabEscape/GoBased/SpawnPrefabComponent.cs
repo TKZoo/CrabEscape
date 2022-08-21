@@ -7,7 +7,7 @@ public class SpawnPrefabComponent : MonoBehaviour
 
     [ContextMenu("Spawn Prefab")]
     
-    public void SpawnPrefab()
+    public GameObject SpawnPrefab()
     {
         if (_prefab == null)
         {
@@ -15,6 +15,7 @@ public class SpawnPrefabComponent : MonoBehaviour
         }
         var instantiate = Instantiate(_prefab, _target.position, Quaternion.identity);
         instantiate.transform.localScale = _target.lossyScale;
+        return instantiate;
     }
 
     public void SetAndSpawn(GameObject pf)

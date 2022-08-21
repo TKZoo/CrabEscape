@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.406, y: 0.32000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 672281116965324507}
   m_RootOrder: 1
@@ -52,6 +53,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 672281116257158045}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DoDamage
         m_Mode: 0
         m_Arguments:
@@ -68,6 +70,7 @@ MonoBehaviour:
   _tags:
   - Player
   - Interactible
+  _ignoreGo: {fileID: 0}
 --- !u!114 &672281116257157986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +165,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.95, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 672281118024693625}
   - {fileID: 672281116257158046}
@@ -179,14 +183,16 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +242,7 @@ CapsuleCollider2D:
   m_Direction: 1
 --- !u!95 &672281116965324510
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -249,6 +255,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -293,6 +300,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 672281116965324510}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetTrigger
         m_Mode: 5
         m_Arguments:
@@ -304,6 +312,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4453214157445734010}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 5
         m_Arguments:
@@ -317,10 +326,14 @@ MonoBehaviour:
   _onTakeHealing:
     m_PersistentCalls:
       m_Calls: []
+  _onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
   _onDie:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4293802479164011123}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SpawnPrefab
         m_Mode: 2
         m_Arguments:
@@ -333,6 +346,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 299164987}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -343,9 +357,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _onHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
+  _immune: 0
+  Hp:
+    _value: 0
 --- !u!114 &299164987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +435,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.077, y: 0.513, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 672281116965324507}
   m_RootOrder: 0
