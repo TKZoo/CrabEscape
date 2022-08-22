@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Usable
   m_EditorClassIdentifier: 
   _collection:
-  - _id: SpeedPotionMedium
-    _usableItemType: 1
+  - _id: Lantern
     _value: 1
-    _effectTime: 5
+    _effectTime: 15

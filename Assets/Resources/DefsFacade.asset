@@ -15,5 +15,6 @@ MonoBehaviour:
   _items: {fileID: 11400000, guid: 4913fcbb76ef23549b7ad677b9083b9d, type: 2}
   _throwableItems: {fileID: 11400000, guid: 267e0b3f9e710044ab2febe012c673a0, type: 2}
   _usableItems: {fileID: 11400000, guid: 7fc7aae39ac10e246be0a8e3143d0861, type: 2}
+  _consumableItems: {fileID: 11400000, guid: 009b30b7ff90346858057559f780ed80, type: 2}
   _perks: {fileID: 11400000, guid: e0e8dad9f93124ff99f45a5846f7e943, type: 2}
   _player: {fileID: 11400000, guid: cde5e556d49502941853fe0c3a31ca28, type: 2}

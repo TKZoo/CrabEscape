@@ -7,6 +7,7 @@ public class QuickInventoryModel : IDisposable
 
     public InventoryItemData[] Inventory { get; private set; }
     public readonly IntProperty SelectedIndex = new IntProperty();
+    private readonly CompositeDisposable _trash = new CompositeDisposable();
 
     public event Action OnChanged;
 
@@ -26,7 +27,7 @@ public class QuickInventoryModel : IDisposable
     public QuickInventoryModel(PlayerData playerData)
     {
         _playerData = playerData;
-        Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
+        Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable, ItemTag.Consumable);
         
         _playerData.Inventory.OnChanged += OnInventoryChange;
     }
@@ -42,7 +43,7 @@ public class QuickInventoryModel : IDisposable
         var indexFound = Array.FindIndex(Inventory, x => x.Id == id);
         if (indexFound != -1)
         {
-            Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable);
+            Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable, ItemTag.Consumable);
             SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
             OnChanged?.Invoke();
         }

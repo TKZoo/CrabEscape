@@ -46,14 +46,14 @@ public class Hero : Character
         }
     }
 
-    private bool CanUse
+    private bool CanConsume
     {
         get
         {
             if (HaveItemToSelect)
             {
                 var def = DefsFacade.I.Items.Get(SelectedId);
-                return def.HasTag(ItemTag.Usable);
+                return def.HasTag(ItemTag.Consumable);
             }
 
             return false;
@@ -210,32 +210,32 @@ public class Hero : Character
             return;
         }
         
-        if (CanUse && HaveItemToSelect)
+        if (CanConsume && HaveItemToSelect)
         {
-            UseItem();
+            UseConsumableItem();
             return;
         }
     }
 
-    private void UseItem()
+    private void UseConsumableItem()
     {
-        var usableId = SelectedId;
-        var usableDef = DefsFacade.I.UsableItems.Get(usableId);
+        var consumableId = SelectedId;
+        var consumableDef = DefsFacade.I.ConsumableItems.Get(consumableId);
 
-        switch (usableDef.UsableItemType)
+        switch (consumableDef.ConsumableItemType)
         {
-            case UsableItemType.HealthPotion:
-                _session.PlayerData.Hp.Value += (int)usableDef.Value;
+            case ConsumableItemType.HealthPotion:
+                _session.PlayerData.Hp.Value += (int)consumableDef.Value;
                 break;
-            case UsableItemType.SpeedPotion:
-                _potionEffectDuration = usableDef.EffectTime;
-                if (!_additionalSpeed) StartCoroutine(SpeedPotionEffect(usableDef.Value));
+            case ConsumableItemType.SpeedPotion:
+                _potionEffectDuration = consumableDef.EffectTime;
+                if (!_additionalSpeed) StartCoroutine(SpeedPotionEffect(consumableDef.Value));
 
                 break;
         }
 
         Sound.Play("usepotion");
-        _session.PlayerData.Inventory.Remove(usableId, 1);
+        _session.PlayerData.Inventory.Remove(consumableId, 1);
     }
 
     public void UsePerk()

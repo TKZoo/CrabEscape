@@ -26,20 +26,23 @@ MonoBehaviour:
   - _id: HpPotionSmall
     _icon: {fileID: -5424018080786991329, guid: ba3a44760a6c9a04ea8900e2da2b8099,
       type: 3}
-    _tags: 0100000000000000
+    _tags: 0300000000000000
   - _id: PearlProjectile
     _icon: {fileID: 21300000, guid: 36d67ae595345464093c0d2c4fbecaaa, type: 3}
     _tags: 0000000002000000
   - _id: HpPotionMedium
     _icon: {fileID: -5056091655110497624, guid: ba3a44760a6c9a04ea8900e2da2b8099,
       type: 3}
-    _tags: 0000000001000000
+    _tags: 0000000003000000
   - _id: HpPotionBig
     _icon: {fileID: 3399796981702735517, guid: ba3a44760a6c9a04ea8900e2da2b8099, type: 3}
-    _tags: 0000000001000000
+    _tags: 0000000003000000
   - _id: SpeedPotionMedium
     _icon: {fileID: 2881500702318566315, guid: 205f45edf0d11424793fdd6a30c5c51a, type: 3}
-    _tags: 0000000001000000
+    _tags: 0000000003000000
   - _id: GreenDiamond
     _icon: {fileID: 21300000, guid: 09e3cc14cada44e9ea18cb6d673c85e7, type: 3}
     _tags: 00000000
+  - _id: Lantern
+    _icon: {fileID: 21300000, guid: 9be005758c7f9453db14642eedb71ca1, type: 3}
+    _tags: 01000000
