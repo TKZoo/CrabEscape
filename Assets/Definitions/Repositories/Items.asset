@@ -19,7 +19,7 @@ MonoBehaviour:
     _tags: 00000000
   - _id: Sword
     _icon: {fileID: 21300000, guid: d2bdb935053419043816281b1bac0d0e, type: 3}
-    _tags: 0000000002000000
+    _tags: 000000000200000001000000
   - _id: DoorKey
     _icon: {fileID: 21300000, guid: 19719d3d1759a0a489ce97f286e554f3, type: 3}
     _tags: 
@@ -29,7 +29,7 @@ MonoBehaviour:
     _tags: 0300000000000000
   - _id: PearlProjectile
     _icon: {fileID: 21300000, guid: 36d67ae595345464093c0d2c4fbecaaa, type: 3}
-    _tags: 0000000002000000
+    _tags: 000000000200000001000000
   - _id: HpPotionMedium
     _icon: {fileID: -5056091655110497624, guid: ba3a44760a6c9a04ea8900e2da2b8099,
       type: 3}
@@ -45,4 +45,4 @@ MonoBehaviour:
     _tags: 00000000
   - _id: Lantern
     _icon: {fileID: 21300000, guid: 9be005758c7f9453db14642eedb71ca1, type: 3}
-    _tags: 01000000
+    _tags: 0100000000000000

@@ -7,7 +7,7 @@ public class InventoryAddComponent : MonoBehaviour
   
     private GameSession _session;
 
-    private void Awake()
+    private void Start()
     {
         _session = FindObjectOfType<GameSession>();
     }

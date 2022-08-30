@@ -20,21 +20,14 @@ public class InventoryData
         var itemDef = DefsFacade.I.Items.Get(id);
         if (itemDef.IsVoid) return;
 
-        var item = GetItem(id);
-        if (_inventory.Count >= DefsFacade.I.Player.InventorySize && !itemDef.HasTag(ItemTag.Stackable)) return;
-
-        if (item == null)
+        if (itemDef.HasTag(ItemTag.Stackable))
         {
-            item = new InventoryItemData(id);
-            _inventory.Add(item);
+            AddToStack(id, value);
         }
-        else if (!itemDef.HasTag(ItemTag.Stackable))
+        else
         {
-            item = new InventoryItemData(id);
-            _inventory.Add(item);
+            AddNonStack(id, value);
         }
-
-        item.Value += value;
 
         OnChanged?.Invoke(id, Count(id));
     }
@@ -54,6 +47,55 @@ public class InventoryData
         }
 
         OnChanged?.Invoke(id, Count(id));
+    }
+    
+    private void AddToStack(string id, int value)
+    {
+        var isFull = _inventory.Count >= DefsFacade.I.Player.InventorySize;
+        var item = GetItem(id);
+        if (item == null)
+        {
+            if (isFull) return;
+
+            item = new InventoryItemData(id);
+            _inventory.Add(item);
+        }
+
+        item.Value += value;
+    }
+
+    private void AddNonStack(string id, int value)
+    {
+        var itemLasts = DefsFacade.I.Player.InventorySize - _inventory.Count;
+        value = Mathf.Min(itemLasts, value);
+
+        for (var i = 0; i < value; i++)
+        {
+            var item = new InventoryItemData(id) {Value = 1};
+            _inventory.Add(item);
+        }
+    }
+
+    private void RemoveFromStack(string id, int value)
+    {
+        var item = GetItem(id);
+        if (item == null) return;
+
+        item.Value -= value;
+
+        if (item.Value <= 0)
+            _inventory.Remove(item);
+    }
+
+    private void RemoveNonStack(string id, int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            var item = GetItem(id);
+            if (item == null) return;
+
+            _inventory.Remove(item);
+        }
     }
 
     public int Count(string id)
@@ -93,10 +135,10 @@ public class InventoryData
             }
         }
 
-        return returnVal.ToArray();
+        return returnVal.ToArray();        
     }
-
-    public bool  IsEnough(params ItemWithCount[] items)
+    
+   public bool  IsEnough(params ItemWithCount[] items)
     {
         var joined = new Dictionary<string, int>();
         

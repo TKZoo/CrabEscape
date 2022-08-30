@@ -40,12 +40,14 @@ public class QuickInventoryModel : IDisposable
 
     private void OnInventoryChange(string id, int value)
     {
+        Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable, ItemTag.Consumable);
+        SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length);
+        OnChanged?.Invoke();
+        //need find how make this IF work correct, if item not present in inventory, inventory not update
         var indexFound = Array.FindIndex(Inventory, x => x.Id == id);
         if (indexFound != -1)
         {
-            Inventory = _playerData.Inventory.GetAll(ItemTag.Throwable, ItemTag.Usable, ItemTag.Consumable);
-            SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
-            OnChanged?.Invoke();
+            
         }
     }
 

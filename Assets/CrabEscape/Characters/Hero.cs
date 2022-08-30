@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Hero : Character
 {
-    //private static readonly int ThrowAttackAnim = Animator.StringToHash("throw");
     [SerializeField] private CheckCircleOverlapComponent _interactionCheck;
     [SerializeField] private float _fallHeight;
     [SerializeField] private AnimatorController _armed;
     [SerializeField] private AnimatorController _disarmed;
+    [SerializeField] private AnimatorController _withLantern;
     [SerializeField] private int _throwComboSwordsCount;
     [SerializeField] private float _throwComboCooldown;
     [SerializeField] private ShieldSkillComponent _shieldSkill;
+    [SerializeField] private LanternComponent _lantern;
 
     [SerializeField] private Projectile _projectile;
     
     private bool _allowDoubleJump;
     private bool _additionalSpeed = false;
     private float _additionalSpeedValue = 0;
-    private float _potionEffectDuration;
-    private int swordCount => _session.PlayerData.Inventory.Count("Sword");
+    private bool _useLantern = false;
+    private float _potionEffectDuration; // need FIX, must be potion setting, not a hero
 
-    private string SelectedId => _session.QuickInventory.SelectedItem.Id;
+    private CameraShakeEffect _cameraShake;
+    
+    private const string LanternId = "Lantern";
+    private const string SwordId = "Sword";
+    
+    private int swordCount => _session.PlayerData.Inventory.Count(SwordId);
+
+    private string SelectedItemId => _session.QuickInventory.SelectedItem.Id;
 
     private bool HaveItemToSelect
     {
@@ -39,9 +47,9 @@ public class Hero : Character
         {
             if (!HaveItemToSelect) return false;
 
-            if (SelectedId == "Sword") return swordCount > 1; // check condition looks wired
+            if (SelectedItemId == SwordId) return swordCount > 1; // check condition looks wired
 
-            var def = DefsFacade.I.Items.Get(SelectedId);
+            var def = DefsFacade.I.Items.Get(SelectedItemId);
             return def.HasTag(ItemTag.Throwable);
         }
     }
@@ -52,8 +60,22 @@ public class Hero : Character
         {
             if (HaveItemToSelect)
             {
-                var def = DefsFacade.I.Items.Get(SelectedId);
+                var def = DefsFacade.I.Items.Get(SelectedItemId);
                 return def.HasTag(ItemTag.Consumable);
+            }
+
+            return false;
+        }
+    }
+    
+    private bool CanUse
+    {
+        get
+        {
+            if (HaveItemToSelect)
+            {
+                var def = DefsFacade.I.Items.Get(SelectedItemId);
+                return def.HasTag(ItemTag.Usable);
             }
 
             return false;
@@ -62,7 +84,8 @@ public class Hero : Character
 
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath);
+        //Debug.Log(Application.persistentDataPath);
+        _cameraShake = FindObjectOfType<CameraShakeEffect>();
         UpdateHeroWeaponStatus();
         _session.PlayerData.Inventory.OnChanged += OnInventoryChanged;
     }
@@ -80,7 +103,7 @@ public class Hero : Character
 
     private void OnInventoryChanged(string id, int value)
     {
-        if (id == "Sword") UpdateHeroWeaponStatus();
+        if (id == SwordId) UpdateHeroWeaponStatus();
 
         //Debug.Log($"Inventory Changed: {id} {value}");
     }
@@ -134,6 +157,7 @@ public class Hero : Character
     public override void TakeDamage()
     {
         _allowDoubleJump = false;
+        _cameraShake?.Shake();
         base.TakeDamage();
     }
 
@@ -149,7 +173,14 @@ public class Hero : Character
 
     private void UpdateHeroWeaponStatus()
     {
-        Animator.runtimeAnimatorController = swordCount > 0 ? _armed : _disarmed;
+        if(_useLantern)
+        {
+            Animator.runtimeAnimatorController = _withLantern;
+        }
+        else
+        {
+            Animator.runtimeAnimatorController = swordCount > 0 ? _armed : _disarmed;
+        }
     }
 
     public override void Attack()
@@ -160,7 +191,7 @@ public class Hero : Character
 
     public void ThrowAttack()
     {
-        var throwableId = SelectedId;
+        var throwableId = SelectedItemId;
         var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
         _projectile.SetRigidBodyToDynamic();
         base.ThrowAttack(throwableDef.ProjectilePf);
@@ -170,20 +201,20 @@ public class Hero : Character
 
     private IEnumerator DoThrowComboAttack()
     {
-        var throwableId = SelectedId;
+        var throwableId = SelectedItemId;
         var throwableValue = _session.QuickInventory.SelectedItem.Value;
         var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
         var throwswordcount = _throwComboSwordsCount;
         while (throwswordcount > 0)
         {
-            if (throwableValue > 0 && throwableId == "Sword" && swordCount > 1)
+            if (throwableValue > 0 && throwableId == SwordId && swordCount > 1)
             {
                 Debug.Log("throwableValue : " + throwableValue);
                 base.ThrowAttack(throwableDef.ProjectilePf);
                 _session.PlayerData.Inventory.Remove(throwableId, 1);
                 throwableValue--;
             }
-            else if (throwableValue > 0 && throwableId != "Sword")
+            else if (throwableValue > 0 && throwableId != SwordId)
             {
                 Debug.Log("throwableValue : " + throwableValue);
                 base.ThrowAttack(throwableDef.ProjectilePf);
@@ -215,11 +246,43 @@ public class Hero : Character
             UseConsumableItem();
             return;
         }
+        if (CanUse && HaveItemToSelect)
+        {
+            UseUsableItem();
+            return;
+        }
+    }
+
+    private void UseUsableItem()
+    {
+        var usableId = SelectedItemId;
+        var usableDef = DefsFacade.I.UsableItems.Get(usableId);
+
+        if (CanUse && usableDef.Id == LanternId)
+        {
+            if (_lantern.lanternOn)
+            {
+                _lantern.TurnOffLantern();
+            }
+            else
+            {
+                _useLantern = true;
+                _lantern.UseLantern();
+            }
+        }
+        else
+        {
+            _useLantern = false;
+            _lantern.TurnOffLantern();
+        }
+
+        UpdateHeroWeaponStatus();
+
     }
 
     private void UseConsumableItem()
     {
-        var consumableId = SelectedId;
+        var consumableId = SelectedItemId;
         var consumableDef = DefsFacade.I.ConsumableItems.Get(consumableId);
 
         switch (consumableDef.ConsumableItemType)
@@ -265,6 +328,6 @@ public class Hero : Character
     public void NextItem()
     {
         _session.QuickInventory.SetNextItem();
-        Debug.Log(SelectedId);
+        Debug.Log(SelectedItemId);
     }
 }

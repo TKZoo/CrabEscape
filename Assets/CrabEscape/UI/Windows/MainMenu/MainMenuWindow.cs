@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuWindow : AnimatedWindow
 {
@@ -8,7 +7,7 @@ public class MainMenuWindow : AnimatedWindow
 
     public void OnShowSettings()
     {
-        var window = Resources.Load<GameObject>("UI/ManagePerkWindow"); //"UI/SettingsWindow"
+        var window = Resources.Load<GameObject>("UI/SettingsWindow");
         var canvas = FindObjectOfType<Canvas>();
         Instantiate(window, canvas.transform);
         Close();
@@ -16,7 +15,11 @@ public class MainMenuWindow : AnimatedWindow
 
     public void OnStartGame()
     {
-        _closeAction = () => { SceneManager.LoadScene("Level_3"); };
+        _closeAction = () =>
+        {
+            var loader = FindObjectOfType<LevelLoader>();
+            loader.LoadLevel("Level_1");
+        };
         Close();
     }
 

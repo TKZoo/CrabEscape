@@ -7,6 +7,7 @@ public class QuickInventoryController : MonoBehaviour
     [SerializeField] private InventoryItemWidget _prefab;
 
     private GameSession _session;
+    private readonly PlayerData _playerData;
 
     private readonly CompositeDisposable _trash = new CompositeDisposable();
     private List<InventoryItemWidget> _createdItems = new List<InventoryItemWidget>();
@@ -15,7 +16,6 @@ public class QuickInventoryController : MonoBehaviour
     {
         _session = FindObjectOfType<GameSession>();
         _trash.Retain(_session.QuickInventory.Subscribe(Rebuild));
-
         Rebuild();
     }
 
